@@ -348,1000 +348,1424 @@ Reemplaza con tu JSON grande importándolo.
                 "label": "1) Anatomía foliar"
             },
                 {
-                    "value": "tejidos",
-                    "label": "2) Tejidos, tinciones y haces vasculares"
+                    "value": "histologia",
+                    "label": "2) Tejidos y cortes microscópicos"
                 },
                 {
                     "value": "morfologia",
-                    "label": "3) Morfología y clasificación foliar"
+                    "label": "3) Morfología y arquitectura foliar"
                 },
                 {
-                    "value": "grupos",
-                    "label": "4) Gimnospermas, angiospermas y helechos"
+                    "value": "helechos",
+                    "label": "4) Frondas y hojas compuestas"
+                },
+                {
+                    "value": "identificacion",
+                    "label": "5) Identificación y análisis comparativo"
                 }],
             "questions": [{
                 "id": "q1",
                 "topic": "anatomia",
-                "text": "¿Cuáles son las funciones principales de las hojas?",
+                "text": "¿Cuáles son las principales funciones fisiológicas de las hojas?",
                 "options": [
-                    "Absorción de agua del suelo y anclaje",
+                    "Absorción mineral del suelo y fijación de la planta",
                     "Fotosíntesis, intercambio gaseoso y transpiración",
-                    "Producción exclusiva de hormonas",
-                    "Absorción intestinal de nutrientes"
+                    "Producción de gametos exclusivamente",
+                    "Transporte de agua sin intercambio gaseoso"
                 ],
                 "answer": 1,
-                "explain": "Las hojas captan luz para la fotosíntesis, intercambian gases mediante estructuras como los estomas y regulan la pérdida de agua por transpiración."
+                "explain": "Las hojas realizan fotosíntesis, regulan el intercambio de CO₂ y O₂ mediante los estomas y participan en la transpiración, que contribuye al movimiento del agua y a la regulación térmica."
             },
                 {
                     "id": "q2",
                     "topic": "anatomia",
-                    "text": "¿Qué tejido protector recubre normalmente la superficie externa de una hoja?",
+                    "text": "¿Qué diferencia anatómica caracteriza generalmente a una hoja dorsiventral de eudicotiledónea?",
                     "options": [
-                        "Floema",
-                        "Xilema",
-                        "Epidermis",
-                        "Parénquima de empalizada"
+                        "Presenta únicamente tejido vascular y carece de mesófilo",
+                        "Posee todos los estomas exclusivamente en el xilema",
+                        "Tiene parénquima de empalizada hacia el haz y esponjoso hacia el envés",
+                        "Presenta haces vasculares sin xilema ni floema"
                     ],
                     "answer": 2,
-                    "explain": "La epidermis constituye el revestimiento externo de la hoja. Puede estar cubierta por una cutícula que limita la pérdida de agua y actúa como barrera protectora."
+                    "explain": "En muchas hojas dorsiventrales, el parénquima en empalizada se ubica cerca de la epidermis adaxial y concentra cloroplastos; el esponjoso, con espacios intercelulares, favorece el intercambio gaseoso."
                 },
                 {
                     "id": "q3",
-                    "topic": "anatomia",
-                    "text": "¿Qué característica distingue generalmente al parénquima de empalizada?",
+                    "topic": "histologia",
+                    "text": "¿Qué función cumple principalmente la cutícula foliar?",
                     "options": [
-                        "Células alargadas con abundantes cloroplastos",
-                        "Células muertas con paredes lignificadas exclusivamente",
-                        "Ausencia total de cloroplastos",
-                        "Conductos formados por elementos cribosos"
+                        "Reducir la pérdida de agua y proteger la superficie",
+                        "Transportar azúcares desde el floema",
+                        "Producir directamente ATP mediante respiración",
+                        "Formar los elementos conductores del xilema"
                     ],
                     "answer": 0,
-                    "explain": "El parénquima de empalizada contiene células alargadas, generalmente próximas entre sí, con numerosos cloroplastos y una función fotosintética importante."
+                    "explain": "La cutícula contiene sustancias lipídicas, especialmente cutina y ceras, que forman una barrera protectora y reducen la pérdida de agua a través de la superficie epidérmica."
                 },
                 {
                     "id": "q4",
-                    "topic": "anatomia",
-                    "text": "¿Qué característica del parénquima esponjoso facilita el intercambio gaseoso?",
+                    "topic": "histologia",
+                    "text": "En un corte transversal foliar, ¿qué característica permite reconocer el parénquima en empalizada?",
                     "options": [
-                        "Paredes secundarias lignificadas",
-                        "Ausencia de espacios intercelulares",
-                        "Presencia exclusiva de células conductoras",
-                        "Grandes espacios intercelulares conectados"
+                        "Células muertas con paredes lignificadas exclusivamente",
+                        "Vasos conductores con paredes perforadas",
+                        "Grandes cámaras de aire sin células fotosintéticas",
+                        "Células alargadas, compactas y generalmente ricas en cloroplastos"
                     ],
                     "answer": 3,
-                    "explain": "Los espacios intercelulares del parénquima esponjoso permiten la difusión de CO₂, O₂ y vapor de agua dentro de la hoja."
+                    "explain": "El parénquima en empalizada está especializado en captar luz y realizar fotosíntesis. Sus células alargadas suelen disponerse perpendicularmente a la superficie foliar y contienen abundantes cloroplastos."
                 },
                 {
                     "id": "q5",
-                    "topic": "tejidos",
-                    "text": "¿Qué transporta principalmente el xilema en las hojas?",
+                    "topic": "histologia",
+                    "text": "¿Cuál es la función principal de los espacios intercelulares del parénquima esponjoso?",
                     "options": [
-                        "Sacarosa desde las hojas hacia otros órganos exclusivamente",
-                        "Agua y minerales procedentes del sistema radical",
-                        "ARN mensajero hacia los estomas",
-                        "Clorofila entre las células"
+                        "Impedir todo movimiento de gases",
+                        "Facilitar la difusión de CO₂, O₂ y vapor de agua",
+                        "Sustituir al xilema en el transporte de agua a larga distancia",
+                        "Almacenar exclusivamente lignina"
                     ],
                     "answer": 1,
-                    "explain": "El xilema conduce agua y minerales hacia los órganos aéreos y contribuye al soporte mecánico mediante paredes celulares especializadas."
+                    "explain": "Las cámaras intercelulares conectan con las cavidades subestomáticas y facilitan la difusión de gases entre los estomas y los tejidos fotosintéticos."
                 },
                 {
                     "id": "q6",
-                    "topic": "tejidos",
-                    "text": "¿Cuál es la función principal del floema?",
+                    "topic": "histologia",
+                    "text": "¿Qué tejido conduce principalmente agua y minerales desde la raíz hacia la hoja?",
                     "options": [
-                        "Formar la cutícula",
-                        "Producir directamente la luz solar",
-                        "Transportar azúcares y otros solutos orgánicos",
-                        "Impedir todo intercambio gaseoso"
+                        "Epidermis",
+                        "Floema",
+                        "Xilema",
+                        "Parénquima de empalizada"
                     ],
                     "answer": 2,
-                    "explain": "El floema distribuye fotoasimilados, especialmente sacarosa, desde órganos fuente hacia órganos sumidero, según las necesidades de la planta."
+                    "explain": "El xilema conduce agua y minerales. Sus elementos conductores suelen presentar paredes secundarias lignificadas; en muchos haces foliares se orienta hacia la superficie adaxial."
                 },
                 {
                     "id": "q7",
-                    "topic": "tejidos",
-                    "text": "En la práctica, ¿qué combinación se utilizó para teñir cortes foliares y observar los tejidos conductores?",
+                    "topic": "histologia",
+                    "text": "¿Qué sustancia explica la coloración rojiza característica producida por fluoroglucina y ácido clorhídrico en tejidos lignificados?",
                     "options": [
-                        "Agua destilada y etanol",
-                        "Lugol y azul de metileno",
-                        "Safranina y verde rápido",
-                        "Fluoroglucina y ácido clorhídrico concentrado"
+                        "La reacción de la fluoroglucina con componentes de la lignina en medio ácido",
+                        "La unión específica de la fluoroglucina con la clorofila",
+                        "La disolución de la celulosa por agua destilada",
+                        "La precipitación de almidón por el floema"
                     ],
-                    "answer": 3,
-                    "explain": "La guía indica fluoroglucina y HCl concentrado. La reacción se utiliza para evidenciar tejidos lignificados mediante una coloración rojiza, especialmente en paredes con lignina."
+                    "answer": 0,
+                    "explain": "La fluoroglucina en medio ácido produce una coloración rojo cereza o rojiza en determinados tejidos lignificados, especialmente elementos del xilema. La intensidad depende del tejido y de las condiciones de tinción."
                 },
                 {
                     "id": "q8",
-                    "topic": "tejidos",
-                    "text": "¿Qué función cumple la vaina del haz vascular?",
+                    "topic": "histologia",
+                    "text": "¿Qué estructura caracteriza al corte foliar de Retrophyllum rospigliosii observado en la práctica?",
                     "options": [
-                        "Rodea el haz y contribuye a su delimitación y regulación de intercambios",
-                        "Reemplaza todas las funciones de la epidermis",
-                        "Produce las esporas de los helechos",
-                        "Constituye siempre la cutícula externa"
+                        "Ausencia total de tejidos conductores",
+                        "Soros ubicados en la epidermis",
+                        "Células buliformes como única estructura diagnóstica",
+                        "Canal resinífero y tejido de transfusión asociados al sistema vascular"
                     ],
-                    "answer": 0,
-                    "explain": "La vaina fascicular rodea los tejidos conductores. Su composición y especialización varían entre especies; en algunas plantas participa en el intercambio de sustancias y en la fotosíntesis."
+                    "answer": 3,
+                    "explain": "En el corte de esta gimnosperma pueden reconocerse canales resiníferos y tejido de transfusión, relacionado con el intercambio radial de agua y solutos alrededor del sistema vascular."
                 },
                 {
                     "id": "q9",
-                    "topic": "tejidos",
-                    "text": "¿Qué característica permite reconocer fibras de esclerénquima en un corte foliar?",
+                    "topic": "histologia",
+                    "text": "¿Qué función se asocia al tejido de transfusión de las hojas de muchas coníferas?",
                     "options": [
-                        "Grandes espacios intercelulares y paredes muy delgadas",
-                        "Paredes celulares gruesas, frecuentemente lignificadas",
-                        "Ausencia de pared celular",
-                        "Presencia obligatoria de numerosos estomas dentro de cada fibra"
+                        "Producir soros y esporangios",
+                        "Facilitar el transporte lateral de agua y solutos entre los tejidos vasculares y el mesófilo",
+                        "Formar la cutícula exclusivamente",
+                        "Sustituir todas las funciones del floema"
                     ],
                     "answer": 1,
-                    "explain": "Las fibras de esclerénquima presentan paredes secundarias gruesas que aportan resistencia y soporte a los tejidos vegetales."
+                    "explain": "El tejido de transfusión, compuesto por células parenquimáticas y elementos traqueidales, facilita el transporte radial de agua y solutos en hojas de determinadas gimnospermas."
                 },
                 {
                     "id": "q10",
-                    "topic": "tejidos",
-                    "text": "¿Qué característica es típica de las células buliformes en muchas hojas de gramíneas?",
+                    "topic": "histologia",
+                    "text": "¿Qué estructuras deben localizarse para diferenciar el sistema conductor en un corte foliar?",
                     "options": [
-                        "Conducen sacarosa por tubos cribosos",
-                        "Forman exclusivamente los vasos del xilema",
-                        "Son células epidérmicas grandes relacionadas con el enrollamiento foliar",
-                        "Constituyen los soros de los helechos"
+                        "Solo la cutícula y los tricomas",
+                        "Únicamente las células epidérmicas",
+                        "Xilema y floema, considerando su posición dentro del haz vascular",
+                        "Exclusivamente el parénquima esponjoso"
                     ],
                     "answer": 2,
-                    "explain": "Las células buliformes suelen localizarse en la epidermis de hojas de gramíneas. Los cambios en su turgencia pueden contribuir al enrollamiento o desenrollamiento de la lámina."
+                    "explain": "El xilema y el floema se reconocen dentro de los haces vasculares por su organización y características celulares. En muchas hojas, el xilema se orienta hacia el haz y el floema hacia el envés, aunque la disposición debe comprobarse en cada muestra."
                 },
                 {
                     "id": "q11",
-                    "topic": "morfologia",
-                    "text": "¿Qué diferencia fundamental existe entre una hoja simple y una compuesta?",
+                    "topic": "histologia",
+                    "text": "¿Qué función cumplen las fibras de esclerénquima asociadas a los haces vasculares?",
                     "options": [
-                        "La hoja simple nunca presenta nervaduras",
-                        "La hoja compuesta carece de epidermis",
-                        "La hoja simple siempre es lineal",
-                        "La hoja compuesta presenta el limbo dividido en folíolos individualizados"
+                        "Aumentar el intercambio gaseoso por cámaras de aire",
+                        "Realizar toda la fotosíntesis de la hoja",
+                        "Producir resina dentro de los estomas",
+                        "Proporcionar soporte mecánico mediante paredes celulares gruesas, frecuentemente lignificadas"
                     ],
                     "answer": 3,
-                    "explain": "En las hojas compuestas, el limbo se divide en folíolos que se insertan en un raquis o en un punto común. Los lóbulos de una hoja simple no constituyen folíolos independientes."
+                    "explain": "Las fibras de esclerénquima refuerzan los tejidos y aportan resistencia mecánica. Su pared secundaria engrosada puede presentar lignificación."
                 },
                 {
                     "id": "q12",
-                    "topic": "morfologia",
-                    "text": "¿Qué caracteriza a una hoja imparipinnada?",
+                    "topic": "histologia",
+                    "text": "¿Qué función tienen las células buliformes presentes en muchas hojas de gramíneas?",
                     "options": [
-                        "Presenta un folíolo terminal que deja un número impar de folíolos",
-                        "Todos los folíolos nacen exclusivamente de un punto común",
-                        "Presenta siempre dos folíolos",
-                        "Carece de raquis"
+                        "Contribuir al plegamiento o enrollamiento de la lámina ante cambios en su turgencia",
+                        "Transportar sacarosa a larga distancia",
+                        "Formar exclusivamente el xilema",
+                        "Producir esporas dentro de soros"
                     ],
                     "answer": 0,
-                    "explain": "La hoja imparipinnada tiene folíolos dispuestos a lo largo del raquis y normalmente termina en un folíolo apical."
+                    "explain": "Las células buliformes son células epidérmicas grandes que, mediante cambios de turgencia, pueden contribuir al plegamiento o enrollamiento de la hoja, reduciendo la exposición foliar en determinadas condiciones."
                 },
                 {
                     "id": "q13",
-                    "topic": "morfologia",
-                    "text": "¿Cómo se reconoce generalmente una filotaxia opuesta?",
+                    "topic": "histologia",
+                    "text": "¿Qué característica se asocia con frecuencia a los haces vasculares de muchas gramíneas?",
                     "options": [
-                        "Tres o más hojas por nudo",
-                        "Dos hojas insertadas frente a frente en un mismo nudo",
-                        "Una hoja por nudo, alternando regularmente",
-                        "Hojas agrupadas exclusivamente en el ápice de la raíz"
+                        "Ausencia de floema",
+                        "Organización exclusiva en una estela radial de raíz",
+                        "Vaina parenquimática alrededor del haz y mesófilo frecuentemente dispuesto alrededor de este",
+                        "Presencia obligatoria de un canal resinífero central"
                     ],
-                    "answer": 1,
-                    "explain": "En la filotaxia opuesta se insertan dos hojas por nudo, enfrentadas entre sí. La verticilada presenta tres o más hojas por nudo."
+                    "answer": 2,
+                    "explain": "En muchas gramíneas, los haces vasculares están rodeados por una vaina de células que puede participar en el intercambio de sustancias. En plantas C4, la anatomía Kranz incluye una organización característica del clorénquima alrededor de los haces."
                 },
                 {
                     "id": "q14",
                     "topic": "morfologia",
-                    "text": "¿Qué diferencia anatómica distingue una espina de un aguijón?",
+                    "text": "¿Cómo se diferencia una hoja simple de una hoja compuesta?",
                     "options": [
-                        "El aguijón siempre contiene xilema y floema bien desarrollados",
-                        "La espina siempre procede de una hoja",
-                        "La espina es una estructura modificada con continuidad anatómica con el órgano; el aguijón es una proyección superficial",
-                        "No existe diferencia en su origen"
+                        "La hoja simple siempre carece de nervaduras",
+                        "La hoja simple tiene un limbo no dividido en foliolos; la compuesta presenta foliolos diferenciados",
+                        "La hoja compuesta carece de pecíolo en todos los casos",
+                        "La hoja simple solo aparece en gimnospermas"
                     ],
-                    "answer": 2,
-                    "explain": "Las espinas suelen derivar de órganos modificados y presentan conexión anatómica con los tejidos internos. Los aguijones son emergencias superficiales, como los de la rosa."
+                    "answer": 1,
+                    "explain": "La distinción se basa en la división del limbo. En la hoja compuesta, los foliolos forman unidades separadas y no poseen una yema axilar en la base de cada foliolo; la yema axilar se encuentra en la base de la hoja completa."
                 },
                 {
                     "id": "q15",
                     "topic": "morfologia",
-                    "text": "¿Dónde se localiza habitualmente la lígula en una hoja de gramínea?",
+                    "text": "¿Qué diferencia morfológica existe entre una espina de Citrus y un aguijón de Rosa?",
                     "options": [
-                        "En el extremo de la raíz",
-                        "En el centro del xilema",
-                        "En la punta del ápice foliar",
-                        "En la unión entre la vaina y el limbo"
+                        "Ambos son siempre tricomas glandulares",
+                        "La espina es una raíz y el aguijón es una hoja",
+                        "La espina es una estructura derivada de un órgano; el aguijón es una emergencia superficial",
+                        "El aguijón contiene necesariamente un haz vascular y la espina nunca lo contiene"
                     ],
-                    "answer": 3,
-                    "explain": "La lígula es una estructura situada en la zona de transición entre la vaina y la lámina foliar. Su forma y desarrollo pueden ayudar a identificar gramíneas."
+                    "answer": 2,
+                    "explain": "Las espinas son órganos o partes de órganos modificados y pueden contener tejido vascular. Los aguijones, como los de Rosa, son emergencias superficiales que no equivalen a una hoja o rama transformada."
                 },
                 {
                     "id": "q16",
-                    "topic": "grupos",
-                    "text": "¿Qué estructura resinífera puede observarse en algunos cortes foliares de gimnospermas como el pino romerón?",
+                    "topic": "morfologia",
+                    "text": "¿Qué significa que una hoja sea peciolada?",
                     "options": [
-                        "Canal resinífero",
-                        "Tubo criboso",
-                        "Soro",
-                        "Estípula"
+                        "Que presenta un pecíolo que une el limbo con el tallo",
+                        "Que el limbo está dividido en pinnas",
+                        "Que carece de lámina foliar",
+                        "Que las hojas se disponen necesariamente en verticilos"
                     ],
                     "answer": 0,
-                    "explain": "Los canales resiníferos contienen resina y forman parte de los sistemas de secreción y defensa presentes en determinadas gimnospermas."
+                    "explain": "El pecíolo es el segmento que conecta el limbo con el tallo. Una hoja sésil carece de pecíolo evidente, mientras que una hoja envainadora presenta una base que rodea parcial o totalmente el tallo."
                 },
                 {
                     "id": "q17",
-                    "topic": "grupos",
-                    "text": "¿Qué estructura reproductiva se busca al observar el envés de las frondas de los helechos?",
+                    "topic": "morfologia",
+                    "text": "¿Qué caracteriza a una filotaxia opuesta decusada?",
                     "options": [
-                        "Granos de polen",
-                        "Soros que agrupan esporangios",
-                        "Flores completas",
-                        "Frutos carnosos"
+                        "Una sola hoja por nudo sin alternancia",
+                        "Tres o más hojas en cada nudo",
+                        "Todas las hojas se originan en una roseta basal",
+                        "Dos hojas por nudo y los pares sucesivos orientados aproximadamente a 90°"
                     ],
-                    "answer": 1,
-                    "explain": "Los soros agrupan esporangios en muchos helechos. Los esporangios producen esporas, que participan en la reproducción y dispersión de estos organismos."
+                    "answer": 3,
+                    "explain": "En la disposición opuesta hay dos hojas por nudo. Cuando los pares sucesivos presentan una rotación aproximada de 90°, la filotaxia se denomina opuesta decusada."
                 },
                 {
                     "id": "q18",
-                    "topic": "grupos",
-                    "text": "¿Qué relación entre anatomía y ambiente puede explicar una cutícula foliar gruesa?",
+                    "topic": "helechos",
+                    "text": "¿Qué estructuras de una fronda de helecho deben reconocerse en la práctica?",
                     "options": [
-                        "Mayor producción de esporangios en el xilema",
-                        "Ausencia total de fotosíntesis",
-                        "Mayor protección frente a la pérdida de agua",
-                        "Transformación del floema en epidermis"
+                        "Solo estomas y canales resiníferos",
+                        "Estipe o pecíolo, raquis, pinnas y pínnulas cuando estén presentes",
+                        "Únicamente xilema y floema",
+                        "Antera, estigma y ovario"
                     ],
-                    "answer": 2,
-                    "explain": "La cutícula limita la pérdida de agua a través de la superficie foliar. Su grosor y composición pueden variar según la especie y las condiciones ambientales."
+                    "answer": 1,
+                    "explain": "La fronda es la hoja del helecho. Puede presentar estipe, raquis y divisiones laterales denominadas pinnas y pínnulas, según su grado de división."
                 },
                 {
                     "id": "q19",
-                    "topic": "anatomia",
-                    "text": "¿Qué tejido se encuentra generalmente entre la epidermis superior e inferior de la hoja?",
+                    "topic": "helechos",
+                    "text": "¿Qué contienen los soros de los helechos?",
                     "options": [
-                        "Peridermis exclusivamente",
-                        "Madera secundaria exclusivamente",
-                        "Corcho de la raíz",
-                        "Mesófilo"
+                        "Canales resiníferos",
+                        "Estomas agrupados",
+                        "Esporangios que producen esporas",
+                        "Células buliformes"
                     ],
-                    "answer": 3,
-                    "explain": "El mesófilo comprende tejidos fundamentales, como el parénquima de empalizada y el esponjoso en muchas hojas de eudicotiledóneas, aunque su organización varía entre grupos."
+                    "answer": 2,
+                    "explain": "Los soros son agrupaciones de esporangios, frecuentemente visibles en el envés de las frondas. Los esporangios producen esporas mediante procesos del ciclo reproductivo."
                 },
                 {
                     "id": "q20",
-                    "topic": "tejidos",
-                    "text": "¿Qué interpretación debe hacerse si la tinción de un corte foliar no permite distinguir claramente los tejidos lignificados?",
+                    "topic": "morfologia",
+                    "text": "¿Qué diferencia existe entre una hoja paripinnada y una imparipinnada?",
                     "options": [
-                        "Verificar el corte, la aplicación de reactivos y la calidad de la preparación antes de concluir",
-                        "Afirmar que la especie carece de xilema",
-                        "Concluir que toda la hoja está formada por floema",
-                        "Clasificar automáticamente la muestra como helecho"
+                        "La paripinnada carece de foliolos y la imparipinnada posee uno",
+                        "La paripinnada tiene siempre foliolos digitados",
+                        "La imparipinnada no presenta raquis",
+                        "La paripinnada suele terminar en un par de foliolos; la imparipinnada presenta un foliolo terminal"
+                    ],
+                    "answer": 3,
+                    "explain": "En la hoja paripinnada, los foliolos suelen disponerse en pares y no hay un foliolo terminal solitario. En la imparipinnada, el raquis termina en un foliolo."
+                },
+                {
+                    "id": "q21",
+                    "topic": "morfologia",
+                    "text": "¿Qué característica define una hoja bipinnada?",
+                    "options": [
+                        "Los foliolos se insertan en pinnas que, a su vez, se insertan en un raquis principal",
+                        "La hoja posee un solo limbo sin divisiones",
+                        "Las hojas aparecen exclusivamente en pares opuestos",
+                        "El limbo está reducido a una espina"
                     ],
                     "answer": 0,
-                    "explain": "La visibilidad depende del espesor del corte, la conservación, la aplicación de los reactivos y la iluminación microscópica. Una tinción deficiente no demuestra la ausencia del tejido."
+                    "explain": "En una hoja bipinnada, el eje principal lleva pinnas secundarias y estas sostienen los foliolos. La división de la lámina ocurre en dos órdenes."
+                },
+                {
+                    "id": "q22",
+                    "topic": "morfologia",
+                    "text": "¿Qué debe evaluarse para describir correctamente la forma del margen foliar?",
+                    "options": [
+                        "Solo el color del pecíolo",
+                        "Únicamente la cantidad de cloroplastos",
+                        "El contorno del borde, por ejemplo entero, dentado, aserrado, crenado u ondulado",
+                        "La ubicación del xilema dentro del tallo"
+                    ],
+                    "answer": 2,
+                    "explain": "El margen se describe por su contorno. Un margen entero no presenta dientes marcados; los dentados y aserrados presentan proyecciones, con orientación diferente de los dientes según el tipo."
+                },
+                {
+                    "id": "q23",
+                    "topic": "morfologia",
+                    "text": "¿Cuál es la diferencia entre el ápice y la base de una hoja?",
+                    "options": [
+                        "Ambos designan la región central del mesófilo",
+                        "El ápice es el extremo distal; la base es la región próxima a la inserción con el pecíolo o tallo",
+                        "El ápice siempre contiene estomas y la base nunca",
+                        "La base solo existe en hojas compuestas"
+                    ],
+                    "answer": 1,
+                    "explain": "El ápice corresponde al extremo terminal de la lámina, mientras que la base se encuentra en la región de unión con el pecíolo o directamente con el tallo."
+                },
+                {
+                    "id": "q24",
+                    "topic": "identificacion",
+                    "text": "¿Por qué deben compararse hojas de gimnospermas, eudicotiledóneas y monocotiledóneas mediante cortes transversales?",
+                    "options": [
+                        "Porque todas presentan exactamente la misma anatomía",
+                        "Porque el corte elimina las diferencias entre los tejidos",
+                        "Porque permite observar únicamente el color externo",
+                        "Porque revela la disposición interna de epidermis, mesófilo y tejidos conductores, útil para comparar adaptaciones y organización"
+                    ],
+                    "answer": 3,
+                    "explain": "Los cortes transversales muestran la relación espacial entre tejidos. La interpretación conjunta de epidermis, mesófilo, haces vasculares y estructuras especializadas permite reconocer patrones anatómicos, sin depender de un solo carácter."
+                },
+                {
+                    "id": "q25",
+                    "topic": "identificacion",
+                    "text": "¿Cuál es el procedimiento más adecuado para describir una muestra foliar desconocida en el laboratorio?",
+                    "options": [
+                        "Registrar únicamente el color de la muestra",
+                        "Asignar una especie a partir de un único rasgo sin comparaciones",
+                        "Observar ambas superficies, describir margen, ápice, base, pecíolo, venación y filotaxia, y comparar los caracteres",
+                        "Clasificar la hoja solo por su tamaño"
+                    ],
+                    "answer": 2,
+                    "explain": "La identificación morfológica se basa en un conjunto de caracteres. Registrar varios rasgos comparables disminuye errores de clasificación y permite distinguir hojas similares."
+                },
+                {
+                    "id": "q26",
+                    "topic": "identificacion",
+                    "text": "En una hoja se observa una epidermis protectora, mesófilo diferenciado y un haz vascular con xilema y floema. ¿Qué conclusión es más adecuada?",
+                    "options": [
+                        "Se reconocen componentes anatómicos foliares, pero la identificación taxonómica requiere más caracteres",
+                        "La muestra necesariamente es una raíz",
+                        "La presencia de xilema demuestra que la hoja es de una gimnosperma",
+                        "El mesófilo indica obligatoriamente que la muestra es un helecho"
+                    ],
+                    "answer": 0,
+                    "explain": "Estos tejidos son comunes en hojas de distintos grupos vegetales. Para diferenciar taxones se requiere analizar su organización, estructuras especializadas y caracteres morfológicos adicionales."
+                },
+                {
+                    "id": "q27",
+                    "topic": "histologia",
+                    "text": "¿Qué función cumplen los estomas en la hoja?",
+                    "options": [
+                        "Producir lignina en las fibras",
+                        "Conducir azúcares dentro del floema",
+                        "Regular el intercambio gaseoso y la pérdida de vapor de agua",
+                        "Formar los foliolos de una hoja compuesta"
+                    ],
+                    "answer": 2,
+                    "explain": "Los estomas son poros regulados por células oclusivas. Su apertura permite la entrada de CO₂ y la salida de O₂ y vapor de agua; el grado de apertura depende, entre otros factores, de la turgencia celular y las condiciones ambientales."
+                },
+                {
+                    "id": "q28",
+                    "topic": "morfologia",
+                    "text": "¿Qué carácter diferencia principalmente una hoja envainadora de una peciolada?",
+                    "options": [
+                        "La presencia de un ápice",
+                        "La base de la hoja envuelve parcial o totalmente el tallo",
+                        "La hoja envainadora carece siempre de epidermis",
+                        "La hoja peciolada no tiene nervaduras"
+                    ],
+                    "answer": 1,
+                    "explain": "En las hojas envainadoras, la base se prolonga alrededor del tallo, como ocurre en muchas monocotiledóneas. En las pecioladas, el limbo se une al tallo mediante un pecíolo."
+                },
+                {
+                    "id": "q29",
+                    "topic": "morfologia",
+                    "text": "¿Qué patrón de nerviación se observa frecuentemente en hojas de monocotiledóneas como Hemerocallis?",
+                    "options": [
+                        "Nerviación paralela",
+                        "Nerviación exclusivamente dicotómica",
+                        "Ausencia de nervaduras",
+                        "Nerviación reticulada obligatoria"
+                    ],
+                    "answer": 0,
+                    "explain": "Muchas monocotiledóneas presentan nerviación paralela, aunque existen excepciones. El patrón de nerviación debe utilizarse junto con otros caracteres, no como criterio único."
+                },
+                {
+                    "id": "q30",
+                    "topic": "identificacion",
+                    "text": "¿Qué diferencia fundamental existe entre anatomía foliar y morfología foliar?",
+                    "options": [
+                        "Son términos idénticos y no describen características distintas",
+                        "La anatomía estudia solo el color; la morfología solo los tejidos internos",
+                        "La anatomía se limita a la raíz y la morfología al tallo",
+                        "La anatomía estudia la organización interna; la morfología describe forma y organización externa"
+                    ],
+                    "answer": 3,
+                    "explain": "La anatomía foliar estudia epidermis, mesófilo y tejidos vasculares. La morfología examina el limbo, ápice, base, margen, pecíolo, división y disposición de las hojas."
                 }],
             "glossary": [{
-                "term": "Anatomía foliar",
-                "def": "Estudio de la organización interna de la hoja, sus tejidos, células y haces vasculares."
+                "term": "Hoja",
+                "def": "Órgano vegetal generalmente especializado en fotosíntesis, intercambio gaseoso y transpiración."
             },
                 {
-                    "term": "Morfología foliar",
-                    "def": "Estudio de los caracteres externos de la hoja, como forma, margen, ápice, base, venación y filotaxia."
+                    "term": "Limbo o lámina",
+                    "def": "Parte expandida de la hoja que contiene la mayor parte del tejido fotosintético."
                 },
                 {
-                    "term": "Limbo",
-                    "def": "Porción generalmente aplanada de la hoja, especializada en la captación de luz y el intercambio con el ambiente."
+                    "term": "Haz o superficie adaxial",
+                    "def": "Superficie foliar orientada generalmente hacia el eje del brote; en muchas hojas dorsiventrales se relaciona con el parénquima en empalizada."
                 },
                 {
-                    "term": "Haz foliar",
-                    "def": "Cara adaxial de la hoja, orientada generalmente hacia el eje del brote."
-                },
-                {
-                    "term": "Envés foliar",
-                    "def": "Cara abaxial de la hoja, opuesta al haz."
+                    "term": "Envés o superficie abaxial",
+                    "def": "Superficie opuesta al haz; en muchas especies concentra una proporción elevada de estomas."
                 },
                 {
                     "term": "Cutícula",
-                    "def": "Capa extracelular rica en cutina y ceras que recubre la epidermis y reduce la pérdida de agua."
+                    "def": "Cubierta extracelular rica en cutina y ceras que protege la epidermis y reduce la pérdida de agua."
+                },
+                {
+                    "term": "Epidermis",
+                    "def": "Tejido protector externo de la hoja, que puede incluir estomas, tricomas y células especializadas."
                 },
                 {
                     "term": "Estoma",
                     "def": "Poro epidérmico delimitado por células oclusivas que regula el intercambio gaseoso y la transpiración."
                 },
                 {
-                    "term": "Tricoma",
-                    "def": "Proyección epidérmica unicelular o multicelular que puede intervenir en protección, secreción o regulación de la interacción con el ambiente."
+                    "term": "Cámara subestomática",
+                    "def": "Espacio interno situado bajo un estoma que conecta el poro con los espacios intercelulares del mesófilo."
                 },
                 {
                     "term": "Mesófilo",
-                    "def": "Tejido fundamental interno de la lámina foliar, frecuentemente fotosintético."
+                    "def": "Tejido interno de la hoja, generalmente parenquimático y fotosintético, ubicado entre las epidermis."
                 },
                 {
-                    "term": "Parénquima de empalizada",
-                    "def": "Tejido fotosintético con células generalmente alargadas y abundantes cloroplastos."
+                    "term": "Parénquima en empalizada",
+                    "def": "Tejido fotosintético de células alargadas y compactas, normalmente rico en cloroplastos y ubicado hacia el haz en hojas dorsiventrales."
                 },
                 {
-                    "term": "Parénquima esponjoso",
-                    "def": "Tejido con células de disposición irregular y espacios intercelulares que facilitan la difusión de gases."
+                    "term": "Parénquima esponjoso o lagunar",
+                    "def": "Tejido con células de disposición laxa y espacios intercelulares que facilitan la difusión de gases."
+                },
+                {
+                    "term": "Clorénquima",
+                    "def": "Parénquima con cloroplastos especializado en la fotosíntesis."
                 },
                 {
                     "term": "Xilema",
-                    "def": "Tejido vascular que conduce agua y minerales y puede contribuir al soporte mecánico."
+                    "def": "Tejido vascular que conduce principalmente agua y minerales; sus elementos conductores suelen presentar paredes secundarias lignificadas."
                 },
                 {
                     "term": "Floema",
-                    "def": "Tejido vascular que distribuye azúcares y otras sustancias orgánicas entre órganos fuente y sumidero."
+                    "def": "Tejido vascular que transporta azúcares y otras sustancias orgánicas desde los órganos fuente hacia los sumideros."
                 },
                 {
-                    "term": "Vaina fascicular",
-                    "def": "Capa de células que rodea un haz vascular y contribuye a delimitarlo; su composición y función varían entre especies."
+                    "term": "Haz vascular",
+                    "def": "Unidad de conducción foliar que integra xilema y floema, acompañados en ocasiones por tejidos de sostén y una vaina."
+                },
+                {
+                    "term": "Vaina del haz",
+                    "def": "Capa de células que rodea un haz vascular y participa en su protección e intercambio con los tejidos circundantes."
                 },
                 {
                     "term": "Esclerénquima",
-                    "def": "Tejido de sostén con células que frecuentemente desarrollan paredes secundarias gruesas y lignificadas."
+                    "def": "Tejido de sostén formado por células con paredes secundarias gruesas, frecuentemente lignificadas."
                 },
                 {
                     "term": "Lignina",
-                    "def": "Polímero de la pared celular que aporta rigidez y resistencia a los tejidos vegetales."
+                    "def": "Polímero de la pared celular que contribuye a la rigidez, resistencia y propiedades hidrofóbicas de determinados tejidos vegetales."
                 },
                 {
                     "term": "Fluoroglucina",
-                    "def": "Reactivo empleado con ácido clorhídrico para evidenciar determinados tejidos lignificados mediante una coloración rojiza."
+                    "def": "Reactivo que, en medio ácido, puede generar una coloración rojiza característica en tejidos con determinados componentes lignificados."
+                },
+                {
+                    "term": "Hipodermis",
+                    "def": "Capa o conjunto de capas situado debajo de la epidermis, presente en algunas hojas y relacionado con protección o soporte."
                 },
                 {
                     "term": "Canal resinífero",
-                    "def": "Conducto secretor que contiene resina y participa en la defensa de ciertas plantas."
+                    "def": "Conducto secretor presente en muchas coníferas que contiene resina, involucrada en la defensa frente a herbívoros y patógenos."
+                },
+                {
+                    "term": "Tejido de transfusión",
+                    "def": "Tejido presente en hojas de determinadas gimnospermas que facilita el transporte radial de agua y solutos alrededor de los haces vasculares."
+                },
+                {
+                    "term": "Células pétreas",
+                    "def": "Esclereidas de paredes gruesas que aportan resistencia mecánica a determinados tejidos."
                 },
                 {
                     "term": "Células buliformes",
-                    "def": "Células epidérmicas grandes presentes en muchas gramíneas, relacionadas con cambios en la curvatura o el enrollamiento de la lámina."
+                    "def": "Células epidérmicas grandes presentes en muchas gramíneas, capaces de participar en el plegamiento o enrollamiento foliar mediante cambios de turgencia."
                 },
                 {
-                    "term": "Filotaxia",
-                    "def": "Patrón de disposición de las hojas sobre el tallo; puede ser alterna, opuesta, verticilada u otras variantes."
+                    "term": "Clorénquima radiado",
+                    "def": "Organización de células fotosintéticas alrededor de haces vasculares; en ciertas plantas C4 forma parte de la anatomía Kranz."
                 },
                 {
-                    "term": "Hoja simple",
-                    "def": "Hoja cuyo limbo constituye una sola lámina, aunque puede presentar lóbulos o incisiones."
+                    "term": "Tricoma",
+                    "def": "Apéndice epidérmico con funciones posibles de protección, secreción o modificación de la interacción con el ambiente."
                 },
                 {
-                    "term": "Hoja compuesta",
-                    "def": "Hoja cuyo limbo se divide en folíolos individualizados insertados en un eje o punto común."
+                    "term": "Pelo bicelular",
+                    "def": "Tricoma formado por dos células, reconocible por su organización celular y su posición superficial."
                 },
                 {
-                    "term": "Raquis",
-                    "def": "Eje principal que sostiene los folíolos en muchas hojas compuestas o las divisiones de una fronda."
-                },
-                {
-                    "term": "Peciólulo",
-                    "def": "Pequeño eje que une un folíolo con el raquis o con el eje secundario."
+                    "term": "Nerviación",
+                    "def": "Patrón de distribución de las nervaduras foliares, relacionadas con conducción y soporte."
                 },
                 {
                     "term": "Pecíolo",
-                    "def": "Estructura que conecta el limbo con el tallo; puede faltar en hojas sésiles."
+                    "def": "Eje que conecta el limbo con el tallo y contiene tejidos vasculares."
                 },
                 {
-                    "term": "Vaina foliar",
-                    "def": "Base de la hoja que envuelve parcial o totalmente el tallo, común en gramíneas."
+                    "term": "Hoja sésil",
+                    "def": "Hoja que carece de pecíolo evidente y cuyo limbo se inserta directamente o casi directamente en el tallo."
                 },
                 {
-                    "term": "Lígula",
-                    "def": "Apéndice situado en la unión de la vaina y el limbo en muchas gramíneas; su forma puede ayudar a identificar especies."
+                    "term": "Hoja envainadora",
+                    "def": "Hoja cuya base forma una vaina que envuelve parcial o totalmente el tallo."
                 },
                 {
-                    "term": "Fronda",
-                    "def": "Hoja de un helecho, que puede ser simple o estar dividida en pinnas y divisiones sucesivas."
+                    "term": "Yema axilar",
+                    "def": "Estructura meristemática situada en la axila de una hoja completa; puede originar una rama u otro brote."
                 },
                 {
-                    "term": "Soro",
-                    "def": "Agrupación de esporangios presente en muchas frondas de helechos."
+                    "term": "Filotaxia",
+                    "def": "Patrón de disposición de las hojas sobre el tallo: alterna, opuesta, verticilada u otras variantes."
                 },
                 {
-                    "term": "Espina",
-                    "def": "Estructura rígida y puntiaguda que suele derivar de un órgano modificado y presentar continuidad anatómica con él."
+                    "term": "Hoja alterna",
+                    "def": "Hoja con una hoja por nudo, alternando a lo largo del tallo."
                 },
                 {
-                    "term": "Aguijón",
-                    "def": "Proyección superficial, como la de la rosa, que se diferencia de una espina por su origen y conexión anatómica."
+                    "term": "Hoja opuesta",
+                    "def": "Hoja dispuesta en pares, con dos hojas insertadas en un mismo nudo."
                 },
                 {
-                    "term": "Venación",
-                    "def": "Patrón de distribución de las nervaduras foliares, relacionado con conducción y soporte."
+                    "term": "Filotaxia decusada",
+                    "def": "Disposición opuesta en la que los pares sucesivos se orientan aproximadamente en ángulo recto."
                 },
                 {
-                    "term": "Estípula",
-                    "def": "Apéndice situado generalmente en la base de la hoja, cuya presencia, forma y tamaño varían entre especies."
+                    "term": "Hoja verticilada",
+                    "def": "Hoja dispuesta en grupos de tres o más hojas por nudo."
+                },
+                {
+                    "term": "Hoja fasciculada",
+                    "def": "Conjunto de hojas agrupadas en fascículos o haces, a menudo sobre brotes cortos."
+                },
+                {
+                    "term": "Hoja imbricada",
+                    "def": "Hoja que se superpone parcialmente a las hojas vecinas, como las tejas."
+                },
+                {
+                    "term": "Hoja en roseta",
+                    "def": "Hoja agrupada en una disposición radial cercana al suelo o a un eje muy corto."
+                },
+                {
+                    "term": "Hoja simple",
+                    "def": "Hoja con un limbo continuo, aunque pueda presentar lóbulos o incisiones que no lo dividen en foliolos independientes."
+                },
+                {
+                    "term": "Hoja compuesta",
+                    "def": "Hoja cuyo limbo está dividido en foliolos diferenciados, todos pertenecientes a una misma hoja."
+                },
+                {
+                    "term": "Foliolo",
+                    "def": "Unidad laminar de una hoja compuesta; no posee una yema axilar propia en su base."
+                },
+                {
+                    "term": "Raquis",
+                    "def": "Eje principal de una hoja compuesta o de una fronda que sostiene sus divisiones laterales."
+                },
+                {
+                    "term": "Peciólulo",
+                    "def": "Pequeño eje que une un foliolo con el raquis o con el eje secundario."
                 },
                 {
                     "term": "Pulvínulo",
-                    "def": "Región engrosada en la base de un folíolo o pecíolo que puede participar en movimientos foliares."
+                    "def": "Engrosamiento en la base de un pecíolo o foliolo que puede participar en movimientos foliares mediante cambios de turgencia."
+                },
+                {
+                    "term": "Hoja paripinnada",
+                    "def": "Hoja pinnada cuyo raquis termina generalmente en un par de foliolos, sin foliolo terminal solitario."
+                },
+                {
+                    "term": "Hoja imparipinnada",
+                    "def": "Hoja pinnada que presenta un foliolo terminal al final del raquis."
+                },
+                {
+                    "term": "Hoja bipinnada",
+                    "def": "Hoja compuesta en la que el raquis principal sostiene pinnas secundarias, que a su vez llevan foliolos."
+                },
+                {
+                    "term": "Hoja trifoliolada",
+                    "def": "Hoja compuesta que posee tres foliolos."
+                },
+                {
+                    "term": "Hoja digitada o palmada",
+                    "def": "Hoja cuyos foliolos se disponen radialmente desde un punto común, semejante a los dedos de una mano."
+                },
+                {
+                    "term": "Fronda",
+                    "def": "Hoja de un helecho, que puede presentar estipe, raquis, pinnas, pínnulas y estructuras reproductivas."
+                },
+                {
+                    "term": "Soro",
+                    "def": "Agrupación de esporangios presente en muchas frondas de helechos, a menudo localizada en el envés."
+                },
+                {
+                    "term": "Esporangio",
+                    "def": "Estructura en la que se forman las esporas."
+                },
+                {
+                    "term": "Lígula",
+                    "def": "Apéndice membranoso o piloso situado en la unión entre la vaina y el limbo en hojas de muchas gramíneas."
+                },
+                {
+                    "term": "Vaina foliar",
+                    "def": "Base de la hoja que rodea parcial o totalmente el tallo, frecuente en muchas monocotiledóneas."
+                },
+                {
+                    "term": "Ápice foliar",
+                    "def": "Extremo distal de la lámina, descrito mediante términos como agudo, obtuso, acuminado, retuso o emarginado."
+                },
+                {
+                    "term": "Base foliar",
+                    "def": "Región proximal de la lámina donde se une al pecíolo o al tallo, descrita como cordada, cuneada, redondeada, oblicua u otras formas."
+                },
+                {
+                    "term": "Margen foliar",
+                    "def": "Contorno del borde de la lámina, que puede ser entero, aserrado, dentado, crenado, ondulado o presentar otras configuraciones."
+                },
+                {
+                    "term": "Hoja lanceolada",
+                    "def": "Hoja alargada, más ancha hacia la zona media y estrechada hacia ambos extremos, generalmente con aspecto de lanza."
+                },
+                {
+                    "term": "Hoja cordada",
+                    "def": "Hoja con base en forma de corazón, generalmente con una escotadura en la zona de inserción."
+                },
+                {
+                    "term": "Hoja acicular",
+                    "def": "Hoja estrecha y puntiaguda, con forma de aguja, característica de muchas coníferas."
+                },
+                {
+                    "term": "Espina",
+                    "def": "Estructura rígida derivada de un órgano vegetal modificado, que puede contener tejido vascular."
+                },
+                {
+                    "term": "Aguijón",
+                    "def": "Emergencia superficial, como la de Rosa, que no equivale a un órgano completo modificado."
+                },
+                {
+                    "term": "Estípula",
+                    "def": "Apéndice generalmente situado a ambos lados de la base foliar, cuya presencia y forma son caracteres de identificación."
+                },
+                {
+                    "term": "Anatomía foliar",
+                    "def": "Estudio de la organización interna de la hoja y de las relaciones entre sus tejidos."
+                },
+                {
+                    "term": "Morfología foliar",
+                    "def": "Estudio de la forma externa, división, margen, ápice, base, pecíolo, venación y disposición de las hojas."
                 }],
             "flashcards": [{
                 "id": "f1",
                 "front": "Funciones de la hoja",
-                "back": "Fotosíntesis, intercambio gaseoso y transpiración. Algunas hojas se especializan en almacenamiento o defensa."
+                "back": "Fotosíntesis, intercambio gaseoso y transpiración. Algunas hojas se especializan en defensa, almacenamiento o captura."
             },
                 {
                     "id": "f2",
-                    "front": "Epidermis y cutícula",
-                    "back": "La epidermis protege la hoja; la cutícula reduce la pérdida de agua y la exposición directa de los tejidos internos."
+                    "front": "Cutícula y epidermis",
+                    "back": "Protegen la superficie foliar. La cutícula reduce la pérdida de agua; la epidermis puede presentar estomas y tricomas."
                 },
                 {
                     "id": "f3",
-                    "front": "Estomas",
-                    "back": "Poros regulados por células oclusivas que permiten el intercambio de CO₂, O₂ y vapor de agua."
+                    "front": "Parénquima en empalizada",
+                    "back": "Células alargadas, compactas y ricas en cloroplastos; realiza gran parte de la fotosíntesis en hojas dorsiventrales."
                 },
                 {
                     "id": "f4",
-                    "front": "Parénquima de empalizada",
-                    "back": "Células alargadas, generalmente con numerosos cloroplastos; fotosíntesis intensa."
+                    "front": "Parénquima esponjoso",
+                    "back": "Células laxas con espacios intercelulares que facilitan la difusión de CO₂, O₂ y vapor de agua."
                 },
                 {
                     "id": "f5",
-                    "front": "Parénquima esponjoso",
-                    "back": "Células irregulares y espacios intercelulares que facilitan la difusión de gases."
+                    "front": "Xilema",
+                    "back": "Conduce agua y minerales. Sus elementos conductores suelen tener paredes lignificadas."
                 },
                 {
                     "id": "f6",
-                    "front": "Xilema y floema",
-                    "back": "Xilema: agua y minerales. Floema: azúcares y otros solutos orgánicos."
+                    "front": "Floema",
+                    "back": "Transporta azúcares y otras sustancias orgánicas entre órganos fuente y sumideros."
                 },
                 {
                     "id": "f7",
                     "front": "Fluoroglucina + HCl",
-                    "back": "Tinción empleada para evidenciar tejidos lignificados mediante una coloración rojiza."
+                    "back": "Tinción usada para reconocer tejidos lignificados; puede producir una coloración rojiza en elementos del xilema."
                 },
                 {
                     "id": "f8",
-                    "front": "Células buliformes",
-                    "back": "Células epidérmicas grandes de muchas gramíneas; cambios de turgencia pueden favorecer el enrollamiento foliar."
+                    "front": "Retrophyllum rospigliosii",
+                    "back": "Gimnosperma estudiada en corte foliar. Se buscan canal resinífero, tejido de transfusión, epidermis, mesófilo y haz vascular."
                 },
                 {
                     "id": "f9",
-                    "front": "Hoja simple vs. compuesta",
-                    "back": "Simple: un limbo, aunque tenga lóbulos. Compuesta: limbo dividido en folíolos individualizados."
+                    "front": "Senna pistaciifolia",
+                    "back": "Eudicotiledónea cuyo foliolo permite reconocer epidermis, parénquima en empalizada, esponjoso y haz vascular."
                 },
                 {
                     "id": "f10",
-                    "front": "Filotaxia",
-                    "back": "Alterna: una hoja por nudo. Opuesta: dos enfrentadas. Verticilada: tres o más por nudo."
+                    "front": "Hemerocallis",
+                    "back": "Monocotiledónea con haces vasculares distribuidos y posible presencia de células buliformes en la epidermis."
                 },
                 {
                     "id": "f11",
-                    "front": "Espina vs. aguijón",
-                    "back": "La espina suele ser un órgano modificado con continuidad anatómica; el aguijón es una proyección superficial."
+                    "front": "Células buliformes",
+                    "back": "Células epidérmicas grandes que pueden favorecer el plegamiento o enrollamiento de hojas de gramíneas por cambios de turgencia."
                 },
                 {
                     "id": "f12",
-                    "front": "Fronda y soro",
-                    "back": "Fronda: hoja de helecho. Soro: agrupación de esporangios, frecuente en el envés."
+                    "front": "Vaina del haz",
+                    "back": "Capa celular alrededor de los haces vasculares; participa en protección e intercambio con los tejidos circundantes."
                 },
                 {
                     "id": "f13",
-                    "front": "Vaina y lígula",
-                    "back": "La vaina envuelve el tallo; la lígula se localiza entre la vaina y el limbo de muchas gramíneas."
+                    "front": "Canal resinífero",
+                    "back": "Conducto secretor de muchas coníferas que contiene resina defensiva."
                 },
                 {
                     "id": "f14",
-                    "front": "Raquis y peciólulo",
-                    "back": "Raquis: eje de la hoja compuesta. Peciólulo: une cada folíolo con el eje correspondiente."
+                    "front": "Tejido de transfusión",
+                    "back": "Facilita el transporte radial de agua y solutos alrededor de los haces vasculares de determinadas gimnospermas."
                 },
                 {
                     "id": "f15",
-                    "front": "Venación foliar",
-                    "back": "Distribución de las nervaduras; contribuye al transporte de sustancias y al soporte de la lámina."
+                    "front": "Anatomía vs. morfología",
+                    "back": "Anatomía: organización interna y tejidos. Morfología: forma externa, división, margen, ápice, base, pecíolo y filotaxia."
                 },
                 {
                     "id": "f16",
-                    "front": "Canal resinífero",
-                    "back": "Conducto secretor de resina en determinadas plantas; participa en mecanismos de defensa."
+                    "front": "Hoja simple vs. compuesta",
+                    "back": "Simple: limbo no dividido en foliolos. Compuesta: limbo dividido en foliolos; la yema axilar pertenece a la hoja completa."
                 },
                 {
                     "id": "f17",
-                    "front": "Vaina fascicular",
-                    "back": "Capa celular que rodea el haz vascular y contribuye a delimitarlo."
+                    "front": "Paripinnada vs. imparipinnada",
+                    "back": "Paripinnada: termina generalmente en un par de foliolos. Imparipinnada: presenta un foliolo terminal."
                 },
                 {
                     "id": "f18",
-                    "front": "Esclerénquima",
-                    "back": "Tejido de sostén con paredes celulares gruesas, frecuentemente lignificadas."
+                    "front": "Hoja bipinnada",
+                    "back": "El raquis principal sostiene pinnas secundarias, que a su vez portan foliolos."
                 },
                 {
                     "id": "f19",
-                    "front": "Ápice, base y margen",
-                    "back": "Ápice: extremo distal. Base: región de inserción. Margen: borde del limbo."
+                    "front": "Filotaxia",
+                    "back": "Disposición de hojas sobre el tallo: alterna, opuesta, decusada, verticilada, fasciculada, imbricada o en roseta."
                 },
                 {
                     "id": "f20",
-                    "front": "Espacios intercelulares",
-                    "back": "Facilitan la difusión interna de gases, especialmente en el parénquima esponjoso."
+                    "front": "Fronda de helecho",
+                    "back": "Hoja que puede presentar estipe, raquis, pinnas y pínnulas; los soros agrupan esporangios."
+                },
+                {
+                    "id": "f21",
+                    "front": "Soros",
+                    "back": "Agrupaciones de esporangios, a menudo en el envés de las frondas; los esporangios producen esporas."
+                },
+                {
+                    "id": "f22",
+                    "front": "Lígula del pasto",
+                    "back": "Estructura situada entre la vaina y el limbo en muchas gramíneas; puede ser membranosa o pilosa."
+                },
+                {
+                    "id": "f23",
+                    "front": "Espina vs. aguijón",
+                    "back": "Espina: órgano modificado, a menudo vascularizado. Aguijón: emergencia superficial, como en Rosa."
+                },
+                {
+                    "id": "f24",
+                    "front": "Margen foliar",
+                    "back": "Se describe por el borde: entero, ondulado, dentado, aserrado, crenado, inciso, espinoso u otras formas."
+                },
+                {
+                    "id": "f25",
+                    "front": "Ápice y base foliar",
+                    "back": "Ápice: extremo distal. Base: zona proximal de unión con pecíolo o tallo; ambos se describen por su forma."
+                },
+                {
+                    "id": "f26",
+                    "front": "Pecíolo y hoja sésil",
+                    "back": "Pecíolo: une limbo y tallo. Hoja sésil: carece de pecíolo evidente."
+                },
+                {
+                    "id": "f27",
+                    "front": "Estípulas",
+                    "back": "Apéndices situados generalmente a ambos lados de la base foliar; su presencia y forma ayudan a identificar especies."
+                },
+                {
+                    "id": "f28",
+                    "front": "Vaina foliar",
+                    "back": "Base que envuelve parcial o totalmente el tallo, frecuente en muchas monocotiledóneas."
+                },
+                {
+                    "id": "f29",
+                    "front": "Criterio de identificación foliar",
+                    "back": "Combinar limbo, margen, ápice, base, pecíolo, venación, estípulas, tricomas y filotaxia; no depender de un solo carácter."
+                },
+                {
+                    "id": "f30",
+                    "front": "Corte transversal foliar",
+                    "back": "Revela la disposición de epidermis, mesófilo, haces vasculares y estructuras especializadas."
                 }],
             "structures": [{
                 "id": "s1",
-                "title": "Figura 1. ¿Qué estructuras anatómicas se distinguen en el corte foliar y cómo se relacionan con la protección, fotosíntesis y conducción?",
-                "img": "link",
+                "title": "Figura 1. https://i.imgur.com/6fUo1vj.png. ¿Qué estructuras anatómicas permiten reconocer el tejido protector, el sistema vascular y los componentes característicos de esta muestra?",
+                "img": "https://i.imgur.com/6fUo1vj.png",
                 "options": [
-                    "Epidermis, hipodermis, mesófilo, xilema, floema, tejido de transfusión y canal resinífero",
-                    "Peridermis, médula caulinar y tubos cribosos exclusivamente",
-                    "Soros, esporangios y pinnas",
-                    "Raíz, cofia y pelos radicales"
+                    "Epidermis con cutícula, mesófilo, xilema, floema, canal resinífero y tejido de transfusión",
+                    "Soros, esporangios, raquis y pinnas",
+                    "Solo células buliformes y lígula",
+                    "Ausencia de tejido vascular y epidermis"
                 ],
                 "answer": 0,
-                "explain": "El corte de Retrophyllum rospigliosii permite estudiar las capas protectoras, el tejido fotosintético, los tejidos conductores y las estructuras secretoras."
+                "explain": "En el corte foliar de Retrophyllum rospigliosii se deben reconocer los tejidos protectores y fotosintéticos, los elementos conductores y las estructuras características de la gimnosperma."
             },
                 {
                     "id": "s2",
-                    "title": "Figura 2. ¿Qué organización anatómica se representa y qué estructuras deben identificarse?",
-                    "img": "link",
+                    "title": "Figura 2. https://i.imgur.com/IFMd7a8.png. ¿Qué organización relaciona la epidermis, los espacios subestomáticos y el sistema vascular?",
+                    "img": "https://i.imgur.com/IFMd7a8.png",
                     "options": [
-                        "Únicamente el sistema radical",
-                        "Epidermis, estomas, hipodermis, mesófilo, cámara subestomática, canal resinífero, endodermis, xilema, floema y tejido de transfusión",
-                        "Solo los folíolos y el raquis",
-                        "Únicamente el ápice y el margen foliar"
+                        "Un conjunto de foliolos unidos por un raquis",
+                        "Una fronda con soros y esporangios",
+                        "Epidermis con estomas, cámara subestomática, mesófilo, endodermis y haz vascular",
+                        "Una raíz con cofia y pelos absorbentes"
                     ],
-                    "answer": 1,
-                    "explain": "La figura representa la organización anatómica de una hoja de gimnosperma y permite relacionar protección, intercambio gaseoso, secreción y conducción."
+                    "answer": 2,
+                    "explain": "El esquema permite relacionar el intercambio gaseoso a través de los estomas con los tejidos internos y la organización del sistema vascular."
                 },
                 {
                     "id": "s3",
-                    "title": "Figura 3. ¿Qué tejidos se reconocen en el corte foliar y qué indica la tinción?",
-                    "img": "link",
+                    "title": "Figura 3. https://i.imgur.com/eNXUMRN.png. ¿Qué tejidos permiten identificar el mesófilo diferenciado y el soporte del nervio principal?",
+                    "img": "https://i.imgur.com/eNXUMRN.png",
                     "options": [
-                        "Solo epidermis y cutícula",
-                        "Únicamente tejido secretor",
-                        "Epidermis, parénquimas de empalizada y esponjoso, xilema, floema y fibras de esclerénquima",
-                        "Solo esporangios y esporas"
+                        "Solo epidermis y tricomas, sin tejido vascular",
+                        "Empalizada, parénquima esponjoso, xilema, floema y fibras de esclerénquima",
+                        "Células buliformes y pelos bicelulares exclusivamente",
+                        "Soros y esporangios agrupados"
                     ],
-                    "answer": 2,
-                    "explain": "El corte de Senna pistaciifolia permite identificar tejidos fotosintéticos y vasculares. La tinción con fluoroglucina y HCl ayuda a reconocer paredes lignificadas."
+                    "answer": 1,
+                    "explain": "El corte del foliolo de Senna pistaciifolia muestra tejidos protectores, fotosintéticos, conductores y de sostén, útiles para interpretar la anatomía de una eudicotiledónea."
                 },
                 {
                     "id": "s4",
-                    "title": "Figura 4. ¿Qué organización del mesófilo y del sistema vascular se observa?",
-                    "img": "link",
+                    "title": "Figura 4. https://i.imgur.com/dH6Pqqo.png. ¿Qué organización del mesófilo se observa en una hoja dorsiventral?",
+                    "img": "https://i.imgur.com/dH6Pqqo.png",
                     "options": [
-                        "Solo tejidos de reserva sin haces vasculares",
-                        "Únicamente epidermis y pelos radicales",
-                        "Una fronda con soros",
-                        "Epidermis, parénquima de empalizada, parénquima esponjoso y haz vascular"
+                        "Parénquima en empalizada próximo al haz y parénquima esponjoso con espacios intercelulares",
+                        "Solo xilema sin células fotosintéticas",
+                        "Una capa de esporangios y soros",
+                        "Únicamente células epidérmicas sin mesófilo"
                     ],
-                    "answer": 3,
-                    "explain": "La figura corresponde a una hoja de eudicotiledónea y muestra la organización del tejido fotosintético y del haz vascular."
+                    "answer": 0,
+                    "explain": "En muchas hojas de eudicotiledóneas, la organización dorsiventral sitúa el parénquima en empalizada hacia el haz y el esponjoso hacia el envés."
                 },
                 {
                     "id": "s5",
-                    "title": "Figura 5. ¿Qué estructuras deben localizarse para caracterizar el tejido foliar representado?",
-                    "img": "link",
+                    "title": "Figura 5. https://i.imgur.com/uKh3BOI.png. ¿Qué combinación de tejidos y estructuras puede identificarse en este corte foliar?",
+                    "img": "https://i.imgur.com/uKh3BOI.png",
                     "options": [
-                        "Epidermis, parénquima de empalizada, parénquima lagunar y estomas",
-                        "Solo vasos del xilema",
-                        "Raquis, pinnas y soros",
-                        "Cofia y zona de elongación"
+                        "Vaina del tallo, cofia y pelos radicales",
+                        "Solo canales resiníferos y tejido de transfusión",
+                        "Pinnas, pínnulas y soros",
+                        "Epidermis, parénquima en empalizada, parénquima lagunar y estomas"
                     ],
-                    "answer": 0,
-                    "explain": "La figura representa tejidos foliares de una dicotiledónea y permite comparar la epidermis, los parénquimas y los estomas."
+                    "answer": 3,
+                    "explain": "La organización de los tejidos permite reconocer la transición entre las superficies adaxial y abaxial, el tejido fotosintético y las estructuras del intercambio gaseoso."
                 },
                 {
                     "id": "s6",
-                    "title": "Figura 6. ¿Qué estructuras permiten reconocer la organización anatómica de la hoja representada?",
-                    "img": "link",
+                    "title": "Figura 6. https://i.imgur.com/pOaciBE.png. ¿Qué caracteres deben buscarse para reconocer la anatomía de esta monocotiledónea?",
+                    "img": "https://i.imgur.com/pOaciBE.png",
                     "options": [
-                        "Solo esporas y esporangios",
-                        "Cutícula, epidermis superior e inferior, parénquima, células buliformes, xilema, floema y haces vasculares",
-                        "Solo estípulas y peciólulos",
-                        "Peridermis y madera secundaria exclusivamente"
+                        "Ausencia completa de epidermis y haces vasculares",
+                        "Cutícula, epidermis superior e inferior, haces vasculares y posibles células buliformes",
+                        "Soros y esporangios en el envés",
+                        "Canales resiníferos obligatorios y tejido de transfusión exclusivo"
                     ],
                     "answer": 1,
-                    "explain": "La hoja de Hemerocallis permite examinar la organización anatómica de una monocotiledónea y la distribución de los tejidos conductores."
+                    "explain": "El corte de Hemerocallis permite examinar la epidermis, el mesófilo y la distribución de los haces vasculares, además de buscar células buliformes."
                 },
                 {
                     "id": "s7",
-                    "title": "Figura 7. ¿Qué características anatómicas deben identificarse en las imágenes?",
-                    "img": "link",
+                    "title": "Figura 7. https://i.imgur.com/mQOe57F.png. ¿Qué asociación de estructuras es compatible con la anatomía foliar representada?",
+                    "img": "https://i.imgur.com/mQOe57F.png",
                     "options": [
-                        "Canales resiníferos y tejido de transfusión exclusivamente",
-                        "Pecíolo, raquis y pinnas",
+                        "Parénquima radical, cofia y endodermis de raíz",
+                        "Soros, esporangios y raquis de helecho",
                         "Células buliformes, pelo bicelular, vaina parenquimática y clorénquima radiado",
-                        "Únicamente el margen y el ápice"
+                        "Únicamente xilema y floema sin tejidos circundantes"
                     ],
                     "answer": 2,
-                    "explain": "La figura presenta tejidos foliares de monocotiledónea. Fuente indicada en la guía: Mollard et al., 2009."
+                    "explain": "La imagen de referencia atribuida a Mollard et al. (2009) permite estudiar caracteres anatómicos de hojas de monocotiledóneas, especialmente gramíneas."
                 },
                 {
                     "id": "s8",
-                    "title": "Figura 8. ¿Qué caracteres permiten describir la organización externa de una hoja?",
-                    "img": "link",
+                    "title": "Figura 8. https://i.imgur.com/JxWIsTQ.png. ¿Qué partes externas deben señalarse en una hoja típica?",
+                    "img": "https://i.imgur.com/JxWIsTQ.png",
                     "options": [
-                        "Solo la estructura de la raíz",
-                        "Únicamente el xilema y el floema",
-                        "Solo las células del mesófilo",
-                        "Limbo, haz, envés, margen, nervios, ápice, base, pecíolo y yema"
+                        "Limbo, haz, envés, margen, nervaduras, ápice, base, pecíolo y yema axilar",
+                        "Cofia, zona de elongación y pelos absorbentes",
+                        "Antera, filamento, estigma y ovario",
+                        "Solo xilema y floema"
                     ],
-                    "answer": 3,
-                    "explain": "La figura permite localizar las principales partes externas de una hoja para su descripción morfológica."
+                    "answer": 0,
+                    "explain": "La morfología externa se describe mediante las partes visibles de la hoja. La yema axilar se ubica en la axila de la hoja completa, no en la base de cada foliolo."
                 },
                 {
                     "id": "s9",
-                    "title": "Figura 9. ¿Qué componentes de la fronda deben reconocerse?",
-                    "img": "link",
+                    "title": "Figura 9. https://i.imgur.com/tSXnolN.png. ¿Qué estructuras organizan la lámina de una fronda de helecho?",
+                    "img": "https://i.imgur.com/tSXnolN.png",
                     "options": [
-                        "Pecíolo, raquis, pinnas, pinnas secundarias y divisiones de la fronda",
-                        "Xilema, floema y canal resinífero exclusivamente",
-                        "Solo estomas y tricomas",
-                        "Vaina y lígula exclusivamente"
+                        "Cutícula, canal resinífero y tejido de transfusión exclusivamente",
+                        "Estipe o pecíolo, raquis, pinnas y pínnulas cuando están presentes",
+                        "Solo células buliformes y vaina parenquimática",
+                        "Raíz, cofia y pelos absorbentes"
                     ],
-                    "answer": 0,
-                    "explain": "La figura permite reconocer los ejes y niveles de división de una fronda de helecho."
+                    "answer": 1,
+                    "explain": "Las frondas presentan un eje principal y divisiones laterales cuyo grado de subdivisión varía. Los soros, cuando están presentes, contienen esporangios."
                 },
                 {
                     "id": "s10",
-                    "title": "Figura 10. ¿Qué caracteres permiten distinguir la organización de hojas simples y compuestas?",
-                    "img": "link",
+                    "title": "Figura 10. https://i.imgur.com/sOZ7Cjj.png. ¿Qué carácter diferencia una hoja simple de una compuesta?",
+                    "img": "https://i.imgur.com/sOZ7Cjj.png",
                     "options": [
-                        "Solo la presencia de cutícula",
-                        "Limbo, pecíolo, estípula, yema axilar, raquis, peciólulo y folíolos",
-                        "Únicamente los soros",
-                        "Solo la vaina del haz vascular"
+                        "La simple carece siempre de nervaduras",
+                        "La compuesta no puede tener pecíolo",
+                        "La simple solo se encuentra en gimnospermas",
+                        "La compuesta presenta foliolos diferenciados; la simple mantiene un limbo no dividido en foliolos"
                     ],
-                    "answer": 1,
-                    "explain": "La distinción depende de la organización del limbo y de la presencia de folíolos individualizados unidos al raquis o a un punto común."
+                    "answer": 3,
+                    "explain": "La división del limbo permite distinguir ambos tipos. La presencia de una yema axilar en la base ayuda a identificar la hoja completa."
                 },
                 {
                     "id": "s11",
-                    "title": "Figura 11. ¿Qué tipos de hojas compuestas deben diferenciarse?",
-                    "img": "link",
+                    "title": "Figura 11. https://i.imgur.com/GzKaRgY.png. ¿Qué patrón corresponde a una hoja imparipinnada?",
+                    "img": "https://i.imgur.com/GzKaRgY.png",
                     "options": [
-                        "Solo hojas alternas y opuestas",
-                        "Únicamente hojas lineales y aciculares",
-                        "Imparipinnada, paripinnada, trifoliolada digitada, trifoliolada pinnada, bipinnada, palmada o digitada y tripinnada",
-                        "Solo hojas con margen entero"
+                        "Un limbo continuo sin foliolos",
+                        "Foliolos que terminan generalmente en pares, sin foliolo terminal",
+                        "Un foliolo terminal al final del raquis",
+                        "Hojas separadas que salen de un mismo nudo"
                     ],
                     "answer": 2,
-                    "explain": "La clasificación considera el número y la disposición de los folíolos y los niveles de división del eje foliar."
+                    "explain": "La hoja imparipinnada presenta un foliolo terminal; la paripinnada suele terminar en un par de foliolos."
                 },
                 {
                     "id": "s12",
-                    "title": "Figura 12. ¿Qué formas del limbo pueden utilizarse para clasificar las muestras?",
-                    "img": "link",
+                    "title": "Figura 12. https://i.imgur.com/DQEshWw.png. ¿Qué criterios permiten clasificar la forma del limbo?",
+                    "img": "https://i.imgur.com/DQEshWw.png",
                     "options": [
-                        "Solo ápices y bases",
-                        "Solo filotaxias",
-                        "Únicamente formas de estomas",
-                        "Formas como ensiforme, acicular, filiforme, lineal, oval, elíptica, lanceolada, cordada y orbicular, entre otras"
+                        "Solo el color del mesófilo",
+                        "El contorno general, la proporción largo/ancho y la distribución de la anchura máxima",
+                        "Únicamente la cantidad de estomas",
+                        "La presencia de xilema sin considerar la forma externa"
                     ],
-                    "answer": 3,
-                    "explain": "La forma del limbo se clasifica según el contorno general de la lámina y sus proporciones."
+                    "answer": 1,
+                    "explain": "La forma del limbo se determina observando el contorno completo, la relación entre longitud y anchura y la posición de la zona más ancha. Debe describirse sin confundirla con la forma del ápice o la base."
                 },
                 {
                     "id": "s13",
-                    "title": "Figura 13. ¿Qué característica morfológica se utiliza para clasificar la forma apical de una hoja?",
-                    "img": "link",
+                    "title": "Figura 13. https://i.imgur.com/XuLwjFC.png. ¿Qué región de la hoja se clasifica mediante términos como acuminado, obtuso, retuso y emarginado?",
+                    "img": "https://i.imgur.com/XuLwjFC.png",
                     "options": [
-                        "El contorno del extremo distal del limbo",
-                        "La ubicación de los soros",
-                        "El número de haces vasculares exclusivamente",
-                        "La disposición de las células buliformes"
+                        "La base de inserción",
+                        "La nerviación central",
+                        "El margen lateral",
+                        "El ápice foliar"
                     ],
-                    "answer": 0,
-                    "explain": "El ápice es el extremo distal de la lámina. Puede clasificarse como agudo, obtuso, acuminado, retuso, truncado y otras formas."
+                    "answer": 3,
+                    "explain": "La forma del ápice se describe por el perfil del extremo distal de la lámina. Los términos deben asignarse a partir de la forma visible y no del margen."
                 },
                 {
                     "id": "s14",
-                    "title": "Figura 14. ¿Qué región foliar se utiliza para clasificar las formas de inserción proximal del limbo?",
-                    "img": "link",
+                    "title": "Figura 14. https://i.imgur.com/qNzep6O.png. ¿Qué región se clasifica como cordada, cuneada, truncada u oblicua?",
+                    "img": "https://i.imgur.com/qNzep6O.png",
                     "options": [
-                        "El ápice",
-                        "La base",
-                        "El raquis",
-                        "El soro"
+                        "La base foliar",
+                        "El ápice foliar",
+                        "El interior del xilema",
+                        "La distribución de los estomas"
                     ],
-                    "answer": 1,
-                    "explain": "La base es la región proximal del limbo, próxima al pecíolo o a la inserción foliar."
+                    "answer": 0,
+                    "explain": "La forma de la base se observa en la región proximal de la lámina, próxima a la inserción con el pecíolo o el tallo."
                 },
                 {
                     "id": "s15",
-                    "title": "Figura 15. ¿Qué característica permite clasificar los bordes foliares?",
-                    "img": "link",
+                    "title": "Figura 15. https://i.imgur.com/7DFpsxz.png. ¿Qué carácter se evalúa al clasificar un margen como entero, dentado, aserrado o crenado?",
+                    "img": "https://i.imgur.com/7DFpsxz.png",
                     "options": [
-                        "La organización del xilema",
-                        "La presencia de canal resinífero",
-                        "El contorno del margen, que puede ser entero, dentado, aserrado, crenado o lobulado",
-                        "El número de soros exclusivamente"
+                        "La disposición del xilema",
+                        "La forma del ápice",
+                        "El contorno del borde de la lámina",
+                        "La inserción de la yema axilar"
                     ],
                     "answer": 2,
-                    "explain": "El margen es el borde del limbo. Sus irregularidades y divisiones constituyen caracteres útiles para la clasificación morfológica."
+                    "explain": "El margen describe el contorno lateral de la lámina. Los dientes, ondulaciones e incisiones permiten diferenciar tipos morfológicos."
                 },
                 {
                     "id": "s16",
-                    "title": "Figura 16. ¿Qué criterio permite reconocer la disposición de las hojas en el tallo?",
-                    "img": "link",
+                    "title": "Figura 16. https://i.imgur.com/oUtzbCZ.png. ¿Qué patrón de filotaxia corresponde a dos hojas insertadas en un mismo nudo?",
+                    "img": "https://i.imgur.com/oUtzbCZ.png",
                     "options": [
-                        "La coloración del floema",
-                        "La forma de las células del mesófilo",
-                        "La presencia de lignina en el xilema",
-                        "El número y la posición de las hojas insertadas en cada nudo"
+                        "Verticilada",
+                        "Opuesta",
+                        "Alterna",
+                        "Fasciculada"
                     ],
-                    "answer": 3,
-                    "explain": "La filotaxia se determina examinando los nudos del tallo y la disposición de las hojas, como alterna, opuesta o verticilada."
+                    "answer": 1,
+                    "explain": "La filotaxia opuesta presenta dos hojas por nudo. En la variante decusada, los pares sucesivos se orientan aproximadamente a 90°."
                 },
                 {
                     "id": "s17",
-                    "title": "Figura 17. ¿Qué observación complementa la clasificación de la disposición foliar?",
-                    "img": "link",
+                    "title": "Figura 17. https://i.imgur.com/n7HcDP8.png. ¿Qué patrón describe una roseta foliar?",
+                    "img": "https://i.imgur.com/n7HcDP8.png",
                     "options": [
-                        "La distribución de las hojas a lo largo del tallo y sus patrones de agrupación",
-                        "Solo la forma del ápice",
-                        "La presencia de cloroplastos en el xilema",
-                        "La producción de esporas en las raíces"
+                        "Hojas agrupadas radialmente cerca de un eje corto o de la base de la planta",
+                        "Una sola hoja en cada nudo a lo largo de un tallo extendido",
+                        "Dos hojas en cada nudo y pares siempre alineados",
+                        "Hojas dispuestas exclusivamente en el extremo de cada raíz"
                     ],
                     "answer": 0,
-                    "explain": "La observación de varios nudos permite diferenciar patrones de inserción y agrupación foliar."
+                    "explain": "En una roseta, las hojas aparecen agrupadas en disposición radial debido a entrenudos muy cortos o a la proximidad de su inserción basal."
                 },
                 {
                     "id": "s18",
-                    "title": "Figura 18. ¿Qué criterio se utiliza para describir la unión de la hoja con el tallo?",
-                    "img": "link",
+                    "title": "Figura 18. https://i.imgur.com/1M3dJKr.png. ¿Qué se debe observar para clasificar la inserción foliar en el tallo?",
+                    "img": "https://i.imgur.com/1M3dJKr.png",
                     "options": [
-                        "La presencia de soros",
-                        "La forma de inserción foliar y la presencia de pecíolo, base o vaina",
-                        "La cantidad de parénquima esponjoso exclusivamente",
-                        "La coloración del canal resinífero"
+                        "Únicamente el número de cloroplastos",
+                        "Solo la forma de los estomas",
+                        "El tipo de soros presentes en el envés",
+                        "La relación entre la base de la hoja, el pecíolo y el tallo"
                     ],
-                    "answer": 1,
-                    "explain": "La inserción foliar permite reconocer hojas pecioladas, sésiles o envainadoras, según la estructura de conexión con el tallo."
+                    "answer": 3,
+                    "explain": "La inserción se describe por cómo la base foliar se une al tallo: puede ser peciolada, sésil, envainadora, amplexicaule, decurrente u otras variantes."
                 },
                 {
                     "id": "s19",
-                    "title": "Figura 19. ¿Qué características permiten clasificar una hoja compuesta?",
-                    "img": "link",
+                    "title": "Figura 19. https://i.imgur.com/lJsjHTk.png. ¿Qué caracteres permiten distinguir los tipos de hojas compuestas?",
+                    "img": "https://i.imgur.com/lJsjHTk.png",
                     "options": [
-                        "Solo el grosor de la cutícula",
-                        "La presencia exclusiva de estomas",
-                        "El número, disposición y nivel de división de los folíolos y sus ejes",
-                        "La ubicación de la raíz principal"
+                        "La presencia o ausencia de cutícula exclusivamente",
+                        "El número de niveles de división y la disposición de los foliolos sobre los ejes",
+                        "El color del xilema únicamente",
+                        "La presencia obligatoria de soros"
                     ],
-                    "answer": 2,
-                    "explain": "La clasificación de hojas compuestas se basa en la organización de los folíolos, el raquis y los ejes secundarios."
+                    "answer": 1,
+                    "explain": "La clasificación considera si los foliolos son pinnados, palmados o digitados y cuántos órdenes de división presenta la hoja, como en las formas bipinnada y tripinnada."
                 }],
             "cases": [{
                 "id": "c1",
-                "text": "En un corte foliar se observan células alargadas, compactas y con numerosos cloroplastos, junto a otro tejido con células irregulares y amplios espacios intercelulares. ¿Cuál es la interpretación correcta?",
+                "text": "En un corte transversal de una hoja se observan células alargadas, compactas y con numerosos cloroplastos hacia la epidermis superior; hacia la inferior hay células irregulares y amplios espacios intercelulares. ¿Qué organización describe mejor la muestra?",
                 "options": [
-                    "Ambos tejidos son exclusivamente vasculares",
-                    "El primer tejido es floema y el segundo es xilema",
-                    "El primer tejido corresponde a epidermis y el segundo a cutícula",
-                    "El primero es parénquima de empalizada y el segundo parénquima esponjoso"
+                    "Anatomía típica de una raíz sin tejidos fotosintéticos",
+                    "Mesófilo dorsiventral con empalizada adaxial y tejido esponjoso abaxial",
+                    "Tejido conductor compuesto exclusivamente por floema",
+                    "Fronda formada solo por esporangios"
                 ],
-                "answer": 3,
-                "feedback": "La disposición compacta y las células alargadas son características del parénquima de empalizada. Los espacios intercelulares amplios son característicos del parénquima esponjoso y facilitan la difusión gaseosa."
+                "answer": 1,
+                "feedback": "La empalizada maximiza la captación de luz, mientras que el parénquima esponjoso favorece la difusión de gases. Esta disposición es frecuente, pero no universal, en hojas dorsiventrales de eudicotiledóneas."
             },
                 {
                     "id": "c2",
-                    "text": "En un corte teñido con fluoroglucina y HCl se identifica una región rojiza en paredes celulares gruesas. ¿Qué interpretación es más apropiada?",
+                    "text": "Durante la observación de Retrophyllum rospigliosii, se identifican un canal resinífero, tejido de transfusión y haces vasculares. ¿Cuál interpretación es la más sólida?",
                     "options": [
-                        "La reacción es compatible con la presencia de tejido lignificado, pero debe interpretarse junto con la anatomía del corte",
-                        "La coloración demuestra la presencia de almidón en todos los tejidos",
-                        "La reacción indica que la muestra carece de xilema",
-                        "El color rojizo confirma que todas las células están vivas"
+                        "La muestra corresponde necesariamente a una raíz de angiosperma",
+                        "El canal resinífero es un soro reproductivo",
+                        "Los caracteres son compatibles con una hoja de gimnosperma y sus adaptaciones anatómicas",
+                        "La muestra carece de funciones protectoras"
                     ],
-                    "answer": 0,
-                    "feedback": "La reacción se utiliza para evidenciar lignina. El resultado debe correlacionarse con la ubicación y la estructura de las paredes celulares; una tinción aislada no identifica por sí sola todos los tejidos."
+                    "answer": 2,
+                    "feedback": "La identificación integra el canal resinífero, el tejido de transfusión y la disposición de los tejidos vasculares. La resina contribuye a la defensa y el tejido de transfusión facilita el intercambio radial de agua y solutos."
                 },
                 {
                     "id": "c3",
-                    "text": "En un corte transversal de hoja se observa un haz vascular rodeado por una capa de células. ¿Qué dato debe evaluarse para identificar correctamente la estructura circundante?",
+                    "text": "En el corte de una hoja se añade fluoroglucina y después ácido clorhídrico concentrado. Se observa una coloración rojiza en ciertos elementos del haz vascular. ¿Cuál es la interpretación más adecuada?",
                     "options": [
-                        "La forma del ápice foliar",
-                        "La organización de las células de la vaina y su relación con el haz",
-                        "La presencia de peciólulos",
-                        "La cantidad de soros en el envés"
+                        "Es compatible con una reacción de tinción de componentes lignificados",
+                        "Demuestra que todas las células de la hoja contienen clorofila",
+                        "Confirma que los tejidos observados son soros maduros",
+                        "Indica que el floema se ha transformado en parénquima esponjoso"
                     ],
-                    "answer": 1,
-                    "feedback": "La vaina fascicular se reconoce por su ubicación alrededor del haz. Su composición y especialización deben evaluarse en el contexto anatómico de la especie."
+                    "answer": 0,
+                    "feedback": "La fluoroglucina en medio ácido puede producir una coloración rojiza en tejidos lignificados. La interpretación debe considerar el tejido, el contraste y la calidad de la preparación; el color por sí solo no identifica una especie."
                 },
                 {
                     "id": "c4",
-                    "text": "Una muestra de *Citrus* presenta una estructura rígida y puntiaguda integrada al eje de la rama, mientras que en *Rosa* se observa una proyección superficial. ¿Qué conclusión es la más adecuada?",
+                    "text": "Una hoja de monocotiledónea presenta haces vasculares distribuidos en la lámina, células buliformes y una vaina alrededor de los haces. ¿Qué conjunto de funciones explica mejor esta organización?",
                     "options": [
-                        "Ambas estructuras son folíolos",
-                        "La estructura de *Rosa* es un soro",
-                        "La primera es compatible con una espina y la segunda con un aguijón",
-                        "Ambas estructuras son necesariamente raíces modificadas"
+                        "Producción de esporas y formación de soros",
+                        "Ausencia de intercambio gaseoso y de fotosíntesis",
+                        "Transporte de agua exclusivamente mediante epidermis",
+                        "Conducción vascular, intercambio con tejidos circundantes y regulación del plegamiento foliar"
                     ],
-                    "answer": 2,
-                    "feedback": "La conexión anatómica y el origen de la estructura permiten diferenciar las espinas de los aguijones. La forma externa, por sí sola, puede resultar insuficiente."
+                    "answer": 3,
+                    "feedback": "Los haces vasculares conducen sustancias, la vaina participa en la interfaz con los tejidos vecinos y las células buliformes pueden intervenir en el plegamiento por cambios de turgencia."
                 },
                 {
                     "id": "c5",
-                    "text": "Al examinar el envés de una fronda se observan agrupaciones oscuras de estructuras reproductivas. ¿Qué identificación es compatible con esta observación?",
+                    "text": "En una rama se observan dos hojas por nudo y los pares sucesivos forman aproximadamente un ángulo de 90°. ¿Cómo se clasifica la filotaxia?",
                     "options": [
-                        "Estomas agrupados",
-                        "Canales resiníferos",
-                        "Folíolos inmaduros",
-                        "Soros que contienen esporangios"
+                        "Opuesta decusada",
+                        "Alterna",
+                        "Verticilada",
+                        "Rosulada"
                     ],
-                    "answer": 3,
-                    "feedback": "En numerosos helechos, los soros se encuentran en el envés y agrupan esporangios. Su apariencia varía con la especie y el grado de madurez."
+                    "answer": 0,
+                    "feedback": "La disposición es opuesta porque hay dos hojas por nudo y decusada porque los pares sucesivos se orientan aproximadamente a 90°."
                 },
                 {
                     "id": "c6",
-                    "text": "Una hoja presenta dos folíolos laterales y uno terminal insertados en un raquis. ¿Qué tipo de hoja puede corresponder a esta organización?",
+                    "text": "Una hoja presenta un raquis principal con ejes secundarios, y cada eje secundario sostiene varios foliolos. ¿Qué tipo de hoja es más probable?",
                     "options": [
-                        "Trifoliolada pinnada",
-                        "Simple con margen aserrado",
-                        "Verticilada",
-                        "Acicular"
+                        "Simple entera",
+                        "Bipinnada",
+                        "Acicular",
+                        "Sésil sin división"
                     ],
-                    "answer": 0,
-                    "feedback": "Una hoja trifoliolada pinnada presenta tres folíolos organizados a lo largo de un eje. La clasificación definitiva debe considerar la inserción y la estructura completa de la hoja."
+                    "answer": 1,
+                    "feedback": "La hoja bipinnada presenta dos órdenes de división: el raquis principal sostiene pinnas y estas llevan los foliolos."
                 },
                 {
                     "id": "c7",
-                    "text": "En una gramínea, la base de la hoja envuelve el tallo y se identifica un pequeño reborde en la transición hacia el limbo. ¿Cómo se denominan estas estructuras?",
+                    "text": "Al observar una hoja de Rosa y una rama de Citrus, se identifican estructuras punzantes superficiales en la primera y estructuras rígidas asociadas a órganos modificados en la segunda. ¿Cuál distinción es correcta?",
                     "options": [
-                        "Raquis y peciólulo",
-                        "Vaina y lígula",
-                        "Soro y esporangio",
-                        "Xilema y floema"
+                        "Ambas estructuras son siempre tricomas glandulares",
+                        "Los aguijones de Rosa son necesariamente hojas modificadas",
+                        "Las espinas son órganos modificados; los aguijones son emergencias superficiales",
+                        "Los aguijones contienen siempre un haz vascular completo"
                     ],
-                    "answer": 1,
-                    "feedback": "La vaina envuelve parcial o totalmente el tallo y la lígula se sitúa en la unión con la lámina. Estas estructuras son útiles en la identificación de gramíneas."
+                    "answer": 2,
+                    "feedback": "La distinción se basa en el origen anatómico: las espinas pueden derivar de hojas o ramas modificadas, mientras que los aguijones son emergencias superficiales y no equivalen a órganos completos."
                 },
                 {
                     "id": "c8",
-                    "text": "En un tallo se observan dos hojas insertadas una frente a otra en cada nudo. ¿Qué patrón de filotaxia corresponde a la observación?",
+                    "text": "Una muestra foliar desconocida presenta margen aserrado, ápice acuminado, base cuneada, hojas alternas y limbo simple. ¿Qué procedimiento de identificación es más fiable?",
                     "options": [
-                        "Alterna",
-                        "Fasciculada",
-                        "Opuesta",
-                        "Rosulada"
+                        "Asignar especie únicamente por el margen",
+                        "Ignorar la inserción de las hojas porque no tiene valor taxonómico",
+                        "Clasificarla como helecho sin revisar estructuras reproductivas",
+                        "Registrar los caracteres en conjunto y compararlos con una clave o referencia botánica"
                     ],
-                    "answer": 2,
-                    "feedback": "La filotaxia opuesta presenta dos hojas por nudo en posiciones enfrentadas. Es importante examinar varios nudos para confirmar el patrón."
+                    "answer": 3,
+                    "feedback": "La identificación requiere combinar caracteres independientes y comparables. El margen, el ápice, la base, la división del limbo y la filotaxia aportan información, pero no siempre bastan por separado para identificar una especie."
                 },
                 {
                     "id": "c9",
-                    "text": "Una preparación microscópica es demasiado gruesa y las células aparecen superpuestas, dificultando la delimitación de tejidos. ¿Qué problema explica mejor esta observación?",
+                    "text": "En el envés de una fronda aparecen agrupaciones oscuras que contienen estructuras productoras de esporas. ¿Qué estructuras se están observando?",
                     "options": [
-                        "El floema se transforma inmediatamente en epidermis",
-                        "La muestra necesariamente carece de pared celular",
-                        "El microscopio no puede observar tejidos vegetales",
-                        "El espesor del corte reduce la resolución y dificulta distinguir las capas anatómicas"
+                        "Soros con esporangios",
+                        "Canales resiníferos con resina",
+                        "Células buliformes",
+                        "Fibras de esclerénquima del xilema"
                     ],
-                    "answer": 3,
-                    "feedback": "Los cortes demasiado gruesos superponen estructuras y dificultan el enfoque. Los cortes finos y uniformes permiten reconocer mejor las capas celulares y los tejidos."
+                    "answer": 0,
+                    "feedback": "Los soros agrupan esporangios en muchas especies de helechos. La forma, distribución y madurez de los soros pueden ayudar a describir la muestra."
                 },
                 {
                     "id": "c10",
-                    "text": "Al comparar hojas de gimnospermas, eudicotiledóneas y monocotiledóneas, ¿qué estrategia ofrece la identificación más confiable?",
+                    "text": "En un corte foliar no se distingue claramente el xilema porque la tinción es débil y el tejido está plegado. ¿Qué decisión metodológica es más adecuada?",
                     "options": [
-                        "Combinar organización anatómica, disposición de tejidos, características vasculares y rasgos morfológicos",
-                        "Clasificar únicamente por el color general de la hoja",
-                        "Utilizar exclusivamente el tamaño del pecíolo",
-                        "Asumir que todas las especies presentan el mismo mesófilo"
+                        "Afirmar que la hoja carece de xilema",
+                        "Revisar el montaje, el enfoque y el contraste; si es necesario, preparar un nuevo corte siguiendo el protocolo",
+                        "Clasificar la muestra exclusivamente por su color",
+                        "Eliminar la observación de la epidermis y el mesófilo"
                     ],
-                    "answer": 0,
-                    "feedback": "La identificación mejora cuando se integran varios caracteres. Existen variaciones anatómicas dentro de cada grupo, por lo que ningún rasgo aislado debe interpretarse como universal."
+                    "answer": 1,
+                    "feedback": "Una estructura no visible puede deberse a una preparación deficiente o a un enfoque inadecuado. Deben comprobarse el espesor del corte, la posición del cubreobjetos, el enfoque y la tinción antes de concluir que la estructura está ausente."
+                },
+                {
+                    "id": "c11",
+                    "text": "Una hoja presenta base que rodea parcialmente el tallo y carece de un pecíolo claramente diferenciado. ¿Cuál descripción es más apropiada?",
+                    "options": [
+                        "Hoja obligatoriamente compuesta",
+                        "Hoja paripinnada",
+                        "Hoja envainadora o con base envolvente, según el grado de inserción observado",
+                        "Fronda con soros maduros"
+                    ],
+                    "answer": 2,
+                    "feedback": "La descripción debe basarse en la forma real de la inserción. La base puede envolver parcial o totalmente el tallo, mientras que la hoja sésil se define por la ausencia de pecíolo evidente."
+                },
+                {
+                    "id": "c12",
+                    "text": "Al comparar una gimnosperma, una eudicotiledónea y una monocotiledónea, se observan diferencias en mesófilo, haces vasculares y estructuras especializadas. ¿Qué conclusión evita una generalización excesiva?",
+                    "options": [
+                        "Todos los miembros de cada grupo poseen exactamente la misma anatomía",
+                        "Una sola estructura microscópica siempre permite identificar una especie",
+                        "La anatomía no tiene relación con la función",
+                        "Los caracteres anatómicos comparados permiten reconocer patrones, pero deben integrarse con otros rasgos para una identificación fiable"
+                    ],
+                    "answer": 3,
+                    "feedback": "La anatomía refleja funciones como protección, fotosíntesis, conducción y defensa. Sin embargo, existe variación entre especies y condiciones ambientales; la identificación sólida combina varios caracteres."
                 }],
             "interactives": [{
                 "id": "i1",
                 "type": "dragdrop",
-                "title": "Relaciona el tejido con su función",
+                "title": "Relaciona cada tejido con su función",
                 "terms": [
                     "Epidermis y cutícula",
-                    "Parénquima de empalizada",
+                    "Parénquima en empalizada",
                     "Parénquima esponjoso",
                     "Xilema",
                     "Floema",
                     "Esclerénquima"
                 ],
                 "targets": [
-                    "Protección y reducción de la pérdida de agua",
+                    "Protección y reducción de pérdida de agua",
                     "Fotosíntesis con abundantes cloroplastos",
-                    "Difusión de gases mediante espacios intercelulares",
+                    "Difusión gaseosa mediante espacios intercelulares",
                     "Conducción de agua y minerales",
-                    "Distribución de azúcares y otros solutos orgánicos",
-                    "Soporte mecánico mediante paredes gruesas"
+                    "Transporte de azúcares y otras sustancias orgánicas",
+                    "Soporte mecánico por paredes gruesas"
                 ],
                 "answerMap": {
-                    "Epidermis y cutícula": "Protección y reducción de la pérdida de agua",
-                    "Parénquima de empalizada": "Fotosíntesis con abundantes cloroplastos",
-                    "Parénquima esponjoso": "Difusión de gases mediante espacios intercelulares",
+                    "Epidermis y cutícula": "Protección y reducción de pérdida de agua",
+                    "Parénquima en empalizada": "Fotosíntesis con abundantes cloroplastos",
+                    "Parénquima esponjoso": "Difusión gaseosa mediante espacios intercelulares",
                     "Xilema": "Conducción de agua y minerales",
-                    "Floema": "Distribución de azúcares y otros solutos orgánicos",
-                    "Esclerénquima": "Soporte mecánico mediante paredes gruesas"
+                    "Floema": "Transporte de azúcares y otras sustancias orgánicas",
+                    "Esclerénquima": "Soporte mecánico por paredes gruesas"
                 }
             },
                 {
                     "id": "i2",
                     "type": "complete",
-                    "title": "Completa la identificación anatómica",
-                    "prompt": "El tejido que transporta agua y minerales hacia la hoja es el ______.",
-                    "answer": "xilema"
+                    "title": "Completa la anatomía dorsiventral",
+                    "prompt": "En muchas hojas dorsiventrales, el parénquima de ______ se ubica hacia el haz y el parénquima ______ presenta amplios espacios intercelulares.",
+                    "answer": "empalizada; esponjoso"
                 },
                 {
                     "id": "i3",
                     "type": "complete",
-                    "title": "Completa la reacción de tinción",
-                    "prompt": "La combinación de ______ y ácido clorhídrico se utiliza para evidenciar tejidos lignificados.",
-                    "answer": "fluoroglucina"
+                    "title": "Completa la tinción histológica",
+                    "prompt": "La fluoroglucina en medio ácido puede producir una coloración ______ en determinados tejidos ______.",
+                    "answer": "rojiza; lignificados"
                 },
                 {
                     "id": "i4",
                     "type": "dragdrop",
-                    "title": "Relaciona la estructura con su grupo o muestra",
+                    "title": "Relaciona la estructura con la muestra o grupo",
                     "terms": [
-                        "Canal resinífero",
-                        "Soro",
+                        "Canal resinífero y tejido de transfusión",
                         "Células buliformes",
-                        "Lígula",
-                        "Aguijón",
-                        "Folíolos"
+                        "Soros",
+                        "Vaina del haz",
+                        "Lígula"
                     ],
                     "targets": [
-                        "Estructura secretora de determinadas gimnospermas",
-                        "Agrupación de esporangios de muchos helechos",
-                        "Células epidérmicas de muchas gramíneas",
-                        "Reborde entre vaina y limbo",
-                        "Proyección superficial característica de la rosa",
-                        "Unidades del limbo de una hoja compuesta"
+                        "Hoja de gimnosperma como Retrophyllum rospigliosii",
+                        "Muchas hojas de gramíneas",
+                        "Frondas de helechos",
+                        "Tejido que rodea haces vasculares",
+                        "Unión entre vaina y limbo en muchas gramíneas"
                     ],
                     "answerMap": {
-                        "Canal resinífero": "Estructura secretora de determinadas gimnospermas",
-                        "Soro": "Agrupación de esporangios de muchos helechos",
-                        "Células buliformes": "Células epidérmicas de muchas gramíneas",
-                        "Lígula": "Reborde entre vaina y limbo",
-                        "Aguijón": "Proyección superficial característica de la rosa",
-                        "Folíolos": "Unidades del limbo de una hoja compuesta"
+                        "Canal resinífero y tejido de transfusión": "Hoja de gimnosperma como Retrophyllum rospigliosii",
+                        "Células buliformes": "Muchas hojas de gramíneas",
+                        "Soros": "Frondas de helechos",
+                        "Vaina del haz": "Tejido que rodea haces vasculares",
+                        "Lígula": "Unión entre vaina y limbo en muchas gramíneas"
                     }
                 },
                 {
                     "id": "i5",
                     "type": "complete",
-                    "title": "Completa la clasificación morfológica",
-                    "prompt": "Cuando dos hojas se insertan enfrentadas en un mismo nudo, la filotaxia es ______.",
-                    "answer": "opuesta"
+                    "title": "Completa las funciones vasculares",
+                    "prompt": "El ______ conduce principalmente agua y minerales; el ______ transporta azúcares y otras sustancias orgánicas.",
+                    "answer": "xilema; floema"
                 },
                 {
                     "id": "i6",
-                    "type": "complete",
-                    "title": "Identifica la estructura de una gramínea",
-                    "prompt": "La estructura basal que envuelve el tallo es la ______, mientras que el reborde entre esta y el limbo es la ______.",
-                    "answer": "vaina y lígula"
+                    "type": "dragdrop",
+                    "title": "Clasifica los patrones de filotaxia",
+                    "terms": [
+                        "Alterna",
+                        "Opuesta",
+                        "Verticilada",
+                        "Opuesta decusada",
+                        "Roseta"
+                    ],
+                    "targets": [
+                        "Una hoja por nudo",
+                        "Dos hojas por nudo",
+                        "Tres o más hojas por nudo",
+                        "Pares sucesivos aproximadamente a 90°",
+                        "Hojas agrupadas radialmente cerca de un eje corto"
+                    ],
+                    "answerMap": {
+                        "Alterna": "Una hoja por nudo",
+                        "Opuesta": "Dos hojas por nudo",
+                        "Verticilada": "Tres o más hojas por nudo",
+                        "Opuesta decusada": "Pares sucesivos aproximadamente a 90°",
+                        "Roseta": "Hojas agrupadas radialmente cerca de un eje corto"
+                    }
                 },
                 {
                     "id": "i7",
                     "type": "dragdrop",
-                    "title": "Relaciona el carácter con el criterio de clasificación",
+                    "title": "Relaciona el tipo de hoja compuesta",
+                    "terms": [
+                        "Paripinnada",
+                        "Imparipinnada",
+                        "Trifoliolada",
+                        "Bipinnada",
+                        "Palmada o digitada",
+                        "Tripinnada"
+                    ],
+                    "targets": [
+                        "Raquis que termina generalmente en un par de foliolos",
+                        "Presencia de foliolo terminal",
+                        "Tres foliolos",
+                        "Raquis principal con pinnas secundarias portadoras de foliolos",
+                        "Foliolos que parten de un punto común",
+                        "Tres órdenes de división de la hoja"
+                    ],
+                    "answerMap": {
+                        "Paripinnada": "Raquis que termina generalmente en un par de foliolos",
+                        "Imparipinnada": "Presencia de foliolo terminal",
+                        "Trifoliolada": "Tres foliolos",
+                        "Bipinnada": "Raquis principal con pinnas secundarias portadoras de foliolos",
+                        "Palmada o digitada": "Foliolos que parten de un punto común",
+                        "Tripinnada": "Tres órdenes de división de la hoja"
+                    }
+                },
+                {
+                    "id": "i8",
+                    "type": "complete",
+                    "title": "Completa la morfología foliar",
+                    "prompt": "El extremo distal de la lámina es el ______; la región próxima a su inserción es la ______; el contorno lateral corresponde al ______.",
+                    "answer": "ápice; base; margen"
+                },
+                {
+                    "id": "i9",
+                    "type": "dragdrop",
+                    "title": "Distingue espina, aguijón y tricoma",
+                    "terms": [
+                        "Espina",
+                        "Aguijón",
+                        "Tricoma"
+                    ],
+                    "targets": [
+                        "Órgano o parte de órgano modificado, a menudo vascularizado",
+                        "Emergencia superficial como la de Rosa",
+                        "Apéndice epidérmico con funciones variables"
+                    ],
+                    "answerMap": {
+                        "Espina": "Órgano o parte de órgano modificado, a menudo vascularizado",
+                        "Aguijón": "Emergencia superficial como la de Rosa",
+                        "Tricoma": "Apéndice epidérmico con funciones variables"
+                    }
+                },
+                {
+                    "id": "i10",
+                    "type": "complete",
+                    "title": "Completa la descripción de una fronda",
+                    "prompt": "La hoja de un helecho se denomina ______; su eje principal puede llamarse ______ y las divisiones laterales, ______.",
+                    "answer": "fronda; raquis; pinnas"
+                },
+                {
+                    "id": "i11",
+                    "type": "complete",
+                    "title": "Completa la identificación anatómica",
+                    "prompt": "Para comparar gimnospermas, eudicotiledóneas y monocotiledóneas en un corte transversal se examinan epidermis, ______, haces vasculares y estructuras especializadas.",
+                    "answer": "mesófilo"
+                },
+                {
+                    "id": "i12",
+                    "type": "dragdrop",
+                    "title": "Asocia cada región foliar con su descripción",
                     "terms": [
                         "Ápice",
                         "Base",
                         "Margen",
-                        "Venación",
-                        "Filotaxia",
-                        "División del limbo"
+                        "Pecíolo",
+                        "Limbo"
                     ],
                     "targets": [
                         "Extremo distal de la lámina",
-                        "Región proximal de la lámina",
-                        "Contorno del borde foliar",
-                        "Patrón de distribución de nervaduras",
-                        "Disposición de hojas sobre el tallo",
-                        "Distinción entre hoja simple y compuesta"
+                        "Región proximal de inserción",
+                        "Contorno lateral de la lámina",
+                        "Eje que une la lámina con el tallo",
+                        "Parte laminar expandida"
                     ],
                     "answerMap": {
                         "Ápice": "Extremo distal de la lámina",
-                        "Base": "Región proximal de la lámina",
-                        "Margen": "Contorno del borde foliar",
-                        "Venación": "Patrón de distribución de nervaduras",
-                        "Filotaxia": "Disposición de hojas sobre el tallo",
-                        "División del limbo": "Distinción entre hoja simple y compuesta"
+                        "Base": "Región proximal de inserción",
+                        "Margen": "Contorno lateral de la lámina",
+                        "Pecíolo": "Eje que une la lámina con el tallo",
+                        "Limbo": "Parte laminar expandida"
                     }
                 }],
             "maps": {
-                "anatomia": "Anatomía foliar\n├─ Funciones\n│  ├─ Fotosíntesis\n│  ├─ Intercambio gaseoso\n│  └─ Transpiración\n├─ Tejidos protectores\n│  ├─ Epidermis superior e inferior\n│  ├─ Cutícula\n│  ├─ Estomas\n│  └─ Tricomas\n├─ Mesófilo\n│  ├─ Parénquima de empalizada\n│  │  ├─ Células alargadas\n│  │  └─ Abundantes cloroplastos\n│  └─ Parénquima esponjoso\n│     ├─ Células irregulares\n│     └─ Espacios intercelulares\n└─ Organización\n   ├─ Haz\n   ├─ Envés\n   ├─ Limbo\n   ├─ Pecíolo\n   └─ Nervaduras",
-                "tejidos": "Tejidos, tinciones y haces vasculares\n├─ Sistema vascular\n│  ├─ Xilema\n│  │  ├─ Agua y minerales\n│  │  └─ Soporte\n│  └─ Floema\n│     ├─ Sacarosa y solutos orgánicos\n│     └─ Órganos fuente y sumidero\n├─ Tejidos de sostén\n│  └─ Esclerénquima\n│     ├─ Paredes gruesas\n│     └─ Lignificación frecuente\n├─ Estructuras especializadas\n│  ├─ Vaina fascicular\n│  ├─ Células buliformes\n│  ├─ Canal resinífero\n│  └─ Tejido de transfusión\n└─ Tinción\n   ├─ Fluoroglucina + HCl concentrado\n   ├─ Evidencia de lignina\n   └─ Coloración rojiza compatible con tejidos lignificados",
-                "morfologia": "Morfología y clasificación foliar\n├─ Partes\n│  ├─ Limbo\n│  ├─ Pecíolo\n│  ├─ Base y ápice\n│  ├─ Margen\n│  ├─ Haz y envés\n│  └─ Nervaduras\n├─ División del limbo\n│  ├─ Hoja simple\n│  └─ Hoja compuesta\n│     ├─ Folíolos\n│     ├─ Raquis\n│     └─ Peciólulo\n├─ Filotaxia\n│  ├─ Alterna\n│  ├─ Opuesta\n│  ├─ Verticilada\n│  ├─ Fasciculada\n│  ├─ Imbricada\n│  └─ Rosulada\n├─ Estructuras especiales\n│  ├─ Estípulas\n│  ├─ Tricomas\n│  ├─ Espinas\n│  ├─ Aguijones\n│  ├─ Vaina\n│  └─ Lígula\n└─ Clasificación\n   ├─ Forma del limbo\n   ├─ Forma del ápice\n   ├─ Forma de la base\n   ├─ Forma del margen\n   └─ Patrón de venación",
-                "grupos": "Gimnospermas, angiospermas y helechos\n├─ Gimnospermas\n│  ├─ Retrophyllum rospigliosii\n│  ├─ Hipodermis\n│  ├─ Canal resinífero\n│  ├─ Tejido de transfusión\n│  └─ Haces vasculares\n├─ Angiospermas\n│  ├─ Eudicotiledóneas\n│  │  ├─ Mesófilo frecuentemente diferenciado\n│  │  └─ Nerviación generalmente reticulada\n│  └─ Monocotiledóneas\n│     ├─ Haces vasculares frecuentemente paralelos\n│     ├─ Células buliformes en muchas gramíneas\n│     └─ Vaina foliar en gramíneas\n├─ Helechos\n│  ├─ Fronda\n│  ├─ Pecíolo y raquis\n│  ├─ Pinnas\n│  └─ Soros con esporangios\n└─ Identificación\n   ├─ Comparar varios caracteres anatómicos\n   ├─ Registrar tejidos y su distribución\n   ├─ Clasificar rasgos morfológicos\n   └─ Evitar conclusiones basadas en un solo carácter"
+                "anatomia": "ANATOMÍA FOLIAR\n├─ Funciones\n│  ├─ Fotosíntesis\n│  ├─ Intercambio gaseoso\n│  └─ Transpiración\n├─ Tejidos protectores\n│  ├─ Epidermis\n│  ├─ Cutícula\n│  ├─ Estomas y cámaras subestomáticas\n│  └─ Tricomas\n├─ Mesófilo\n│  ├─ Empalizada → captación de luz y fotosíntesis\n│  └─ Esponjoso → difusión de gases\n└─ Sistema vascular\n   ├─ Xilema → agua y minerales\n   ├─ Floema → azúcares\n   └─ Vaina del haz → interfaz y protección",
+                "histologia": "TEJIDOS Y CORTES MICROSCÓPICOS\n├─ Preparación\n│  ├─ Corte transversal delgado\n│  ├─ Portaobjetos + gota de agua destilada\n│  ├─ Cubreobjetos y enfoque microscópico\n│  └─ Fluoroglucina + HCl → posible coloración rojiza de tejidos lignificados\n├─ Gimnosperma: Retrophyllum rospigliosii\n│  ├─ Epidermis y cutícula\n│  ├─ Hipodermis y mesófilo\n│  ├─ Canal resinífero\n│  ├─ Haz vascular\n│  └─ Tejido de transfusión\n├─ Eudicotiledónea: Senna pistaciifolia\n│  ├─ Epidermis superior e inferior\n│  ├─ Empalizada\n│  ├─ Parénquima esponjoso\n│  ├─ Xilema y floema\n│  └─ Fibras de esclerénquima\n└─ Monocotiledónea: Hemerocallis\n   ├─ Cutícula y epidermis\n   ├─ Haces vasculares distribuidos\n   ├─ Células buliformes\n   └─ Posible vaina del haz y clorénquima",
+                "morfologia": "MORFOLOGÍA Y ARQUITECTURA FOLIAR\n├─ Partes\n│  ├─ Limbo, haz y envés\n│  ├─ Ápice, base y margen\n│  ├─ Pecíolo y nerviación\n│  └─ Estípulas y yema axilar\n├─ División del limbo\n│  ├─ Simple\n│  └─ Compuesta → foliolos y raquis\n├─ Formas de la lámina\n│  ├─ Acicular, ensiforme y filiforme\n│  ├─ Linear, lanceolada y elíptica\n│  ├─ Ovada, obovada y oblonga\n│  └─ Cordada, reniforme, orbicular y otras\n├─ Ápice y base\n│  ├─ Agudo, obtuso, acuminado, retuso\n│  └─ Cordada, cuneada, truncada, oblicua\n├─ Margen\n│  ├─ Entero y ondulado\n│  ├─ Dentado y aserrado\n│  └─ Crenado, inciso, espinoso y otros\n└─ Inserción y filotaxia\n   ├─ Peciolada, sésil y envainadora\n   ├─ Alterna\n   ├─ Opuesta y decusada\n   ├─ Verticilada\n   ├─ Fasciculada e imbricada\n   └─ Roseta",
+                "helechos": "FRONDAS Y HOJAS COMPUESTAS\n├─ Fronda de helecho\n│  ├─ Estipe o pecíolo\n│  ├─ Raquis\n│  ├─ Pinnas y pínnulas\n│  └─ Envés → soros → esporangios → esporas\n├─ Hoja simple\n│  └─ Limbo no dividido en foliolos\n└─ Hoja compuesta\n   ├─ Foliolos\n   ├─ Peciólulos\n   ├─ Raquis\n   ├─ Paripinnada e imparipinnada\n   ├─ Trifoliolada\n   ├─ Palmada o digitada\n   ├─ Bipinnada\n   └─ Tripinnada",
+                "identificacion": "IDENTIFICACIÓN Y ANÁLISIS COMPARATIVO\n├─ Gimnospermas\n│  ├─ Buscar canal resinífero\n│  ├─ Examinar tejido de transfusión\n│  └─ Analizar la disposición del haz vascular\n├─ Eudicotiledóneas\n│  ├─ Mesófilo frecuentemente dorsiventral\n│  ├─ Empalizada y parénquima esponjoso\n│  └─ Haz vascular con tejidos de sostén posibles\n├─ Monocotiledóneas\n│  ├─ Nerviación frecuentemente paralela\n│  ├─ Haces distribuidos en la lámina\n│  └─ Buscar células buliformes y vaina del haz\n├─ Tinción\n│  ├─ Fluoroglucina + HCl\n│  └─ Coloración rojiza compatible con lignificación\n└─ Identificación morfológica\n   ├─ División del limbo\n   ├─ Forma, margen, ápice y base\n   ├─ Pecíolo e inserción\n   ├─ Nerviación y estípulas\n   └─ Filotaxia y caracteres combinados"
             }
         };
 
