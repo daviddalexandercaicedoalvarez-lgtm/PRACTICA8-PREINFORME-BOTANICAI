@@ -1,0 +1,2184 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Plataforma Educativa (Fix)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .hidden-by-default {
+            display: none;
+        }
+        .card {
+            perspective: 1000px;
+        }
+        .card-inner {
+            position: relative;
+            width: 240px;
+            height: 140px;
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+        .card:hover .card-inner {
+            transform: rotateY(180deg);
+        }
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 500;
+            padding: 0.75rem;
+            box-sizing: border-box;
+        }
+        .card-front {
+            background-color: #059669;
+            color: white;
+        }
+        .card-back {
+            background-color: #b91c1c;
+            color: white;
+            transform: rotateY(180deg);
+        }
+        .draggable {
+            cursor: grab;
+            background-color: #dbeafe;
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            margin: 0.25rem;
+            display: inline-block;
+            user-select: none;
+        }
+        .dropzone {
+            border: 2px dashed #94a3b8;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            min-height: 50px;
+            transition: border-color 0.25s, background-color 0.25s;
+        }
+        .btn-file {
+            background: #2563eb;
+            color: white;
+            padding: .4rem .75rem;
+            border-radius: .4rem;
+            cursor: pointer;
+        }
+        pre.map {
+            white-space: pre-wrap;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace;
+        }
+        .link-img {
+            color: #1d4ed8;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 text-gray-800">
+    <div class="max-w-6xl mx-auto p-6">
+        <header class="mb-6">
+            <h1 class="text-3xl font-bold text-indigo-600">Plataforma Educativa Interactiva</h1>
+            <p class="text-sm text-gray-600 mt-2">
+                Recursos sobre <strong>cualquier contenido educativo, que desees agregar</strong>. Incluye quizzes secuenciales, glosario, flashcards, estructuras (imágenes via links), casos y actividades interactivas. Progreso guardado localmente.
+            </p>
+
+            <nav class="mt-4 flex flex-wrap gap-2">
+                <button class="btn" data-target="home">Inicio</button>
+                <button class="btn" data-target="quiz">Quiz</button>
+                <button class="btn" data-target="gloss">Glosario</button>
+                <button class="btn" data-target="flash">Flashcards</button>
+                <button class="btn" data-target="estructuras">Estructuras</button>
+                <button class="btn" data-target="casos">Casos</button>
+                <button class="btn" data-target="interactivo">Interactivo</button>
+                <button class="btn" data-target="map">Mapas</button>
+                <button class="btn" data-target="dash">Dashboard</button>
+                <label class="btn-file ml-2">
+                    Importar contenido (JSON)
+                    <input id="fileInput" type="file" accept="application/json" style="display:none">
+                </label>
+                <button id="exportJSON" class="btn">Exportar contenido</button>
+            </nav>
+        </header>
+
+        <!-- Home -->
+        <section id="home" class="bg-white p-5 rounded shadow">
+            <h2 id="homeTitle" class="text-xl font-semibold mb-2">Bienvenido</h2>
+
+            <p id="homeDescription" class="text-sm text-gray-700">
+                La plataforma está diseñada para estudiar y practicar los tres bloques fundamentales:
+                <strong>Endomembrana</strong> (síntesis, procesamiento y tráfico de proteínas/lípidos),
+                <strong>Estructuras y Procesos</strong> (ribosomas, lisosomas, RE, Golgi y mecanismos moleculares)
+                y <strong>Mitocondrias y Metabolismo – Plastidios y Cloroplastos</strong> (bioenergética, ATP, fotosíntesis).
+                Usa las herramientas interactivas para autoevaluación.
+            </p>
+
+            <details class="mt-4">
+                <summary class="cursor-pointer font-semibold">
+                    Editar contenido de Inicio (JSON)
+                </summary>
+
+                <textarea id="homeJSON"
+                    style="width:100%;height:160px"
+                    class="mt-2 border rounded p-2 font-mono text-sm">
+                    {
+                    "title": "Bienvenido",
+                    "description": "Texto de introducción editable desde JSON."
+                    }
+                </textarea>
+
+                <div class="mt-2 flex gap-2">
+                    <button id="loadHomeJSON" class="px-3 py-1 bg-green-600 text-white rounded">
+                        Cargar Inicio
+                    </button>
+                    <button id="exportHomeJSON" class="px-3 py-1 bg-gray-600 text-white rounded">
+                        Exportar Inicio
+                    </button>
+                </div>
+            </details>
+        </section>
+
+        <!-- Quiz -->
+        <section id="quiz" class="hidden-by-default bg-white p-5 rounded shadow">
+            <h2 class="text-lg font-semibold mb-2">Quiz (secuencial por tema)</h2>
+            <div class="flex gap-3 mb-3">
+                <button id="prevQ" class="px-3 py-1 bg-gray-500 text-white rounded">Anterior</button>
+                <button id="nextQ" class="px-3 py-1 bg-indigo-600 text-white rounded">Siguiente</button>
+                <button id="showAll" class="px-3 py-1 bg-gray-600 text-white rounded">Mostrar preguntas (JSON)</button>
+                <select id="quizTopic" class="rounded border px-2"></select>
+            </div>
+
+            <div id="quizArea">
+                <p id="qText" class="font-medium mb-2">
+                    Cargando pregunta...
+                </p>
+                <div id="qOptions" class="space-y-2 mb-3"></div>
+                <button id="checkA" class="px-3 py-1 bg-amber-500 text-white rounded">Verificar</button>
+                <p id="qResult" class="mt-2 text-sm"></p>
+                <p class="text-xs text-gray-500 mt-2">
+                    Pregunta <span id="qNumber">0</span> de <span id="qTotal">0</span>
+                </p>
+            </div>
+
+            <details class="mt-4">
+                <summary class="cursor-pointer">Ver/Editar inventario de preguntas (JSON)</summary>
+                <textarea id="questionsJSON" style="width:100%;height:200px" class="mt-2 border rounded p-2 font-mono text-sm"></textarea>
+                <div class="mt-2">
+                    <button id="loadQuestions" class="px-3 py-1 bg-green-600 text-white rounded">Cargar preguntas desde JSON</button>
+                </div>
+            </details>
+            <details class="mt-4">
+                <summary class="cursor-pointer">Ver/Editar bloques del quiz (JSON)</summary>
+                <textarea id="quizTopicsJSON" style="width:100%;height:160px" class="mt-2 border rounded p-2 font-mono text-sm"></textarea>
+                <div class="mt-2">
+                    <button id="loadQuizTopics" class="px-3 py-1 bg-green-600 text-white rounded">Cargar bloques desde JSON</button>
+                    <button id="exportQuizTopics" class="px-3 py-1 bg-gray-600 text-white rounded">Exportar bloques</button>
+                </div>
+            </details>
+        </section>
+
+        <!-- Glosario -->
+        <section id="gloss" class="hidden-by-default bg-white p-5 rounded shadow">
+            <h2 class="text-lg font-semibold mb-2">Glosario (términos técnicos)</h2>
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <input id="glossSearch" placeholder="Buscar término..." class="w-full p-2 border rounded mb-3" />
+                    <div id="glossList" style="max-height:420px;overflow:auto"></div>
+                </div>
+                <div>
+                    <h3 class="font-semibold">Agregar/editar término</h3>
+                    <input id="termInput" placeholder="Término" class="w-full p-2 border rounded mb-2" />
+                    <textarea id="defInput" placeholder="Definición" class="w-full p-2 border rounded mb-2" style="height:160px"></textarea>
+                    <div class="flex gap-2">
+                        <button id="addTerm" class="px-3 py-1 bg-green-600 text-white rounded">Agregar término</button>
+                        <button id="clearGloss" class="px-3 py-1 bg-red-500 text-white rounded">Borrar todo</button>
+                    </div>
+                </div>
+            </div>
+
+            <details class="mt-4">
+                <summary>Exportar/Importar glosario (JSON)</summary>
+                <textarea id="glossJSON" style="width:100%;height:140px" class="mt-2 border rounded p-2 font-mono text-sm"></textarea>
+                <div class="mt-2">
+                    <button id="importGloss" class="px-3 py-1 bg-blue-600 text-white rounded">Importar glosario</button>
+                    <button id="exportGloss" class="px-3 py-1 bg-gray-600 text-white rounded">Exportar glosario</button>
+                </div>
+            </details>
+        </section>
+
+        <!-- Flashcards -->
+        <section id="flash" class="hidden-by-default bg-white p-5 rounded shadow">
+            <h2 class="text-lg font-semibold mb-2">Flashcards (giran al hacer hover o clic)</h2>
+            <div class="flex flex-wrap gap-4" id="flashContainer" style="min-height:160px"></div>
+
+            <details class="mt-4">
+                <summary>Administrar flashcards (JSON)</summary>
+                <textarea id="flashJSON" style="width:100%;height:160px" class="mt-2 border rounded p-2 font-mono text-sm"></textarea>
+                <div class="mt-2">
+                    <button id="loadFlash" class="px-3 py-1 bg-green-600 text-white rounded">Cargar flashcards</button>
+                    <button id="exportFlash" class="px-3 py-1 bg-gray-600 text-white rounded">Exportar flashcards</button>
+                </div>
+            </details>
+        </section>
+
+        <!-- Estructuras -->
+        <section id="estructuras" class="hidden-by-default bg-white p-5 rounded shadow">
+            <h2 class="text-lg font-semibold mb-2">Estructuras: identificación (imágenes como links)</h2>
+            <p class="text-sm text-gray-700 mb-3">
+                Haz clic en el enlace para abrir la imagen en nueva pestaña y luego elige la opción correcta.
+            </p>
+
+            <div id="structuresArea" class="space-y-4"></div>
+
+            <details class="mt-4">
+                <summary>Administrar estructuras (JSON)</summary>
+                <textarea id="structuresJSON" style="width:100%;height:160px" class="mt-2 border rounded p-2 font-mono text-sm"></textarea>
+                <div class="mt-2">
+                    <button id="loadStructures" class="px-3 py-1 bg-green-600 text-white rounded">Cargar estructuras</button>
+                    <button id="exportStructures" class="px-3 py-1 bg-gray-600 text-white rounded">Exportar estructuras</button>
+                </div>
+            </details>
+        </section>
+
+        <!-- Casos -->
+        <section id="casos" class="hidden-by-default bg-white p-5 rounded shadow">
+            <h2 class="text-lg font-semibold mb-2">Casos de análisis (escenarios clínico/experimentales)</h2>
+            <div id="casesArea"></div>
+
+            <details class="mt-4">
+                <summary>Administrar casos (JSON)</summary>
+                <textarea id="casesJSON" style="width:100%;height:160px" class="mt-2 border rounded p-2 font-mono text-sm"></textarea>
+                <div class="mt-2">
+                    <button id="loadCases" class="px-3 py-1 bg-green-600 text-white rounded">Cargar casos</button>
+                    <button id="exportCases" class="px-3 py-1 bg-gray-600 text-white rounded">Exportar casos</button>
+                </div>
+            </details>
+        </section>
+
+        <!-- Interactivo -->
+        <section id="interactivo" class="hidden-by-default bg-white p-5 rounded shadow">
+            <h2 class="text-lg font-semibold mb-2">Interactivo: arrastra y suelta / completar</h2>
+            <p class="text-sm mb-3">
+                Ejercicios arrastrar-soltar y completar. Los ejercicios se cargan desde JSON (50 ítems) para mantener compatibilidad.
+            </p>
+
+            <div id="interactiveArea" class="space-y-4"></div>
+
+            <details class="mt-4">
+                <summary>Administrar interactivos (JSON)</summary>
+                <textarea id="interJSON" style="width:100%;height:160px" class="mt-2 border rounded p-2 font-mono text-sm"></textarea>
+                <div class="mt-2">
+                    <button id="loadInter" class="px-3 py-1 bg-green-600 text-white rounded">Cargar interactivos</button>
+                    <button id="exportInter" class="px-3 py-1 bg-gray-600 text-white rounded">Exportar interactivos</button>
+                </div>
+            </details>
+        </section>
+
+        <!-- Mapas -->
+        <section id="map" class="hidden-by-default bg-white p-5 rounded shadow">
+            <h2 class="text-lg font-semibold mb-2">Mapas conceptuales</h2>
+            <div id="mapsDisplay" class="grid grid-cols-1 gap-4 mb-3"></div>
+
+            <details class="mt-4">
+                <summary>Administrar mapas (JSON)</summary>
+                <textarea id="mapsJSON" style="width:100%;height:160px" class="mt-2 border rounded p-2 font-mono text-sm"></textarea>
+                <div class="mt-2">
+                    <button id="loadMaps" class="px-3 py-1 bg-green-600 text-white rounded">Cargar mapas</button>
+                    <button id="exportMaps" class="px-3 py-1 bg-gray-600 text-white rounded">Exportar mapas</button>
+                </div>
+            </details>
+        </section>
+
+        <!-- Dashboard -->
+        <section id="dash" class="hidden-by-default bg-white p-5 rounded shadow">
+            <h2 class="text-lg font-semibold mb-2">Dashboard de progreso</h2>
+
+            <p class="text-sm">
+                Puntaje total:
+                <span id="score">0</span> /
+                <span id="maxScore">0</span>
+            </p>
+
+            <p class="text-sm mt-1">
+                Progreso general:
+                <span id="scorePercent">0%</span>
+            </p>
+
+            <button id="reset" class="mt-2 px-3 py-1 bg-red-500 text-white rounded">
+                Reiniciar progreso
+            </button>
+
+            <div class="mt-4">
+                <h3 class="font-semibold">Progreso por sección</h3>
+                <ul class="list-disc ml-6 text-sm">
+                    <li>Quiz: <span id="progressQuiz" class="font-semibold text-blue-600">0 / 0 - 0%</span></li>
+                    <li>Glosario: <span id="progressGloss" class="font-semibold text-green-600">0 / 0 - 0%</span></li>
+                    <li>Flashcards: <span id="progressFlash" class="font-semibold text-purple-600">0 / 0 - 0%</span></li>
+                    <li>Estructuras: <span id="progressStructures" class="font-semibold text-indigo-600">0 / 0 - 0%</span></li>
+                    <li>Casos: <span id="progressCases" class="font-semibold text-red-600">0 / 0 - 0%</span></li>
+                    <li>Interactivo: <span id="progressInteractive" class="font-semibold text-amber-600">0 / 0 - 0%</span></li>
+                    <li>Mapas: <span id="progressMaps" class="font-semibold text-teal-600">0 / 0 - 0%</span></li>
+                </ul>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        function normalizeText(value) {
+            return String(value || '')
+            .normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, '')
+            .toLowerCase()
+            .replace(/\s+/g, ' ')
+            .trim();
+        }
+
+        /* --------------------------
+ESTRUCTURA DE DATOS (DB) - muestra mínima inicial para pruebas.
+Reemplaza con tu JSON grande importándolo.
+-------------------------- */
+        let DB = {
+            "quizTopics": [{
+                "value": "anatomia",
+                "label": "1) Anatomía foliar"
+            },
+                {
+                    "value": "tejidos",
+                    "label": "2) Tejidos, tinciones y haces vasculares"
+                },
+                {
+                    "value": "morfologia",
+                    "label": "3) Morfología y clasificación foliar"
+                },
+                {
+                    "value": "grupos",
+                    "label": "4) Gimnospermas, angiospermas y helechos"
+                }],
+            "questions": [{
+                "id": "q1",
+                "topic": "anatomia",
+                "text": "¿Cuáles son las funciones principales de las hojas?",
+                "options": [
+                    "Absorción de agua del suelo y anclaje",
+                    "Fotosíntesis, intercambio gaseoso y transpiración",
+                    "Producción exclusiva de hormonas",
+                    "Absorción intestinal de nutrientes"
+                ],
+                "answer": 1,
+                "explain": "Las hojas captan luz para la fotosíntesis, intercambian gases mediante estructuras como los estomas y regulan la pérdida de agua por transpiración."
+            },
+                {
+                    "id": "q2",
+                    "topic": "anatomia",
+                    "text": "¿Qué tejido protector recubre normalmente la superficie externa de una hoja?",
+                    "options": [
+                        "Floema",
+                        "Xilema",
+                        "Epidermis",
+                        "Parénquima de empalizada"
+                    ],
+                    "answer": 2,
+                    "explain": "La epidermis constituye el revestimiento externo de la hoja. Puede estar cubierta por una cutícula que limita la pérdida de agua y actúa como barrera protectora."
+                },
+                {
+                    "id": "q3",
+                    "topic": "anatomia",
+                    "text": "¿Qué característica distingue generalmente al parénquima de empalizada?",
+                    "options": [
+                        "Células alargadas con abundantes cloroplastos",
+                        "Células muertas con paredes lignificadas exclusivamente",
+                        "Ausencia total de cloroplastos",
+                        "Conductos formados por elementos cribosos"
+                    ],
+                    "answer": 0,
+                    "explain": "El parénquima de empalizada contiene células alargadas, generalmente próximas entre sí, con numerosos cloroplastos y una función fotosintética importante."
+                },
+                {
+                    "id": "q4",
+                    "topic": "anatomia",
+                    "text": "¿Qué característica del parénquima esponjoso facilita el intercambio gaseoso?",
+                    "options": [
+                        "Paredes secundarias lignificadas",
+                        "Ausencia de espacios intercelulares",
+                        "Presencia exclusiva de células conductoras",
+                        "Grandes espacios intercelulares conectados"
+                    ],
+                    "answer": 3,
+                    "explain": "Los espacios intercelulares del parénquima esponjoso permiten la difusión de CO₂, O₂ y vapor de agua dentro de la hoja."
+                },
+                {
+                    "id": "q5",
+                    "topic": "tejidos",
+                    "text": "¿Qué transporta principalmente el xilema en las hojas?",
+                    "options": [
+                        "Sacarosa desde las hojas hacia otros órganos exclusivamente",
+                        "Agua y minerales procedentes del sistema radical",
+                        "ARN mensajero hacia los estomas",
+                        "Clorofila entre las células"
+                    ],
+                    "answer": 1,
+                    "explain": "El xilema conduce agua y minerales hacia los órganos aéreos y contribuye al soporte mecánico mediante paredes celulares especializadas."
+                },
+                {
+                    "id": "q6",
+                    "topic": "tejidos",
+                    "text": "¿Cuál es la función principal del floema?",
+                    "options": [
+                        "Formar la cutícula",
+                        "Producir directamente la luz solar",
+                        "Transportar azúcares y otros solutos orgánicos",
+                        "Impedir todo intercambio gaseoso"
+                    ],
+                    "answer": 2,
+                    "explain": "El floema distribuye fotoasimilados, especialmente sacarosa, desde órganos fuente hacia órganos sumidero, según las necesidades de la planta."
+                },
+                {
+                    "id": "q7",
+                    "topic": "tejidos",
+                    "text": "En la práctica, ¿qué combinación se utilizó para teñir cortes foliares y observar los tejidos conductores?",
+                    "options": [
+                        "Agua destilada y etanol",
+                        "Lugol y azul de metileno",
+                        "Safranina y verde rápido",
+                        "Fluoroglucina y ácido clorhídrico concentrado"
+                    ],
+                    "answer": 3,
+                    "explain": "La guía indica fluoroglucina y HCl concentrado. La reacción se utiliza para evidenciar tejidos lignificados mediante una coloración rojiza, especialmente en paredes con lignina."
+                },
+                {
+                    "id": "q8",
+                    "topic": "tejidos",
+                    "text": "¿Qué función cumple la vaina del haz vascular?",
+                    "options": [
+                        "Rodea el haz y contribuye a su delimitación y regulación de intercambios",
+                        "Reemplaza todas las funciones de la epidermis",
+                        "Produce las esporas de los helechos",
+                        "Constituye siempre la cutícula externa"
+                    ],
+                    "answer": 0,
+                    "explain": "La vaina fascicular rodea los tejidos conductores. Su composición y especialización varían entre especies; en algunas plantas participa en el intercambio de sustancias y en la fotosíntesis."
+                },
+                {
+                    "id": "q9",
+                    "topic": "tejidos",
+                    "text": "¿Qué característica permite reconocer fibras de esclerénquima en un corte foliar?",
+                    "options": [
+                        "Grandes espacios intercelulares y paredes muy delgadas",
+                        "Paredes celulares gruesas, frecuentemente lignificadas",
+                        "Ausencia de pared celular",
+                        "Presencia obligatoria de numerosos estomas dentro de cada fibra"
+                    ],
+                    "answer": 1,
+                    "explain": "Las fibras de esclerénquima presentan paredes secundarias gruesas que aportan resistencia y soporte a los tejidos vegetales."
+                },
+                {
+                    "id": "q10",
+                    "topic": "tejidos",
+                    "text": "¿Qué característica es típica de las células buliformes en muchas hojas de gramíneas?",
+                    "options": [
+                        "Conducen sacarosa por tubos cribosos",
+                        "Forman exclusivamente los vasos del xilema",
+                        "Son células epidérmicas grandes relacionadas con el enrollamiento foliar",
+                        "Constituyen los soros de los helechos"
+                    ],
+                    "answer": 2,
+                    "explain": "Las células buliformes suelen localizarse en la epidermis de hojas de gramíneas. Los cambios en su turgencia pueden contribuir al enrollamiento o desenrollamiento de la lámina."
+                },
+                {
+                    "id": "q11",
+                    "topic": "morfologia",
+                    "text": "¿Qué diferencia fundamental existe entre una hoja simple y una compuesta?",
+                    "options": [
+                        "La hoja simple nunca presenta nervaduras",
+                        "La hoja compuesta carece de epidermis",
+                        "La hoja simple siempre es lineal",
+                        "La hoja compuesta presenta el limbo dividido en folíolos individualizados"
+                    ],
+                    "answer": 3,
+                    "explain": "En las hojas compuestas, el limbo se divide en folíolos que se insertan en un raquis o en un punto común. Los lóbulos de una hoja simple no constituyen folíolos independientes."
+                },
+                {
+                    "id": "q12",
+                    "topic": "morfologia",
+                    "text": "¿Qué caracteriza a una hoja imparipinnada?",
+                    "options": [
+                        "Presenta un folíolo terminal que deja un número impar de folíolos",
+                        "Todos los folíolos nacen exclusivamente de un punto común",
+                        "Presenta siempre dos folíolos",
+                        "Carece de raquis"
+                    ],
+                    "answer": 0,
+                    "explain": "La hoja imparipinnada tiene folíolos dispuestos a lo largo del raquis y normalmente termina en un folíolo apical."
+                },
+                {
+                    "id": "q13",
+                    "topic": "morfologia",
+                    "text": "¿Cómo se reconoce generalmente una filotaxia opuesta?",
+                    "options": [
+                        "Tres o más hojas por nudo",
+                        "Dos hojas insertadas frente a frente en un mismo nudo",
+                        "Una hoja por nudo, alternando regularmente",
+                        "Hojas agrupadas exclusivamente en el ápice de la raíz"
+                    ],
+                    "answer": 1,
+                    "explain": "En la filotaxia opuesta se insertan dos hojas por nudo, enfrentadas entre sí. La verticilada presenta tres o más hojas por nudo."
+                },
+                {
+                    "id": "q14",
+                    "topic": "morfologia",
+                    "text": "¿Qué diferencia anatómica distingue una espina de un aguijón?",
+                    "options": [
+                        "El aguijón siempre contiene xilema y floema bien desarrollados",
+                        "La espina siempre procede de una hoja",
+                        "La espina es una estructura modificada con continuidad anatómica con el órgano; el aguijón es una proyección superficial",
+                        "No existe diferencia en su origen"
+                    ],
+                    "answer": 2,
+                    "explain": "Las espinas suelen derivar de órganos modificados y presentan conexión anatómica con los tejidos internos. Los aguijones son emergencias superficiales, como los de la rosa."
+                },
+                {
+                    "id": "q15",
+                    "topic": "morfologia",
+                    "text": "¿Dónde se localiza habitualmente la lígula en una hoja de gramínea?",
+                    "options": [
+                        "En el extremo de la raíz",
+                        "En el centro del xilema",
+                        "En la punta del ápice foliar",
+                        "En la unión entre la vaina y el limbo"
+                    ],
+                    "answer": 3,
+                    "explain": "La lígula es una estructura situada en la zona de transición entre la vaina y la lámina foliar. Su forma y desarrollo pueden ayudar a identificar gramíneas."
+                },
+                {
+                    "id": "q16",
+                    "topic": "grupos",
+                    "text": "¿Qué estructura resinífera puede observarse en algunos cortes foliares de gimnospermas como el pino romerón?",
+                    "options": [
+                        "Canal resinífero",
+                        "Tubo criboso",
+                        "Soro",
+                        "Estípula"
+                    ],
+                    "answer": 0,
+                    "explain": "Los canales resiníferos contienen resina y forman parte de los sistemas de secreción y defensa presentes en determinadas gimnospermas."
+                },
+                {
+                    "id": "q17",
+                    "topic": "grupos",
+                    "text": "¿Qué estructura reproductiva se busca al observar el envés de las frondas de los helechos?",
+                    "options": [
+                        "Granos de polen",
+                        "Soros que agrupan esporangios",
+                        "Flores completas",
+                        "Frutos carnosos"
+                    ],
+                    "answer": 1,
+                    "explain": "Los soros agrupan esporangios en muchos helechos. Los esporangios producen esporas, que participan en la reproducción y dispersión de estos organismos."
+                },
+                {
+                    "id": "q18",
+                    "topic": "grupos",
+                    "text": "¿Qué relación entre anatomía y ambiente puede explicar una cutícula foliar gruesa?",
+                    "options": [
+                        "Mayor producción de esporangios en el xilema",
+                        "Ausencia total de fotosíntesis",
+                        "Mayor protección frente a la pérdida de agua",
+                        "Transformación del floema en epidermis"
+                    ],
+                    "answer": 2,
+                    "explain": "La cutícula limita la pérdida de agua a través de la superficie foliar. Su grosor y composición pueden variar según la especie y las condiciones ambientales."
+                },
+                {
+                    "id": "q19",
+                    "topic": "anatomia",
+                    "text": "¿Qué tejido se encuentra generalmente entre la epidermis superior e inferior de la hoja?",
+                    "options": [
+                        "Peridermis exclusivamente",
+                        "Madera secundaria exclusivamente",
+                        "Corcho de la raíz",
+                        "Mesófilo"
+                    ],
+                    "answer": 3,
+                    "explain": "El mesófilo comprende tejidos fundamentales, como el parénquima de empalizada y el esponjoso en muchas hojas de eudicotiledóneas, aunque su organización varía entre grupos."
+                },
+                {
+                    "id": "q20",
+                    "topic": "tejidos",
+                    "text": "¿Qué interpretación debe hacerse si la tinción de un corte foliar no permite distinguir claramente los tejidos lignificados?",
+                    "options": [
+                        "Verificar el corte, la aplicación de reactivos y la calidad de la preparación antes de concluir",
+                        "Afirmar que la especie carece de xilema",
+                        "Concluir que toda la hoja está formada por floema",
+                        "Clasificar automáticamente la muestra como helecho"
+                    ],
+                    "answer": 0,
+                    "explain": "La visibilidad depende del espesor del corte, la conservación, la aplicación de los reactivos y la iluminación microscópica. Una tinción deficiente no demuestra la ausencia del tejido."
+                }],
+            "glossary": [{
+                "term": "Anatomía foliar",
+                "def": "Estudio de la organización interna de la hoja, sus tejidos, células y haces vasculares."
+            },
+                {
+                    "term": "Morfología foliar",
+                    "def": "Estudio de los caracteres externos de la hoja, como forma, margen, ápice, base, venación y filotaxia."
+                },
+                {
+                    "term": "Limbo",
+                    "def": "Porción generalmente aplanada de la hoja, especializada en la captación de luz y el intercambio con el ambiente."
+                },
+                {
+                    "term": "Haz foliar",
+                    "def": "Cara adaxial de la hoja, orientada generalmente hacia el eje del brote."
+                },
+                {
+                    "term": "Envés foliar",
+                    "def": "Cara abaxial de la hoja, opuesta al haz."
+                },
+                {
+                    "term": "Cutícula",
+                    "def": "Capa extracelular rica en cutina y ceras que recubre la epidermis y reduce la pérdida de agua."
+                },
+                {
+                    "term": "Estoma",
+                    "def": "Poro epidérmico delimitado por células oclusivas que regula el intercambio gaseoso y la transpiración."
+                },
+                {
+                    "term": "Tricoma",
+                    "def": "Proyección epidérmica unicelular o multicelular que puede intervenir en protección, secreción o regulación de la interacción con el ambiente."
+                },
+                {
+                    "term": "Mesófilo",
+                    "def": "Tejido fundamental interno de la lámina foliar, frecuentemente fotosintético."
+                },
+                {
+                    "term": "Parénquima de empalizada",
+                    "def": "Tejido fotosintético con células generalmente alargadas y abundantes cloroplastos."
+                },
+                {
+                    "term": "Parénquima esponjoso",
+                    "def": "Tejido con células de disposición irregular y espacios intercelulares que facilitan la difusión de gases."
+                },
+                {
+                    "term": "Xilema",
+                    "def": "Tejido vascular que conduce agua y minerales y puede contribuir al soporte mecánico."
+                },
+                {
+                    "term": "Floema",
+                    "def": "Tejido vascular que distribuye azúcares y otras sustancias orgánicas entre órganos fuente y sumidero."
+                },
+                {
+                    "term": "Vaina fascicular",
+                    "def": "Capa de células que rodea un haz vascular y contribuye a delimitarlo; su composición y función varían entre especies."
+                },
+                {
+                    "term": "Esclerénquima",
+                    "def": "Tejido de sostén con células que frecuentemente desarrollan paredes secundarias gruesas y lignificadas."
+                },
+                {
+                    "term": "Lignina",
+                    "def": "Polímero de la pared celular que aporta rigidez y resistencia a los tejidos vegetales."
+                },
+                {
+                    "term": "Fluoroglucina",
+                    "def": "Reactivo empleado con ácido clorhídrico para evidenciar determinados tejidos lignificados mediante una coloración rojiza."
+                },
+                {
+                    "term": "Canal resinífero",
+                    "def": "Conducto secretor que contiene resina y participa en la defensa de ciertas plantas."
+                },
+                {
+                    "term": "Células buliformes",
+                    "def": "Células epidérmicas grandes presentes en muchas gramíneas, relacionadas con cambios en la curvatura o el enrollamiento de la lámina."
+                },
+                {
+                    "term": "Filotaxia",
+                    "def": "Patrón de disposición de las hojas sobre el tallo; puede ser alterna, opuesta, verticilada u otras variantes."
+                },
+                {
+                    "term": "Hoja simple",
+                    "def": "Hoja cuyo limbo constituye una sola lámina, aunque puede presentar lóbulos o incisiones."
+                },
+                {
+                    "term": "Hoja compuesta",
+                    "def": "Hoja cuyo limbo se divide en folíolos individualizados insertados en un eje o punto común."
+                },
+                {
+                    "term": "Raquis",
+                    "def": "Eje principal que sostiene los folíolos en muchas hojas compuestas o las divisiones de una fronda."
+                },
+                {
+                    "term": "Peciólulo",
+                    "def": "Pequeño eje que une un folíolo con el raquis o con el eje secundario."
+                },
+                {
+                    "term": "Pecíolo",
+                    "def": "Estructura que conecta el limbo con el tallo; puede faltar en hojas sésiles."
+                },
+                {
+                    "term": "Vaina foliar",
+                    "def": "Base de la hoja que envuelve parcial o totalmente el tallo, común en gramíneas."
+                },
+                {
+                    "term": "Lígula",
+                    "def": "Apéndice situado en la unión de la vaina y el limbo en muchas gramíneas; su forma puede ayudar a identificar especies."
+                },
+                {
+                    "term": "Fronda",
+                    "def": "Hoja de un helecho, que puede ser simple o estar dividida en pinnas y divisiones sucesivas."
+                },
+                {
+                    "term": "Soro",
+                    "def": "Agrupación de esporangios presente en muchas frondas de helechos."
+                },
+                {
+                    "term": "Espina",
+                    "def": "Estructura rígida y puntiaguda que suele derivar de un órgano modificado y presentar continuidad anatómica con él."
+                },
+                {
+                    "term": "Aguijón",
+                    "def": "Proyección superficial, como la de la rosa, que se diferencia de una espina por su origen y conexión anatómica."
+                },
+                {
+                    "term": "Venación",
+                    "def": "Patrón de distribución de las nervaduras foliares, relacionado con conducción y soporte."
+                },
+                {
+                    "term": "Estípula",
+                    "def": "Apéndice situado generalmente en la base de la hoja, cuya presencia, forma y tamaño varían entre especies."
+                },
+                {
+                    "term": "Pulvínulo",
+                    "def": "Región engrosada en la base de un folíolo o pecíolo que puede participar en movimientos foliares."
+                }],
+            "flashcards": [{
+                "id": "f1",
+                "front": "Funciones de la hoja",
+                "back": "Fotosíntesis, intercambio gaseoso y transpiración. Algunas hojas se especializan en almacenamiento o defensa."
+            },
+                {
+                    "id": "f2",
+                    "front": "Epidermis y cutícula",
+                    "back": "La epidermis protege la hoja; la cutícula reduce la pérdida de agua y la exposición directa de los tejidos internos."
+                },
+                {
+                    "id": "f3",
+                    "front": "Estomas",
+                    "back": "Poros regulados por células oclusivas que permiten el intercambio de CO₂, O₂ y vapor de agua."
+                },
+                {
+                    "id": "f4",
+                    "front": "Parénquima de empalizada",
+                    "back": "Células alargadas, generalmente con numerosos cloroplastos; fotosíntesis intensa."
+                },
+                {
+                    "id": "f5",
+                    "front": "Parénquima esponjoso",
+                    "back": "Células irregulares y espacios intercelulares que facilitan la difusión de gases."
+                },
+                {
+                    "id": "f6",
+                    "front": "Xilema y floema",
+                    "back": "Xilema: agua y minerales. Floema: azúcares y otros solutos orgánicos."
+                },
+                {
+                    "id": "f7",
+                    "front": "Fluoroglucina + HCl",
+                    "back": "Tinción empleada para evidenciar tejidos lignificados mediante una coloración rojiza."
+                },
+                {
+                    "id": "f8",
+                    "front": "Células buliformes",
+                    "back": "Células epidérmicas grandes de muchas gramíneas; cambios de turgencia pueden favorecer el enrollamiento foliar."
+                },
+                {
+                    "id": "f9",
+                    "front": "Hoja simple vs. compuesta",
+                    "back": "Simple: un limbo, aunque tenga lóbulos. Compuesta: limbo dividido en folíolos individualizados."
+                },
+                {
+                    "id": "f10",
+                    "front": "Filotaxia",
+                    "back": "Alterna: una hoja por nudo. Opuesta: dos enfrentadas. Verticilada: tres o más por nudo."
+                },
+                {
+                    "id": "f11",
+                    "front": "Espina vs. aguijón",
+                    "back": "La espina suele ser un órgano modificado con continuidad anatómica; el aguijón es una proyección superficial."
+                },
+                {
+                    "id": "f12",
+                    "front": "Fronda y soro",
+                    "back": "Fronda: hoja de helecho. Soro: agrupación de esporangios, frecuente en el envés."
+                },
+                {
+                    "id": "f13",
+                    "front": "Vaina y lígula",
+                    "back": "La vaina envuelve el tallo; la lígula se localiza entre la vaina y el limbo de muchas gramíneas."
+                },
+                {
+                    "id": "f14",
+                    "front": "Raquis y peciólulo",
+                    "back": "Raquis: eje de la hoja compuesta. Peciólulo: une cada folíolo con el eje correspondiente."
+                },
+                {
+                    "id": "f15",
+                    "front": "Venación foliar",
+                    "back": "Distribución de las nervaduras; contribuye al transporte de sustancias y al soporte de la lámina."
+                },
+                {
+                    "id": "f16",
+                    "front": "Canal resinífero",
+                    "back": "Conducto secretor de resina en determinadas plantas; participa en mecanismos de defensa."
+                },
+                {
+                    "id": "f17",
+                    "front": "Vaina fascicular",
+                    "back": "Capa celular que rodea el haz vascular y contribuye a delimitarlo."
+                },
+                {
+                    "id": "f18",
+                    "front": "Esclerénquima",
+                    "back": "Tejido de sostén con paredes celulares gruesas, frecuentemente lignificadas."
+                },
+                {
+                    "id": "f19",
+                    "front": "Ápice, base y margen",
+                    "back": "Ápice: extremo distal. Base: región de inserción. Margen: borde del limbo."
+                },
+                {
+                    "id": "f20",
+                    "front": "Espacios intercelulares",
+                    "back": "Facilitan la difusión interna de gases, especialmente en el parénquima esponjoso."
+                }],
+            "structures": [{
+                "id": "s1",
+                "title": "Figura 1. ¿Qué estructuras anatómicas se distinguen en el corte foliar y cómo se relacionan con la protección, fotosíntesis y conducción?",
+                "img": "link",
+                "options": [
+                    "Epidermis, hipodermis, mesófilo, xilema, floema, tejido de transfusión y canal resinífero",
+                    "Peridermis, médula caulinar y tubos cribosos exclusivamente",
+                    "Soros, esporangios y pinnas",
+                    "Raíz, cofia y pelos radicales"
+                ],
+                "answer": 0,
+                "explain": "El corte de Retrophyllum rospigliosii permite estudiar las capas protectoras, el tejido fotosintético, los tejidos conductores y las estructuras secretoras."
+            },
+                {
+                    "id": "s2",
+                    "title": "Figura 2. ¿Qué organización anatómica se representa y qué estructuras deben identificarse?",
+                    "img": "link",
+                    "options": [
+                        "Únicamente el sistema radical",
+                        "Epidermis, estomas, hipodermis, mesófilo, cámara subestomática, canal resinífero, endodermis, xilema, floema y tejido de transfusión",
+                        "Solo los folíolos y el raquis",
+                        "Únicamente el ápice y el margen foliar"
+                    ],
+                    "answer": 1,
+                    "explain": "La figura representa la organización anatómica de una hoja de gimnosperma y permite relacionar protección, intercambio gaseoso, secreción y conducción."
+                },
+                {
+                    "id": "s3",
+                    "title": "Figura 3. ¿Qué tejidos se reconocen en el corte foliar y qué indica la tinción?",
+                    "img": "link",
+                    "options": [
+                        "Solo epidermis y cutícula",
+                        "Únicamente tejido secretor",
+                        "Epidermis, parénquimas de empalizada y esponjoso, xilema, floema y fibras de esclerénquima",
+                        "Solo esporangios y esporas"
+                    ],
+                    "answer": 2,
+                    "explain": "El corte de Senna pistaciifolia permite identificar tejidos fotosintéticos y vasculares. La tinción con fluoroglucina y HCl ayuda a reconocer paredes lignificadas."
+                },
+                {
+                    "id": "s4",
+                    "title": "Figura 4. ¿Qué organización del mesófilo y del sistema vascular se observa?",
+                    "img": "link",
+                    "options": [
+                        "Solo tejidos de reserva sin haces vasculares",
+                        "Únicamente epidermis y pelos radicales",
+                        "Una fronda con soros",
+                        "Epidermis, parénquima de empalizada, parénquima esponjoso y haz vascular"
+                    ],
+                    "answer": 3,
+                    "explain": "La figura corresponde a una hoja de eudicotiledónea y muestra la organización del tejido fotosintético y del haz vascular."
+                },
+                {
+                    "id": "s5",
+                    "title": "Figura 5. ¿Qué estructuras deben localizarse para caracterizar el tejido foliar representado?",
+                    "img": "link",
+                    "options": [
+                        "Epidermis, parénquima de empalizada, parénquima lagunar y estomas",
+                        "Solo vasos del xilema",
+                        "Raquis, pinnas y soros",
+                        "Cofia y zona de elongación"
+                    ],
+                    "answer": 0,
+                    "explain": "La figura representa tejidos foliares de una dicotiledónea y permite comparar la epidermis, los parénquimas y los estomas."
+                },
+                {
+                    "id": "s6",
+                    "title": "Figura 6. ¿Qué estructuras permiten reconocer la organización anatómica de la hoja representada?",
+                    "img": "link",
+                    "options": [
+                        "Solo esporas y esporangios",
+                        "Cutícula, epidermis superior e inferior, parénquima, células buliformes, xilema, floema y haces vasculares",
+                        "Solo estípulas y peciólulos",
+                        "Peridermis y madera secundaria exclusivamente"
+                    ],
+                    "answer": 1,
+                    "explain": "La hoja de Hemerocallis permite examinar la organización anatómica de una monocotiledónea y la distribución de los tejidos conductores."
+                },
+                {
+                    "id": "s7",
+                    "title": "Figura 7. ¿Qué características anatómicas deben identificarse en las imágenes?",
+                    "img": "link",
+                    "options": [
+                        "Canales resiníferos y tejido de transfusión exclusivamente",
+                        "Pecíolo, raquis y pinnas",
+                        "Células buliformes, pelo bicelular, vaina parenquimática y clorénquima radiado",
+                        "Únicamente el margen y el ápice"
+                    ],
+                    "answer": 2,
+                    "explain": "La figura presenta tejidos foliares de monocotiledónea. Fuente indicada en la guía: Mollard et al., 2009."
+                },
+                {
+                    "id": "s8",
+                    "title": "Figura 8. ¿Qué caracteres permiten describir la organización externa de una hoja?",
+                    "img": "link",
+                    "options": [
+                        "Solo la estructura de la raíz",
+                        "Únicamente el xilema y el floema",
+                        "Solo las células del mesófilo",
+                        "Limbo, haz, envés, margen, nervios, ápice, base, pecíolo y yema"
+                    ],
+                    "answer": 3,
+                    "explain": "La figura permite localizar las principales partes externas de una hoja para su descripción morfológica."
+                },
+                {
+                    "id": "s9",
+                    "title": "Figura 9. ¿Qué componentes de la fronda deben reconocerse?",
+                    "img": "link",
+                    "options": [
+                        "Pecíolo, raquis, pinnas, pinnas secundarias y divisiones de la fronda",
+                        "Xilema, floema y canal resinífero exclusivamente",
+                        "Solo estomas y tricomas",
+                        "Vaina y lígula exclusivamente"
+                    ],
+                    "answer": 0,
+                    "explain": "La figura permite reconocer los ejes y niveles de división de una fronda de helecho."
+                },
+                {
+                    "id": "s10",
+                    "title": "Figura 10. ¿Qué caracteres permiten distinguir la organización de hojas simples y compuestas?",
+                    "img": "link",
+                    "options": [
+                        "Solo la presencia de cutícula",
+                        "Limbo, pecíolo, estípula, yema axilar, raquis, peciólulo y folíolos",
+                        "Únicamente los soros",
+                        "Solo la vaina del haz vascular"
+                    ],
+                    "answer": 1,
+                    "explain": "La distinción depende de la organización del limbo y de la presencia de folíolos individualizados unidos al raquis o a un punto común."
+                },
+                {
+                    "id": "s11",
+                    "title": "Figura 11. ¿Qué tipos de hojas compuestas deben diferenciarse?",
+                    "img": "link",
+                    "options": [
+                        "Solo hojas alternas y opuestas",
+                        "Únicamente hojas lineales y aciculares",
+                        "Imparipinnada, paripinnada, trifoliolada digitada, trifoliolada pinnada, bipinnada, palmada o digitada y tripinnada",
+                        "Solo hojas con margen entero"
+                    ],
+                    "answer": 2,
+                    "explain": "La clasificación considera el número y la disposición de los folíolos y los niveles de división del eje foliar."
+                },
+                {
+                    "id": "s12",
+                    "title": "Figura 12. ¿Qué formas del limbo pueden utilizarse para clasificar las muestras?",
+                    "img": "link",
+                    "options": [
+                        "Solo ápices y bases",
+                        "Solo filotaxias",
+                        "Únicamente formas de estomas",
+                        "Formas como ensiforme, acicular, filiforme, lineal, oval, elíptica, lanceolada, cordada y orbicular, entre otras"
+                    ],
+                    "answer": 3,
+                    "explain": "La forma del limbo se clasifica según el contorno general de la lámina y sus proporciones."
+                },
+                {
+                    "id": "s13",
+                    "title": "Figura 13. ¿Qué característica morfológica se utiliza para clasificar la forma apical de una hoja?",
+                    "img": "link",
+                    "options": [
+                        "El contorno del extremo distal del limbo",
+                        "La ubicación de los soros",
+                        "El número de haces vasculares exclusivamente",
+                        "La disposición de las células buliformes"
+                    ],
+                    "answer": 0,
+                    "explain": "El ápice es el extremo distal de la lámina. Puede clasificarse como agudo, obtuso, acuminado, retuso, truncado y otras formas."
+                },
+                {
+                    "id": "s14",
+                    "title": "Figura 14. ¿Qué región foliar se utiliza para clasificar las formas de inserción proximal del limbo?",
+                    "img": "link",
+                    "options": [
+                        "El ápice",
+                        "La base",
+                        "El raquis",
+                        "El soro"
+                    ],
+                    "answer": 1,
+                    "explain": "La base es la región proximal del limbo, próxima al pecíolo o a la inserción foliar."
+                },
+                {
+                    "id": "s15",
+                    "title": "Figura 15. ¿Qué característica permite clasificar los bordes foliares?",
+                    "img": "link",
+                    "options": [
+                        "La organización del xilema",
+                        "La presencia de canal resinífero",
+                        "El contorno del margen, que puede ser entero, dentado, aserrado, crenado o lobulado",
+                        "El número de soros exclusivamente"
+                    ],
+                    "answer": 2,
+                    "explain": "El margen es el borde del limbo. Sus irregularidades y divisiones constituyen caracteres útiles para la clasificación morfológica."
+                },
+                {
+                    "id": "s16",
+                    "title": "Figura 16. ¿Qué criterio permite reconocer la disposición de las hojas en el tallo?",
+                    "img": "link",
+                    "options": [
+                        "La coloración del floema",
+                        "La forma de las células del mesófilo",
+                        "La presencia de lignina en el xilema",
+                        "El número y la posición de las hojas insertadas en cada nudo"
+                    ],
+                    "answer": 3,
+                    "explain": "La filotaxia se determina examinando los nudos del tallo y la disposición de las hojas, como alterna, opuesta o verticilada."
+                },
+                {
+                    "id": "s17",
+                    "title": "Figura 17. ¿Qué observación complementa la clasificación de la disposición foliar?",
+                    "img": "link",
+                    "options": [
+                        "La distribución de las hojas a lo largo del tallo y sus patrones de agrupación",
+                        "Solo la forma del ápice",
+                        "La presencia de cloroplastos en el xilema",
+                        "La producción de esporas en las raíces"
+                    ],
+                    "answer": 0,
+                    "explain": "La observación de varios nudos permite diferenciar patrones de inserción y agrupación foliar."
+                },
+                {
+                    "id": "s18",
+                    "title": "Figura 18. ¿Qué criterio se utiliza para describir la unión de la hoja con el tallo?",
+                    "img": "link",
+                    "options": [
+                        "La presencia de soros",
+                        "La forma de inserción foliar y la presencia de pecíolo, base o vaina",
+                        "La cantidad de parénquima esponjoso exclusivamente",
+                        "La coloración del canal resinífero"
+                    ],
+                    "answer": 1,
+                    "explain": "La inserción foliar permite reconocer hojas pecioladas, sésiles o envainadoras, según la estructura de conexión con el tallo."
+                },
+                {
+                    "id": "s19",
+                    "title": "Figura 19. ¿Qué características permiten clasificar una hoja compuesta?",
+                    "img": "link",
+                    "options": [
+                        "Solo el grosor de la cutícula",
+                        "La presencia exclusiva de estomas",
+                        "El número, disposición y nivel de división de los folíolos y sus ejes",
+                        "La ubicación de la raíz principal"
+                    ],
+                    "answer": 2,
+                    "explain": "La clasificación de hojas compuestas se basa en la organización de los folíolos, el raquis y los ejes secundarios."
+                }],
+            "cases": [{
+                "id": "c1",
+                "text": "En un corte foliar se observan células alargadas, compactas y con numerosos cloroplastos, junto a otro tejido con células irregulares y amplios espacios intercelulares. ¿Cuál es la interpretación correcta?",
+                "options": [
+                    "Ambos tejidos son exclusivamente vasculares",
+                    "El primer tejido es floema y el segundo es xilema",
+                    "El primer tejido corresponde a epidermis y el segundo a cutícula",
+                    "El primero es parénquima de empalizada y el segundo parénquima esponjoso"
+                ],
+                "answer": 3,
+                "feedback": "La disposición compacta y las células alargadas son características del parénquima de empalizada. Los espacios intercelulares amplios son característicos del parénquima esponjoso y facilitan la difusión gaseosa."
+            },
+                {
+                    "id": "c2",
+                    "text": "En un corte teñido con fluoroglucina y HCl se identifica una región rojiza en paredes celulares gruesas. ¿Qué interpretación es más apropiada?",
+                    "options": [
+                        "La reacción es compatible con la presencia de tejido lignificado, pero debe interpretarse junto con la anatomía del corte",
+                        "La coloración demuestra la presencia de almidón en todos los tejidos",
+                        "La reacción indica que la muestra carece de xilema",
+                        "El color rojizo confirma que todas las células están vivas"
+                    ],
+                    "answer": 0,
+                    "feedback": "La reacción se utiliza para evidenciar lignina. El resultado debe correlacionarse con la ubicación y la estructura de las paredes celulares; una tinción aislada no identifica por sí sola todos los tejidos."
+                },
+                {
+                    "id": "c3",
+                    "text": "En un corte transversal de hoja se observa un haz vascular rodeado por una capa de células. ¿Qué dato debe evaluarse para identificar correctamente la estructura circundante?",
+                    "options": [
+                        "La forma del ápice foliar",
+                        "La organización de las células de la vaina y su relación con el haz",
+                        "La presencia de peciólulos",
+                        "La cantidad de soros en el envés"
+                    ],
+                    "answer": 1,
+                    "feedback": "La vaina fascicular se reconoce por su ubicación alrededor del haz. Su composición y especialización deben evaluarse en el contexto anatómico de la especie."
+                },
+                {
+                    "id": "c4",
+                    "text": "Una muestra de *Citrus* presenta una estructura rígida y puntiaguda integrada al eje de la rama, mientras que en *Rosa* se observa una proyección superficial. ¿Qué conclusión es la más adecuada?",
+                    "options": [
+                        "Ambas estructuras son folíolos",
+                        "La estructura de *Rosa* es un soro",
+                        "La primera es compatible con una espina y la segunda con un aguijón",
+                        "Ambas estructuras son necesariamente raíces modificadas"
+                    ],
+                    "answer": 2,
+                    "feedback": "La conexión anatómica y el origen de la estructura permiten diferenciar las espinas de los aguijones. La forma externa, por sí sola, puede resultar insuficiente."
+                },
+                {
+                    "id": "c5",
+                    "text": "Al examinar el envés de una fronda se observan agrupaciones oscuras de estructuras reproductivas. ¿Qué identificación es compatible con esta observación?",
+                    "options": [
+                        "Estomas agrupados",
+                        "Canales resiníferos",
+                        "Folíolos inmaduros",
+                        "Soros que contienen esporangios"
+                    ],
+                    "answer": 3,
+                    "feedback": "En numerosos helechos, los soros se encuentran en el envés y agrupan esporangios. Su apariencia varía con la especie y el grado de madurez."
+                },
+                {
+                    "id": "c6",
+                    "text": "Una hoja presenta dos folíolos laterales y uno terminal insertados en un raquis. ¿Qué tipo de hoja puede corresponder a esta organización?",
+                    "options": [
+                        "Trifoliolada pinnada",
+                        "Simple con margen aserrado",
+                        "Verticilada",
+                        "Acicular"
+                    ],
+                    "answer": 0,
+                    "feedback": "Una hoja trifoliolada pinnada presenta tres folíolos organizados a lo largo de un eje. La clasificación definitiva debe considerar la inserción y la estructura completa de la hoja."
+                },
+                {
+                    "id": "c7",
+                    "text": "En una gramínea, la base de la hoja envuelve el tallo y se identifica un pequeño reborde en la transición hacia el limbo. ¿Cómo se denominan estas estructuras?",
+                    "options": [
+                        "Raquis y peciólulo",
+                        "Vaina y lígula",
+                        "Soro y esporangio",
+                        "Xilema y floema"
+                    ],
+                    "answer": 1,
+                    "feedback": "La vaina envuelve parcial o totalmente el tallo y la lígula se sitúa en la unión con la lámina. Estas estructuras son útiles en la identificación de gramíneas."
+                },
+                {
+                    "id": "c8",
+                    "text": "En un tallo se observan dos hojas insertadas una frente a otra en cada nudo. ¿Qué patrón de filotaxia corresponde a la observación?",
+                    "options": [
+                        "Alterna",
+                        "Fasciculada",
+                        "Opuesta",
+                        "Rosulada"
+                    ],
+                    "answer": 2,
+                    "feedback": "La filotaxia opuesta presenta dos hojas por nudo en posiciones enfrentadas. Es importante examinar varios nudos para confirmar el patrón."
+                },
+                {
+                    "id": "c9",
+                    "text": "Una preparación microscópica es demasiado gruesa y las células aparecen superpuestas, dificultando la delimitación de tejidos. ¿Qué problema explica mejor esta observación?",
+                    "options": [
+                        "El floema se transforma inmediatamente en epidermis",
+                        "La muestra necesariamente carece de pared celular",
+                        "El microscopio no puede observar tejidos vegetales",
+                        "El espesor del corte reduce la resolución y dificulta distinguir las capas anatómicas"
+                    ],
+                    "answer": 3,
+                    "feedback": "Los cortes demasiado gruesos superponen estructuras y dificultan el enfoque. Los cortes finos y uniformes permiten reconocer mejor las capas celulares y los tejidos."
+                },
+                {
+                    "id": "c10",
+                    "text": "Al comparar hojas de gimnospermas, eudicotiledóneas y monocotiledóneas, ¿qué estrategia ofrece la identificación más confiable?",
+                    "options": [
+                        "Combinar organización anatómica, disposición de tejidos, características vasculares y rasgos morfológicos",
+                        "Clasificar únicamente por el color general de la hoja",
+                        "Utilizar exclusivamente el tamaño del pecíolo",
+                        "Asumir que todas las especies presentan el mismo mesófilo"
+                    ],
+                    "answer": 0,
+                    "feedback": "La identificación mejora cuando se integran varios caracteres. Existen variaciones anatómicas dentro de cada grupo, por lo que ningún rasgo aislado debe interpretarse como universal."
+                }],
+            "interactives": [{
+                "id": "i1",
+                "type": "dragdrop",
+                "title": "Relaciona el tejido con su función",
+                "terms": [
+                    "Epidermis y cutícula",
+                    "Parénquima de empalizada",
+                    "Parénquima esponjoso",
+                    "Xilema",
+                    "Floema",
+                    "Esclerénquima"
+                ],
+                "targets": [
+                    "Protección y reducción de la pérdida de agua",
+                    "Fotosíntesis con abundantes cloroplastos",
+                    "Difusión de gases mediante espacios intercelulares",
+                    "Conducción de agua y minerales",
+                    "Distribución de azúcares y otros solutos orgánicos",
+                    "Soporte mecánico mediante paredes gruesas"
+                ],
+                "answerMap": {
+                    "Epidermis y cutícula": "Protección y reducción de la pérdida de agua",
+                    "Parénquima de empalizada": "Fotosíntesis con abundantes cloroplastos",
+                    "Parénquima esponjoso": "Difusión de gases mediante espacios intercelulares",
+                    "Xilema": "Conducción de agua y minerales",
+                    "Floema": "Distribución de azúcares y otros solutos orgánicos",
+                    "Esclerénquima": "Soporte mecánico mediante paredes gruesas"
+                }
+            },
+                {
+                    "id": "i2",
+                    "type": "complete",
+                    "title": "Completa la identificación anatómica",
+                    "prompt": "El tejido que transporta agua y minerales hacia la hoja es el ______.",
+                    "answer": "xilema"
+                },
+                {
+                    "id": "i3",
+                    "type": "complete",
+                    "title": "Completa la reacción de tinción",
+                    "prompt": "La combinación de ______ y ácido clorhídrico se utiliza para evidenciar tejidos lignificados.",
+                    "answer": "fluoroglucina"
+                },
+                {
+                    "id": "i4",
+                    "type": "dragdrop",
+                    "title": "Relaciona la estructura con su grupo o muestra",
+                    "terms": [
+                        "Canal resinífero",
+                        "Soro",
+                        "Células buliformes",
+                        "Lígula",
+                        "Aguijón",
+                        "Folíolos"
+                    ],
+                    "targets": [
+                        "Estructura secretora de determinadas gimnospermas",
+                        "Agrupación de esporangios de muchos helechos",
+                        "Células epidérmicas de muchas gramíneas",
+                        "Reborde entre vaina y limbo",
+                        "Proyección superficial característica de la rosa",
+                        "Unidades del limbo de una hoja compuesta"
+                    ],
+                    "answerMap": {
+                        "Canal resinífero": "Estructura secretora de determinadas gimnospermas",
+                        "Soro": "Agrupación de esporangios de muchos helechos",
+                        "Células buliformes": "Células epidérmicas de muchas gramíneas",
+                        "Lígula": "Reborde entre vaina y limbo",
+                        "Aguijón": "Proyección superficial característica de la rosa",
+                        "Folíolos": "Unidades del limbo de una hoja compuesta"
+                    }
+                },
+                {
+                    "id": "i5",
+                    "type": "complete",
+                    "title": "Completa la clasificación morfológica",
+                    "prompt": "Cuando dos hojas se insertan enfrentadas en un mismo nudo, la filotaxia es ______.",
+                    "answer": "opuesta"
+                },
+                {
+                    "id": "i6",
+                    "type": "complete",
+                    "title": "Identifica la estructura de una gramínea",
+                    "prompt": "La estructura basal que envuelve el tallo es la ______, mientras que el reborde entre esta y el limbo es la ______.",
+                    "answer": "vaina y lígula"
+                },
+                {
+                    "id": "i7",
+                    "type": "dragdrop",
+                    "title": "Relaciona el carácter con el criterio de clasificación",
+                    "terms": [
+                        "Ápice",
+                        "Base",
+                        "Margen",
+                        "Venación",
+                        "Filotaxia",
+                        "División del limbo"
+                    ],
+                    "targets": [
+                        "Extremo distal de la lámina",
+                        "Región proximal de la lámina",
+                        "Contorno del borde foliar",
+                        "Patrón de distribución de nervaduras",
+                        "Disposición de hojas sobre el tallo",
+                        "Distinción entre hoja simple y compuesta"
+                    ],
+                    "answerMap": {
+                        "Ápice": "Extremo distal de la lámina",
+                        "Base": "Región proximal de la lámina",
+                        "Margen": "Contorno del borde foliar",
+                        "Venación": "Patrón de distribución de nervaduras",
+                        "Filotaxia": "Disposición de hojas sobre el tallo",
+                        "División del limbo": "Distinción entre hoja simple y compuesta"
+                    }
+                }],
+            "maps": {
+                "anatomia": "Anatomía foliar\n├─ Funciones\n│  ├─ Fotosíntesis\n│  ├─ Intercambio gaseoso\n│  └─ Transpiración\n├─ Tejidos protectores\n│  ├─ Epidermis superior e inferior\n│  ├─ Cutícula\n│  ├─ Estomas\n│  └─ Tricomas\n├─ Mesófilo\n│  ├─ Parénquima de empalizada\n│  │  ├─ Células alargadas\n│  │  └─ Abundantes cloroplastos\n│  └─ Parénquima esponjoso\n│     ├─ Células irregulares\n│     └─ Espacios intercelulares\n└─ Organización\n   ├─ Haz\n   ├─ Envés\n   ├─ Limbo\n   ├─ Pecíolo\n   └─ Nervaduras",
+                "tejidos": "Tejidos, tinciones y haces vasculares\n├─ Sistema vascular\n│  ├─ Xilema\n│  │  ├─ Agua y minerales\n│  │  └─ Soporte\n│  └─ Floema\n│     ├─ Sacarosa y solutos orgánicos\n│     └─ Órganos fuente y sumidero\n├─ Tejidos de sostén\n│  └─ Esclerénquima\n│     ├─ Paredes gruesas\n│     └─ Lignificación frecuente\n├─ Estructuras especializadas\n│  ├─ Vaina fascicular\n│  ├─ Células buliformes\n│  ├─ Canal resinífero\n│  └─ Tejido de transfusión\n└─ Tinción\n   ├─ Fluoroglucina + HCl concentrado\n   ├─ Evidencia de lignina\n   └─ Coloración rojiza compatible con tejidos lignificados",
+                "morfologia": "Morfología y clasificación foliar\n├─ Partes\n│  ├─ Limbo\n│  ├─ Pecíolo\n│  ├─ Base y ápice\n│  ├─ Margen\n│  ├─ Haz y envés\n│  └─ Nervaduras\n├─ División del limbo\n│  ├─ Hoja simple\n│  └─ Hoja compuesta\n│     ├─ Folíolos\n│     ├─ Raquis\n│     └─ Peciólulo\n├─ Filotaxia\n│  ├─ Alterna\n│  ├─ Opuesta\n│  ├─ Verticilada\n│  ├─ Fasciculada\n│  ├─ Imbricada\n│  └─ Rosulada\n├─ Estructuras especiales\n│  ├─ Estípulas\n│  ├─ Tricomas\n│  ├─ Espinas\n│  ├─ Aguijones\n│  ├─ Vaina\n│  └─ Lígula\n└─ Clasificación\n   ├─ Forma del limbo\n   ├─ Forma del ápice\n   ├─ Forma de la base\n   ├─ Forma del margen\n   └─ Patrón de venación",
+                "grupos": "Gimnospermas, angiospermas y helechos\n├─ Gimnospermas\n│  ├─ Retrophyllum rospigliosii\n│  ├─ Hipodermis\n│  ├─ Canal resinífero\n│  ├─ Tejido de transfusión\n│  └─ Haces vasculares\n├─ Angiospermas\n│  ├─ Eudicotiledóneas\n│  │  ├─ Mesófilo frecuentemente diferenciado\n│  │  └─ Nerviación generalmente reticulada\n│  └─ Monocotiledóneas\n│     ├─ Haces vasculares frecuentemente paralelos\n│     ├─ Células buliformes en muchas gramíneas\n│     └─ Vaina foliar en gramíneas\n├─ Helechos\n│  ├─ Fronda\n│  ├─ Pecíolo y raquis\n│  ├─ Pinnas\n│  └─ Soros con esporangios\n└─ Identificación\n   ├─ Comparar varios caracteres anatómicos\n   ├─ Registrar tejidos y su distribución\n   ├─ Clasificar rasgos morfológicos\n   └─ Evitar conclusiones basadas en un solo carácter"
+            }
+        };
+
+        /* --------------------------
+Utilidades y renderizado
+-------------------------- */
+        function ensureDbShape() {
+            DB.quizTopics = Array.isArray(DB.quizTopics) ? DB.quizTopics: [];
+            DB.questions = Array.isArray(DB.questions) ? DB.questions: [];
+            DB.glossary = Array.isArray(DB.glossary) ? DB.glossary: [];
+            DB.flashcards = Array.isArray(DB.flashcards) ? DB.flashcards: [];
+            DB.structures = Array.isArray(DB.structures) ? DB.structures: [];
+            DB.cases = Array.isArray(DB.cases) ? DB.cases: [];
+            DB.interactives = Array.isArray(DB.interactives) ? DB.interactives: [];
+            DB.maps = DB.maps && typeof DB.maps === 'object' ? DB.maps: {};
+        }
+
+        function escapeHtml(s) {
+            if (!s) return ''; return String(s).replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;');
+        }
+
+        /* render glossary */
+        function renderGloss() {
+            const list = document.getElementById('glossList');
+            list.innerHTML = '';
+
+            const glossary = Array.isArray(DB.glossary) ? DB.glossary: [];
+            const query = normalizeText(document.getElementById('glossSearch').value || '');
+
+            glossary
+            .filter(item => {
+                const term = normalizeText(item.term);
+                const def = normalizeText(item.def);
+                return !query || term.includes(query) || def.includes(query);
+            })
+            .forEach((g, idx) => {
+                const itemId = g.id || `gloss-${idx}`;
+
+                const div = document.createElement('div');
+                div.className = 'relative p-2 border-b';
+
+                div.innerHTML = `
+                <strong>${escapeHtml(g.term)}</strong>
+                <p class="text-xs text-gray-700 pr-14">${escapeHtml(g.def)}</p>
+
+                <button data-i="${idx}" class="edit-gloss text-blue-600 text-xs mt-1">
+                Editar
+                </button>
+
+                <div class="absolute bottom-1 right-1 flex gap-1">
+                <button data-section="gloss" data-id="${itemId}" data-correct="true" class="score-btn text-xs">✅</button>
+                <button data-section="gloss" data-id="${itemId}" data-correct="false" class="score-btn text-xs">❌</button>
+                </div>
+                `;
+
+                list.appendChild(div);
+            });
+
+            list.querySelectorAll('.edit-gloss').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const i = parseInt(btn.dataset.i);
+                    document.getElementById('termInput').value = DB.glossary[i].term || '';
+                    document.getElementById('defInput').value = DB.glossary[i].def || '';
+                    DB.glossary.splice(i, 1);
+                    renderGloss();
+                    saveToLocal();
+                    updateDashboard();
+                });
+            });
+
+            list.querySelectorAll('.score-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    markItem(
+                        btn.dataset.section,
+                        btn.dataset.id,
+                        btn.dataset.correct === 'true'
+                    );
+                });
+            });
+
+            document.getElementById('glossJSON').value = JSON.stringify(glossary, null, 2);
+        }
+        document.getElementById('glossSearch').addEventListener('input', renderGloss);
+
+        /* render flashcards */
+        function renderFlashcards() {
+            const cont = document.getElementById('flashContainer');
+            cont.innerHTML = '';
+
+            const flashcards = Array.isArray(DB.flashcards) ? DB.flashcards: [];
+
+            flashcards.forEach((f, i) => {
+                const itemId = f.id || `flash-${i}`;
+
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.style.width = '240px';
+
+                card.innerHTML = `
+                <div class="card-inner" data-index="${i}">
+                <div class="card-front">
+                ${escapeHtml(f.front)}
+                </div>
+
+                <div class="card-back relative">
+                <span class="pr-14">${escapeHtml(f.back)}</span>
+
+                <div class="absolute bottom-1 right-1 flex gap-1">
+                <button data-section="flash" data-id="${itemId}" data-correct="true" class="score-btn text-xs">✅</button>
+                <button data-section="flash" data-id="${itemId}" data-correct="false" class="score-btn text-xs">❌</button>
+                </div>
+                </div>
+                </div>
+                `;
+
+                card.querySelector('.card-inner').addEventListener('click', e => {
+                    const inner = e.currentTarget;
+                    inner.style.transform = inner.style.transform ? '': 'rotateY(180deg)';
+                });
+
+                card.querySelectorAll('.score-btn').forEach(btn => {
+                    btn.addEventListener('click', e => {
+                        e.stopPropagation();
+
+                        markItem(
+                            btn.dataset.section,
+                            btn.dataset.id,
+                            btn.dataset.correct === 'true'
+                        );
+                    });
+                });
+
+                cont.appendChild(card);
+            });
+
+            document.getElementById('flashJSON').value = JSON.stringify(flashcards, null, 2);
+        }
+
+        /* render structures */
+        function renderStructures() {
+            const area = document.getElementById('structuresArea'); area.innerHTML = '';
+            const structures = Array.isArray(DB.structures) ? DB.structures: [];
+            structures.forEach((s, idx)=> {
+                const options = Array.isArray(s.options) ? s.options: [];
+                const wrap = document.createElement('div'); wrap.className = 'p-3 border rounded';
+                wrap.innerHTML = `<div><h4 class="font-semibold">${idx+1}. ${escapeHtml(s.title)}</h4><div class="text-sm mt-1">Imagen: <a class="link-img" target="_blank" href="${s.img}">${s.img}</a></div><div class="mt-2" id="opts-${idx}"></div></div>`;
+                area.appendChild(wrap);
+                const optsDiv = wrap.querySelector(`#opts-${idx}`);
+                options.forEach((o, i)=> {
+                    const radio = document.createElement('label'); radio.className = 'mr-3 block'; radio.innerHTML = `<input type="radio" name="struct_${idx}" value="${i}"> ${escapeHtml(o)}`; optsDiv.appendChild(radio);
+                });
+                const btn = document.createElement('button'); btn.className = 'mt-2 px-2 py-1 bg-amber-500 text-white rounded'; btn.textContent = 'Verificar';
+                btn.addEventListener('click', () => {
+                    const sel = wrap.querySelector(`input[name="struct_${idx}"]:checked`);
+
+                    if (!sel) {
+                        alert('Selecciona opción');
+                        return;
+                    }
+
+                    const itemId = s.id || `structure-${idx}`;
+
+                    if (parseInt(sel.value) === s.answer) {
+                        alert('✅ Correcto\n' + (s.explain || ''));
+                        markItem('structures', itemId, true);
+                    } else {
+                        alert('❌ Incorrecto\n' + (s.explain || ''));
+                        markItem('structures', itemId, false);
+                    }
+                });
+                wrap.appendChild(btn);
+            });
+            document.getElementById('structuresJSON').value = JSON.stringify(structures, null, 2);
+        }
+
+        /* render cases */
+        function renderCases() {
+            const area = document.getElementById('casesArea'); area.innerHTML = '';
+            const casesList = Array.isArray(DB.cases) ? DB.cases: [];
+            casesList.forEach((c,
+                idx)=> {
+                const options = Array.isArray(c.options) ? c.options: [];
+                const wrap = document.createElement('div'); wrap.className = 'p-3 border rounded mb-3';
+                wrap.innerHTML = `<div><h4 class="font-semibold">Caso ${idx+1}</h4><p class="mt-1">${escapeHtml(c.text)}</p><div class="mt-2" id="caseOpts${idx}"></div></div>`;
+                area.appendChild(wrap);
+                const optsDiv = wrap.querySelector(`#caseOpts${idx}`);
+                options.forEach((o, i)=> {
+                    const label = document.createElement('label'); label.className = 'block'; label.innerHTML = `<input type="radio" name="case_${idx}" value="${i}"> ${escapeHtml(o)}`; optsDiv.appendChild(label);
+                });
+                const btn = document.createElement('button'); btn.className = 'mt-2 px-2 py-1 bg-indigo-600 text-white rounded'; btn.textContent = 'Responder';
+                btn.addEventListener('click',
+                    () => {
+                        const sel = wrap.querySelector(`input[name="case_${idx}"]:checked`);
+
+                        if (!sel) {
+                            alert('Selecciona opción');
+                            return;
+                        }
+
+                        const itemId = c.id || `case-${idx}`;
+
+                        if (parseInt(sel.value) === c.answer) {
+                            alert('✅ Correcto\n' + (c.feedback || ''));
+                            markItem('cases', itemId, true);
+                        } else {
+                            alert('❌ Incorrecto\n' + (c.feedback || ''));
+                            markItem('cases', itemId, false);
+                        }
+                    });
+                wrap.appendChild(btn);
+            });
+            document.getElementById('casesJSON').value = JSON.stringify(casesList, null, 2);
+        }
+
+        /* render interactives with correct drag/drop handling */
+        function renderInteratives() {
+            const area = document.getElementById('interactiveArea'); area.innerHTML = '';
+            (Array.isArray(DB.interactives) ? DB.interactives: []).forEach((it,
+                idx)=> {
+                const block = document.createElement('div'); block.className = 'p-3 border rounded';
+                block.innerHTML = `<h4 class="font-semibold">${idx+1}. ${escapeHtml(it.title || it.id)}</h4>`;
+                if (it.type === 'dragdrop') {
+                    const terms = Array.isArray(it.terms) ? it.terms: [];
+                    const targets = Array.isArray(it.targets) ? it.targets: [];
+                    const termsDiv = document.createElement('div'); termsDiv.className = 'mt-2 flex gap-2 flex-wrap';
+                    terms.forEach((t, i)=> {
+                        const d = document.createElement('div'); d.className = 'draggable'; d.id = `term-${idx}-${i}`; d.draggable = true; d.textContent = t;
+                        d.addEventListener('dragstart', e => {
+                            e.dataTransfer.setData('text/plain', d.id); e.dataTransfer.effectAllowed = 'move';
+                        });
+                        termsDiv.appendChild(d);
+                    });
+                    const targetsDiv = document.createElement('div'); targetsDiv.className = 'mt-3 grid grid-cols-1 gap-2';
+                    targets.forEach((tg, i)=> {
+                        const dz = document.createElement('div'); dz.className = 'dropzone'; dz.id = `target-${idx}-${i}`;
+                        dz.dataset.target = tg;
+                        const label = document.createElement('span');
+                        label.className = 'dropzone-label';
+                        label.textContent = tg;
+                        dz.appendChild(label);
+                        dz.addEventListener('dragover', e => {
+                            e.preventDefault(); e.dataTransfer.dropEffect = 'move'; dz.style.backgroundColor = '#f8fafc';
+                        });
+                        dz.addEventListener('dragleave', e => {
+                            dz.style.backgroundColor = '';
+                        });
+                        dz.addEventListener('drop', e => {
+                            e.preventDefault();
+                            dz.style.backgroundColor = '';
+                            const id = e.dataTransfer.getData('text/plain');
+                            const el = document.getElementById(id);
+                            if (!el) return;
+                            // append (this move automatically removes from previous parent)
+                            dz.appendChild(el);
+                            // compute trimmed texts
+                            const childText = el.textContent.trim();
+                            const expected = normalizeText((it.answerMap && it.answerMap[childText]) ? it.answerMap[childText]: '');
+                            const zoneText = normalizeText(dz.dataset.target || label.textContent || '');
+                            if (expected && expected === zoneText) {
+                                dz.style.borderColor = '#16a34a';
+                                dz.style.backgroundColor = '#ecfdf5';
+                                dz.dataset.correct = 'true';
+                            } else {
+                                dz.style.borderColor = '#dc2626';
+                                dz.style.backgroundColor = '#fff1f2';
+                                dz.dataset.correct = 'false';
+                            }
+                            // For other zones: if empty reset; if they have children, re-evaluate them
+                            targets.forEach((ot, j)=> {
+                                const otherDz = document.getElementById(`target-${idx}-${j}`);
+                                if (!otherDz) return;
+                                if (otherDz === dz) return;
+                                // remove any duplicate of the moved element (safety)
+                                Array.from(otherDz.querySelectorAll('.draggable')).forEach(ch => {
+                                    if (ch.id === el.id) otherDz.removeChild(ch);
+                                });
+                                if (otherDz.querySelectorAll('.draggable').length === 0) {
+                                    otherDz.style.borderColor = '#94a3b8'; otherDz.style.backgroundColor = ''; delete otherDz.dataset.correct;
+                                } else {
+                                    const rem = otherDz.querySelector('.draggable');
+                                    if (rem) {
+                                        const remText = rem.textContent.trim();
+                                        const remExp = normalizeText((it.answerMap && it.answerMap[remText]) ? it.answerMap[remText]: '');
+                                        const otherLabel = otherDz.querySelector('.dropzone-label');
+                                        const otherZoneText = normalizeText(otherDz.dataset.target || (otherLabel ? otherLabel.textContent: ''));
+                                        if (remExp && remExp === otherZoneText) {
+                                            otherDz.style.borderColor = '#16a34a'; otherDz.style.backgroundColor = '#ecfdf5'; otherDz.dataset.correct = 'true';
+                                        } else {
+                                            otherDz.style.borderColor = '#dc2626'; otherDz.style.backgroundColor = '#fff1f2'; otherDz.dataset.correct = 'false';
+                                        }
+                                    }
+                                }
+                            });
+                        });
+                        targetsDiv.appendChild(dz);
+                    });
+                    block.appendChild(termsDiv);
+                    block.appendChild(targetsDiv);
+
+                    const checkBtn = document.createElement('button');
+                    checkBtn.className = 'mt-2 px-2 py-1 bg-amber-500 text-white rounded';
+                    checkBtn.textContent = 'Verificar actividad';
+
+                    checkBtn.addEventListener('click', () => {
+                        const itemId = it.id || `interactive-${idx}`;
+                        const zones = block.querySelectorAll('.dropzone');
+                        const allCorrect = Array.from(zones).length > 0 &&
+                        Array.from(zones).every(zone => zone.dataset.correct === 'true');
+
+                        if (allCorrect) {
+                            alert('✅ Actividad correcta');
+                            markItem('interactive', itemId, true);
+                        } else {
+                            alert('❌ Revisa la actividad.');
+                            markItem('interactive', itemId, false);
+                        }
+                    });
+
+                    block.appendChild(checkBtn);
+                } else if (it.type === 'complete') {
+                    const q = document.createElement('div'); q.innerHTML = `<div class="mt-2">${escapeHtml(it.prompt || '')}</div><input class="mt-2 border rounded p-1" id="fill-${idx}">`;
+                    const btn = document.createElement('button'); btn.className = 'mt-2 px-2 py-1 bg-amber-500 text-white rounded'; btn.textContent = 'Verificar';
+                    btn.addEventListener('click', () => {
+                        const user = document.getElementById(`fill-${idx}`).value.trim();
+                        const itemId = it.id || `interactive-${idx}`;
+
+                        if (normalizeText(user) === normalizeText(it.answer || '')) {
+                            alert('✅ Correcto');
+                            markItem('interactive', itemId, true);
+                        } else {
+                            alert('❌ Incorrecto.');
+                            markItem('interactive', itemId, false);
+                        }
+                    });
+                    block.appendChild(q); block.appendChild(btn);
+                }
+                area.appendChild(block);
+            });
+            document.getElementById('interJSON').value = JSON.stringify(DB.interactives, null, 2);
+        }
+
+        /* render maps */
+        function renderMaps() {
+            const disp = document.getElementById('mapsDisplay');
+            disp.innerHTML = '';
+
+            Object.entries(DB.maps || {}).forEach(([k,
+                v]) => {
+                const itemId = `map-${k}`;
+
+                const div = document.createElement('div');
+                div.className = 'relative bg-gray-50 p-3 rounded';
+
+                div.innerHTML = `
+                <h3 class="font-semibold capitalize">${escapeHtml(k)}</h3>
+                <pre class="map pr-14">${escapeHtml(v)}</pre>
+
+                <div class="absolute bottom-1 right-1 flex gap-1">
+                <button data-section="maps" data-id="${itemId}" data-correct="true" class="score-btn text-xs">✅</button>
+                <button data-section="maps" data-id="${itemId}" data-correct="false" class="score-btn text-xs">❌</button>
+                </div>
+                `;
+
+                div.querySelectorAll('.score-btn').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        markItem(
+                            btn.dataset.section,
+                            btn.dataset.id,
+                            btn.dataset.correct === 'true'
+                        );
+                    });
+                });
+
+                disp.appendChild(div);
+            });
+
+            document.getElementById('mapsJSON').value = JSON.stringify(DB.maps || {}, null, 2);
+        }
+
+        /* Save/load DB to localStorage */
+        function saveToLocal() {
+            localStorage.setItem('DB_biocel', JSON.stringify(DB));
+        }
+        function loadFromLocal() {
+            const raw = localStorage.getItem('DB_biocel');
+            if (raw) {
+                try {
+                    DB = JSON.parse(raw);
+                } catch(e) {
+                    console.error(e);
+                }
+            }
+            ensureDbShape();
+            renderAll();
+        }
+        function renderAll() {
+            ensureDbShape();
+            renderQuizTopics();
+            renderGloss();
+            renderFlashcards();
+            renderStructures();
+            renderCases();
+            renderInteratives();
+            renderMaps();
+
+            document.getElementById('questionsJSON').value = JSON.stringify(DB.questions || [], null, 2);
+            document.getElementById('quizTopicsJSON').value = JSON.stringify(DB.quizTopics || [], null, 2);
+
+            updateDashboard();
+        }
+        /* Score and dashboard */
+        const POINTS_PER_ITEM = 10;
+
+        function getProgress() {
+            return JSON.parse(localStorage.getItem('progressBySection') || '{}');
+        }
+
+        function saveProgress(progress) {
+            localStorage.setItem('progressBySection', JSON.stringify(progress));
+        }
+
+        function markItem(section, id, isCorrect) {
+            const progress = getProgress();
+
+            if (!progress[section]) {
+                progress[section] = {};
+            }
+
+            progress[section][id] = isCorrect ? 'correct': 'incorrect';
+
+            saveProgress(progress);
+            updateDashboard();
+        }
+
+        function countCorrect(progress, section) {
+            if (!progress[section]) return 0;
+
+            return Object.values(progress[section]).filter(value => value === 'correct').length;
+        }
+
+        function getSectionTotals() {
+            return {
+                quiz: Array.isArray(DB.questions) ? DB.questions.length: 0,
+                gloss: Array.isArray(DB.glossary) ? DB.glossary.length: 0,
+                flash: Array.isArray(DB.flashcards) ? DB.flashcards.length: 0,
+                structures: Array.isArray(DB.structures) ? DB.structures.length: 0,
+                cases: Array.isArray(DB.cases) ? DB.cases.length: 0,
+                interactive: Array.isArray(DB.interactives) ? DB.interactives.length: 0,
+                maps: DB.maps && typeof DB.maps === 'object' ? Object.keys(DB.maps).length: 0
+            };
+        }
+
+        function formatProgress(correct, total) {
+            const obtained = correct * POINTS_PER_ITEM;
+            const max = total * POINTS_PER_ITEM;
+            const percent = max > 0 ? Math.round((obtained / max) * 100): 0;
+
+            return {
+                obtained,
+                max,
+                percent,
+                text: `${obtained} / ${max} - ${percent}%`
+            };
+        }
+
+        function updateDashboard() {
+            const progress = getProgress();
+            const totals = getSectionTotals();
+
+            const quiz = formatProgress(countCorrect(progress, 'quiz'), totals.quiz);
+            const gloss = formatProgress(countCorrect(progress, 'gloss'), totals.gloss);
+            const flash = formatProgress(countCorrect(progress, 'flash'), totals.flash);
+            const structures = formatProgress(countCorrect(progress, 'structures'), totals.structures);
+            const cases = formatProgress(countCorrect(progress, 'cases'), totals.cases);
+            const interactive = formatProgress(countCorrect(progress, 'interactive'), totals.interactive);
+            const maps = formatProgress(countCorrect(progress, 'maps'), totals.maps);
+
+            const obtainedTotal =
+            quiz.obtained +
+            gloss.obtained +
+            flash.obtained +
+            structures.obtained +
+            cases.obtained +
+            interactive.obtained +
+            maps.obtained;
+
+            const maxTotal =
+            quiz.max +
+            gloss.max +
+            flash.max +
+            structures.max +
+            cases.max +
+            interactive.max +
+            maps.max;
+
+            const totalPercent = maxTotal > 0
+            ? Math.round((obtainedTotal / maxTotal) * 100): 0;
+
+            document.getElementById('score').textContent = obtainedTotal;
+            document.getElementById('maxScore').textContent = maxTotal;
+            document.getElementById('scorePercent').textContent = `${totalPercent}%`;
+
+            document.getElementById('progressQuiz').textContent = quiz.text;
+            document.getElementById('progressGloss').textContent = gloss.text;
+            document.getElementById('progressFlash').textContent = flash.text;
+            document.getElementById('progressStructures').textContent = structures.text;
+            document.getElementById('progressCases').textContent = cases.text;
+            document.getElementById('progressInteractive').textContent = interactive.text;
+            document.getElementById('progressMaps').textContent = maps.text;
+        }
+
+        loadFromLocal();
+
+        /* Navigation wiring */
+        const sections = document.querySelectorAll("section");
+        document.querySelectorAll(".btn").forEach(btn=> {
+            btn.classList.add("px-3", "py-1", "rounded", "bg-indigo-600", "text-white"); btn.addEventListener('click', ()=> {
+                sections.forEach(sec=>sec.classList.add('hidden-by-default')); document.getElementById(btn.dataset.target).classList.remove('hidden-by-default'); window.scrollTo({
+                    top: 0, behavior: 'smooth'
+                });
+            });
+        });
+
+        /* File import/export */
+        const fileInput = document.getElementById('fileInput');
+        document.querySelector('.btn-file').addEventListener('click', ()=> fileInput.click());
+        fileInput.addEventListener('change', handleFile, false);
+        document.getElementById('exportJSON').addEventListener('click', exportAll);
+
+        function handleFile(evt) {
+            const f = evt.target.files[0];
+            if (!f) return;
+            const reader = new FileReader();
+            reader.onload = e=> {
+                try {
+                    const obj = JSON.parse(e.target.result);
+                    // basic merge/replace: if keys present replace DB keys
+                    DB = Object.assign({}, DB, obj);
+                    ensureDbShape();
+                    renderAll();
+                    saveToLocal();
+                    alert('Contenido importado correctamente.');
+                } catch(err) {
+                    alert('Error leyendo JSON: ' + err.message);
+                }
+            };
+            reader.readAsText(f);
+        }
+        function exportAll() {
+            const dataStr = JSON.stringify(DB, null, 2);
+            const blob = new Blob([dataStr], {
+                type: "application/json"
+            });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a'); a.href = url; a.download = 'contenido_biologia_celular.json'; document.body.appendChild(a); a.click(); a.remove();
+            URL.revokeObjectURL(url);
+        }
+
+        /* CRUD simple for glosario, flashcards, etc. */
+        document.getElementById('addTerm').addEventListener('click', ()=> {
+            const t = document.getElementById('termInput').value.trim(); const d = document.getElementById('defInput').value.trim();
+            if (!t || !d) {
+                alert('Rellena término y definición'); return;
+            }
+            DB.glossary.unshift({
+                term: t, def: d
+            }); document.getElementById('termInput').value = ''; document.getElementById('defInput').value = ''; renderGloss(); saveToLocal();
+        });
+        document.getElementById('clearGloss').addEventListener('click', ()=> {
+            if (!confirm('Borrar todo el glosario?')) return; DB.glossary = []; renderGloss(); saveToLocal();
+        });
+        document.getElementById('importGloss').addEventListener('click', ()=> {
+            try {
+                const arr = JSON.parse(document.getElementById('glossJSON').value); if (Array.isArray(arr)) {
+                    DB.glossary = arr;
+                    renderGloss();
+                    saveToLocal();
+                    updateDashboard();
+                    alert('Glosario importado');
+                } else alert('Formato inválido');
+            } catch(e) {
+                alert('JSON inválido');
+            }
+        });
+        document.getElementById('exportGloss').addEventListener('click', ()=> {
+            document.getElementById('glossJSON').value = JSON.stringify(DB.glossary, null, 2);
+        });
+
+        document.getElementById('loadFlash').addEventListener('click', ()=> {
+            try {
+                const arr = JSON.parse(document.getElementById('flashJSON').value); if (Array.isArray(arr)) {
+                    DB.flashcards = arr;
+                    renderFlashcards();
+                    saveToLocal();
+                    updateDashboard();
+                    alert('Flashcards cargadas');
+                } else alert('Formato inválido');
+            } catch(e) {
+                alert('JSON inválido');
+            }
+        });
+        document.getElementById('exportFlash').addEventListener('click', ()=> {
+            document.getElementById('flashJSON').value = JSON.stringify(DB.flashcards, null, 2);
+        });
+
+        document.getElementById('loadStructures').addEventListener('click', ()=> {
+            try {
+                const arr = JSON.parse(document.getElementById('structuresJSON').value); if (Array.isArray(arr)) {
+                    DB.structures = arr;
+                    renderStructures();
+                    saveToLocal();
+                    updateDashboard();
+                    alert('Estructuras cargadas');
+                } else alert('Formato inválido');
+            } catch(e) {
+                alert('JSON inválido');
+            }
+        });
+        document.getElementById('exportStructures').addEventListener('click', ()=> {
+            document.getElementById('structuresJSON').value = JSON.stringify(DB.structures, null, 2);
+        });
+
+        document.getElementById('loadCases').addEventListener('click', ()=> {
+            try {
+                const arr = JSON.parse(document.getElementById('casesJSON').value); if (Array.isArray(arr)) {
+                    DB.cases = arr;
+                    renderCases();
+                    saveToLocal();
+                    updateDashboard();
+                    alert('Casos cargados');
+                } else alert('Formato inválido');
+            } catch(e) {
+                alert('JSON inválido');
+            }
+        });
+        document.getElementById('exportCases').addEventListener('click', ()=> {
+            document.getElementById('casesJSON').value = JSON.stringify(DB.cases, null, 2);
+        });
+
+        document.getElementById('loadInter').addEventListener('click', ()=> {
+            try {
+                const arr = JSON.parse(document.getElementById('interJSON').value); if (Array.isArray(arr)) {
+                    DB.interactives = arr;
+                    renderInteratives();
+                    saveToLocal();
+                    updateDashboard();
+                    alert('Interactivos cargados');
+                } else alert('Formato inválido');
+            } catch(e) {
+                alert('JSON inválido');
+            }
+        });
+        document.getElementById('exportInter').addEventListener('click', ()=> {
+            document.getElementById('interJSON').value = JSON.stringify(DB.interactives, null, 2);
+        });
+
+        document.getElementById('loadMaps').addEventListener('click', ()=> {
+            try {
+                const obj = JSON.parse(document.getElementById('mapsJSON').value); if (typeof obj === 'object') {
+                    DB.maps = obj;
+                    renderMaps();
+                    saveToLocal();
+                    updateDashboard();
+                    alert('Mapas cargados');
+                } else alert('Formato inválido');
+            } catch(e) {
+                alert('JSON inválido');
+            }
+        });
+        document.getElementById('exportMaps').addEventListener('click', ()=> {
+            document.getElementById('mapsJSON').value = JSON.stringify(DB.maps || {}, null, 2);
+        });
+
+        /* Quiz: sequential behavior */
+        let filteredQuestions = DB.questions.slice();
+        let qIndex = 0;
+        let currentQuestion = null;
+        function renderQuizTopics() {
+            const select = document.getElementById('quizTopic');
+            if (!select) return;
+            select.innerHTML = '';
+            const allOption = document.createElement('option');
+            allOption.value = 'all';
+            allOption.textContent = 'Todos los bloques';
+            select.appendChild(allOption);
+            const topics = Array.isArray(DB.quizTopics) ? DB.quizTopics: [];
+            topics.forEach(topic => {
+                if (!topic || !topic.value) return;
+                const option = document.createElement('option');
+                option.value = topic.value;
+                option.textContent = topic.label || topic.value;
+                select.appendChild(option);
+            });
+        }
+        function refreshFiltered(topic) {
+            filteredQuestions = (topic && topic !== 'all') ? DB.questions.filter(q=> q.topic === topic): DB.questions.slice();
+            qIndex = 0;
+            document.getElementById('qTotal').textContent = filteredQuestions.length;
+            renderCurrentQuestion();
+        }
+        function renderCurrentQuestion() {
+            if (filteredQuestions.length === 0) {
+                document.getElementById('qText').textContent = 'No hay preguntas en este tema.'; document.getElementById('qOptions').innerHTML = ''; document.getElementById('qNumber').textContent = '0'; return;
+            }
+            if (qIndex < 0) qIndex = 0;
+            if (qIndex >= filteredQuestions.length) qIndex = filteredQuestions.length -1;
+            const q = filteredQuestions[qIndex];
+            document.getElementById('qText').textContent = q.text;
+            const opts = document.getElementById('qOptions'); opts.innerHTML = '';
+            const questionOptions = Array.isArray(q.options) ? q.options: [];
+            questionOptions.forEach((o, i)=> {
+                const label = document.createElement('label'); label.className = 'block'; label.innerHTML = `<input type="radio" name="qopt" value="${i}"> ${escapeHtml(o)}`; opts.appendChild(label);
+            });
+            document.getElementById('qNumber').textContent = (qIndex+1);
+            document.getElementById('qTotal').textContent = filteredQuestions.length;
+            currentQuestion = q;
+        }
+        document.getElementById('quizTopic').addEventListener('change', ()=> {
+            refreshFiltered(document.getElementById('quizTopic').value);
+        });
+        document.getElementById('nextQ').addEventListener('click', ()=> {
+            if (filteredQuestions.length === 0) {
+                alert('No hay preguntas.'); return;
+            } if (qIndex < filteredQuestions.length-1) qIndex++; renderCurrentQuestion();
+        });
+        document.getElementById('prevQ').addEventListener('click', ()=> {
+            if (filteredQuestions.length === 0) {
+                alert('No hay preguntas.'); return;
+            } if (qIndex > 0) qIndex--; renderCurrentQuestion();
+        });
+        document.getElementById('checkA').addEventListener('click', () => {
+            const sel = document.querySelector('input[name="qopt"]:checked');
+            const res = document.getElementById('qResult');
+
+            if (!currentQuestion) {
+                res.textContent = 'No hay pregunta seleccionada.';
+                return;
+            }
+
+            if (!sel) {
+                res.textContent = 'Selecciona una opción.';
+                return;
+            }
+
+            const itemId = currentQuestion.id || `quiz-${qIndex}`;
+
+            if (parseInt(sel.value) === currentQuestion.answer) {
+                res.textContent = '✅ Correcto. ' + (currentQuestion.explain || '');
+                markItem('quiz', itemId, true);
+            } else {
+                res.textContent = '❌ Incorrecto. ' + (currentQuestion.explain || '');
+                markItem('quiz', itemId, false);
+            }
+        });
+
+        document.getElementById('showAll').addEventListener('click', ()=> {
+            document.getElementById('questionsJSON').value = JSON.stringify(DB.questions, null, 2);
+        });
+
+        /* Load questions JSON editor */
+        document.getElementById('loadQuestions').addEventListener('click', ()=> {
+            try {
+                const arr = JSON.parse(document.getElementById('questionsJSON').value); if (Array.isArray(arr)) {
+                    DB.questions = arr;
+                    refreshFiltered(document.getElementById('quizTopic').value);
+                    renderAll();
+                    saveToLocal();
+                    updateDashboard();
+                    alert('Preguntas cargadas');
+                } else alert('Formato inválido (se espera array).');
+            } catch(e) {
+                alert('JSON inválido');
+            }
+        });
+        document.getElementById('loadQuizTopics').addEventListener('click', ()=> {
+            try {
+                const arr = JSON.parse(document.getElementById('quizTopicsJSON').value);
+                if (Array.isArray(arr)) {
+                    DB.quizTopics = arr;
+                    renderQuizTopics();
+                    refreshFiltered(document.getElementById('quizTopic').value);
+                    saveToLocal();
+                    alert('Bloques del quiz cargados');
+                } else {
+                    alert('Formato inválido (se espera array).');
+                }
+            } catch(e) {
+                alert('JSON inválido');
+            }
+        });
+        document.getElementById('exportQuizTopics').addEventListener('click', ()=> {
+            document.getElementById('quizTopicsJSON').value = JSON.stringify(DB.quizTopics || [], null, 2);
+        });
+
+        /* Reset progress */
+        document.getElementById('reset').addEventListener('click', () => {
+            if (!confirm('Reiniciar todo el progreso?')) return;
+
+            localStorage.removeItem('progressBySection');
+            localStorage.removeItem('score');
+            localStorage.removeItem('block1');
+            localStorage.removeItem('block2');
+            localStorage.removeItem('block3');
+
+            updateDashboard();
+        });
+
+        /* initial render and quiz setup */
+        renderAll();
+        refreshFiltered('all');
+
+        /* =====================
+HOME JSON (SOLO INICIO)
+===================== */
+
+        document.getElementById("loadHomeJSON").addEventListener("click", () => {
+            try {
+                const data = JSON.parse(document.getElementById("homeJSON").value);
+
+                if (data.title) {
+                    document.getElementById("homeTitle").textContent = data.title;
+                }
+                if (data.description) {
+                    document.getElementById("homeDescription").innerHTML = data.description;
+                }
+            } catch (e) {
+                alert("JSON inválido en Inicio");
+            }
+        });
+
+        document.getElementById("exportHomeJSON").addEventListener("click", () => {
+            const data = {
+                title: document.getElementById("homeTitle").textContent,
+                description: document.getElementById("homeDescription").innerHTML
+            };
+            document.getElementById("homeJSON").value = JSON.stringify(data, null, 2);
+        });
+    </script>
+</body>
+</html>
